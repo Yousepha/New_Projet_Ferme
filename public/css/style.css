@@ -1,0 +1,20 @@
+body, html {
+	padding: 0;
+	margin: 0;
+}
+
+.footer{
+	background-color: #2C3E80;
+}
+
+.inner{
+	overflow: hidden;
+}
+
+.inner img{
+	transition: all 1.5s ease;
+}
+
+.inner:hover img{
+	transform: scale(1.5);
+}
