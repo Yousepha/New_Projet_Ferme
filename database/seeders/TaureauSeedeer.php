@@ -17,7 +17,7 @@ class TaureauSeedeer extends Seeder
         $taureaux = [
             [
                 'idBovin' => 2,
-                'codeBovin' => "TAU-1",
+                'codeBovin' => "TAU-00",
             ],
             // [
             //     'codeBovin' => "TAU-2",

@@ -129,17 +129,11 @@
                                         </option>
                                         @if($data->etatDeSante == "Sain")
                                             <option>Malade</option>
-                                            <option>Guéri</option>
                                         @endif
                                         @if($data->etatDeSante == "Malade")
                                             <option>Sain</option>
-                                            <option>Guéri</option>
                                         @endif
-                                        @if($data->etatDeSante == "Guéri")
-                                            <option>Sain</option>
-                                            <option>Malade</option>
-                                        @endif
-
+                                        
                                         {{-- @endforeach --}}
                                     </select>
                                 </div>

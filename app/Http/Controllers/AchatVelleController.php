@@ -56,7 +56,7 @@ class AchatVelleController extends Controller
      */
     public function store(Request $request)
     {
-        $codeBovin = Helper::IDGenerator(new Velle,'idBovin', 'codeBovin', 6, 'VEL');
+        $codeBovin = Helper::IDGenerator(new Velle,'idBovin', 'codeBovin', 2, 'VEL');
         $q = new Velle;
         $q->codeBovin = $codeBovin;
 

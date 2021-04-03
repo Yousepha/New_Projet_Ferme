@@ -86,7 +86,7 @@
             </div>
             <div class="right-menu">
                 <div class="cart-btn">
-                    <a href="{{route('achatVisiteur')}}">
+                    <a href="{{route('cart_index')}}">
                         <i class='bx bx-cart-alt'></i>
                     </a>
                 </div>

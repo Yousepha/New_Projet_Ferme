@@ -54,21 +54,19 @@ class VachesController extends Controller
      */
     public function store(Request $request)
     {
-        $codeBovin = Helper::IDGenerator(new Vache,'idBovin', 'codeBovin', 6, 'VAC');
+        $codeBovin = Helper::IDGenerator(new Vache,'idBovin', 'codeBovin', 2, 'VAC');
         $q = new Vache;
         $q->codeBovin = $codeBovin;
-
-        // $errorMessage = [
-        //     'required' => 'Le champ :attribute est obligatoire'
-        // ];
 
         $request->validate([
             'nom'    =>  'required',
             'etat'     =>  'required',
             'dateNaissance'     =>  'required|date',
             'etatDeSante'     =>  'required',
-            'geniteur'     =>  'required',
-            'genitrice'     =>  'required',
+            'prix'     =>  'nullable',
+            'situation'     =>  'nullable',
+            'geniteur'     =>  'nullable|string',
+            'genitrice'     =>  'nullable|string',
             'photo'         =>  'required|image|max:2048'
         ]);
 
@@ -86,6 +84,8 @@ class VachesController extends Controller
             'geniteur'        =>       $request->geniteur,
             'genitrice'        =>       $request->genitrice,
             'race_id'        =>       $request->race_id,
+            'prix'        =>       $request->prix,
+            'situation'        =>       $request->situation,
             'photo'            =>   $new_name,
         );
         
@@ -114,7 +114,7 @@ class VachesController extends Controller
         }
         
         
-        return redirect('vaches')->with('Success', 'Vache Inseré avec Succès');
+        return redirect('vaches')->with('Success', 'Vache Inserée avec Succès');
     }
 
     /**
@@ -166,15 +166,17 @@ class VachesController extends Controller
         $photo = $request->file('photo');
         if($photo != '')  // here is the if part when you dont want to update the image required
         {
-            // unlink(public_path('images').'/'.$image_name);
+            unlink(public_path('images').'/'.$image_name);
 
             $request->validate([
                 'nom'    =>  'required',
                 'etat'     =>  'required',
                 'dateNaissance'     =>  'required|date',
                 'etatDeSante'     =>  'required',
-                'geniteur'     =>  'required',
-                'genitrice'     =>  'required',
+                'prix'     =>  'nullable',
+                'situation'     =>  'nullable',
+                'geniteur'     =>  'nullable|string',
+                'genitrice'     =>  'nullable|string',
                 'photo'         =>  'image|max:2048'
             ]);
 
@@ -188,8 +190,10 @@ class VachesController extends Controller
                 'etat'     =>  'required',
                 'dateNaissance'     =>  'required|date',
                 'etatDeSante'     =>  'required',
-                'geniteur'     =>  'required',
-                'genitrice'     =>  'required',
+                'prix'     =>  'nullable',
+                'situation'     =>  'nullable',
+                'geniteur'     =>  'nullable|string',
+                'genitrice'     =>  'nullable|string',
             ]);
         }
 
@@ -201,6 +205,8 @@ class VachesController extends Controller
             'geniteur'        =>       $request->geniteur,
             'genitrice'        =>       $request->genitrice,
             'race_id'        =>       $request->race_id,
+            'prix'        =>       $request->prix,
+            'situation'        =>       $request->situation,
             'photo'            =>   $image_name
         );
 

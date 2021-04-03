@@ -59,7 +59,7 @@ class AchatVacheController extends Controller
      */
     public function store(Request $request)
     {
-        $codeBovin = Helper::IDGenerator(new Vache,'idBovin', 'codeBovin', 6, 'VAC');
+        $codeBovin = Helper::IDGenerator(new Vache,'idBovin', 'codeBovin', 2, 'VAC');
         $q = new Vache;
         $q->codeBovin = $codeBovin;
         // $q->codeBovin->validate([

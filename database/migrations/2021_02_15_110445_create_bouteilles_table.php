@@ -18,6 +18,9 @@ class CreateBouteillesTable extends Migration
             $table->unsignedBigInteger('stock_id')->nullable();
             $table->foreign('stock_id')->references('idStock')->on('stock_laits')->onUpdate('cascade')->onDelete('cascade');            
             $table->integer('capacite');
+            $table->integer('prix')->nullable();
+            $table->integer('nombreDispo');
+            $table->text('description')->nullable();
             $table->string('photo')->nullable();
             $table->timestamps();
         });

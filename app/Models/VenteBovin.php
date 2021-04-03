@@ -14,7 +14,7 @@ class VenteBovin extends Model
         'prixBovin',
         'dateVenteBovin',
         'bovin_id',
-        'description',
+        'enLigne',
         'commande_id',
     ];
     

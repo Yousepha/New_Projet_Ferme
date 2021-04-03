@@ -23,9 +23,18 @@
                     </p>
                     <hr>
                    
-                    <p>
+                    <form action="{{ route('cart_add', ['idV'=>$vaches[0]->idBovin]) }}" method="POST" id="panier_add">
+                    @csrf
+
+                    <label for="qty">Quantité</label>
+                    <input class="form-control" name="qty" id="qty" type="number" value="1">
+                    </form>
+                    <button type="submit" form="panier_add" class="btn btn-cart my-2 btn-block btn-warning"><i class="fa fa-lg fa-shopping-cart"></i> Ajouter au Panier</button>
+
+                   
+                    {{--<p>
                         <a href="{{route('panierVisiteur')}}" class="btn btn-cart my-2 btn-block btn-warning"><i class="fa fa-lg fa-shopping-cart"></i> Ajouter au Panier</a>
-                    </p>
+                    </p>--}}
 
                 </div>
             </div>

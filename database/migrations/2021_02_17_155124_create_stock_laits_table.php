@@ -15,9 +15,9 @@ class CreateStockLaitsTable extends Migration
     {
         Schema::create('stock_laits', function (Blueprint $table) {
             $table->bigIncrements('idStock');
-            $table->float('quantiteTotale');
-            $table->float('quantiteVendue');
-            $table->float('quantiteDispo');
+            $table->float('quantiteTotale')->nullable();
+            $table->float('quantiteVendue')->nullable();
+            $table->float('quantiteDispo')->nullable();
             $table->timestamps();
         });
     }

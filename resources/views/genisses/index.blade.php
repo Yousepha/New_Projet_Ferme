@@ -32,13 +32,13 @@
         <tr class="text-center">
             <th width="10%">Photo</th>
             <th >Nom</th>
-            <th >Nom Race</th>
+            <th >Race</th>
             <th >Date IA</th>
             <th >Phase</th>
             <th >codeBovin</th>
             <th >Etat</th>
-            <th >Date de Naissance</th>
-            <th >Etat De Sante</th>
+            <th >Date Naissance</th>
+            <th >Etat Sante</th>
             <th >geniteur</th>
             <th >genitrice</th>
             <th >Action</th>
@@ -61,7 +61,7 @@
                 <!-- here is the button action side where you can edit . view and delete the genisses record -->
                 <form action="{{ route('genisses.destroy', $genisses->idBovin) }}" method="post">
                     <a href="{{ route('genisses.show', $genisses->idBovin) }}" class="btn btn-sm btn-warning"><span class="fa fa-eye"></span> </a>
-                    <a href="{{ route('genisses.edit', $genisses->idBovin) }}" class="btn btn-sm btn-info"><span class="fa fa-edit"></span> Editer</a>
+                    <a href="{{ route('genisses.edit', $genisses->idBovin) }}" class="btn btn-sm btn-info"><span class="fa fa-edit"></span></a>
                     
                     @csrf
                     @method('DELETE')

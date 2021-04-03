@@ -50,14 +50,14 @@
             
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        {{--<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Date Traite:</strong>
                 <input type="date" name="dateTraite" class="form-control" placeholder="Date" value="{{ old('dateTraite') }}">
                 <span style="color:red">@error('dateTraite') {{$message}} @enderror</span>
             
             </div>
-        </div>
+        </div>--}}
         <!--  -->
         <div class="form-group col-md-12">
             <!-- <div class="row"> -->

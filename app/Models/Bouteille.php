@@ -12,7 +12,10 @@ class Bouteille extends Model
 
     protected $fillable = [
         'stock_id',
-        'capacite'
+        'capacite',
+        'prix',
+        'nombreDispo',
+        'description',
     ];
     
     public function venteLaits(){

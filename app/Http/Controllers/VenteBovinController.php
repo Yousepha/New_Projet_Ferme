@@ -20,6 +20,7 @@ class VenteBovinController extends Controller
         $data = DB::table('vente_bovins')
         ->join('bovins', 'bovins.idBovin', '=', 'vente_bovins.bovin_id')
         // ->join('commandes', 'commandes.idCom','=','vente_bovins.commande_id')
+        ->where('bovins.situation','en vente')
         ->select('*')
         ->paginate(5);
         
@@ -33,7 +34,7 @@ class VenteBovinController extends Controller
      */
     public function create()
     {
-        $bovins = Bovin::all();
+        $bovins = Bovin::all()->where('situation','en vente');
 
         $commandes = Commande::all();
         
@@ -49,9 +50,10 @@ class VenteBovinController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'dateVenteBovin' => 'required|date',
+            // 'dateVenteBovin' => 'required|date',
             'prixBovin' => 'required|integer',
             'description' => 'required|string',
+            'enLigne' => 'required|string',
             'photo'   =>  'required|image|max:2048',
             'bovin_id' => 'unique:vente_bovins'
         ]);
@@ -60,8 +62,8 @@ class VenteBovinController extends Controller
             'bovin_id' => $request->bovin_id,
             'commande_id' => $request->idCom,
             'prixBovin' => $request->prixBovin,
-            'dateVenteBovin' => $request->dateVenteBovin,
-            'description' => $request->description,
+            'enLigne' => $request->enLigne,
+            // 'dateVenteBovin' => $request->dateVenteBovin,
         );
         
 
@@ -74,6 +76,8 @@ class VenteBovinController extends Controller
 
         $image_bovin = array(
             'photo'   =>   $new_name,
+            'description' => $request->description,
+            'prix' => $request->prixBovin,
         );
 
         Bovin::whereidbovin($request->bovin_id)->update($image_bovin);
@@ -107,7 +111,7 @@ class VenteBovinController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $id-
      * @return \Illuminate\Http\Response
      */
     public function edit($idVenteBovin)
@@ -135,17 +139,17 @@ class VenteBovinController extends Controller
     public function update(Request $request, $idVenteBovin)
     {
         $request->validate([
-            'dateVenteBovin' => 'required|date',
+            // 'dateVenteBovin' => 'required|date',
             'prixBovin' => 'required|integer',
             'description' => 'required|string',
         ]);
 
         $input_data = array(
             'bovin_id' => $request->bovin_id,
+            'enLigne' => $request->enLigne,
             'commande_id' => $request->idCom,
             'prixBovin' => $request->prixBovin,
-            'dateVenteBovin' => $request->dateVenteBovin,
-            'description' => $request->description,
+            // 'dateVenteBovin' => $request->dateVenteBovin,
         );
 
         VenteBovin::whereidventebovin($idVenteBovin)->update($input_data);        
@@ -171,6 +175,8 @@ class VenteBovinController extends Controller
         
         $image_bovin = array(
             'photo'   =>   $image_name,
+            'description' => $request->description,
+            'prix' => $request->prixBovin,
         );
 
         Bovin::whereidbovin($request->bovin_id)->update($image_bovin);
@@ -192,7 +198,7 @@ class VenteBovinController extends Controller
         and vente_bovins.idVenteBovin = $idVenteBovin");
 
         $data = VenteBovin::findOrFail($idVenteBovin);
-        // unlink(public_path('images').'/'.$bovins[0]->photo);
+        unlink(public_path('images').'/'.$bovins[0]->photo);
 
         $data->delete();
         

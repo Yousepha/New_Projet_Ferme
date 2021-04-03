@@ -58,7 +58,7 @@ class AchatTaureauController extends Controller
      */
     public function store(Request $request)
     {
-        $codeBovin = Helper::IDGenerator(new Taureau,'idBovin', 'codeBovin', 6, 'TAU');
+        $codeBovin = Helper::IDGenerator(new Taureau,'idBovin', 'codeBovin', 2, 'TAU');
         $q = new Taureau;
         $q->codeBovin = $codeBovin;
 

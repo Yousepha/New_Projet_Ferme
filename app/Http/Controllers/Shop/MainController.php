@@ -20,6 +20,7 @@ class MainController extends Controller
         $taureaux = DB::table('vente_bovins')
         ->join('bovins', 'bovins.idBovin', '=', 'vente_bovins.bovin_id')
         // ->join('commandes', 'commandes.idCom','=','vente_bovins.commande_id')
+        // ->where('vente_bovins.enLigne', 'en ligne') attribut de mis en ligne
         ->join('taureaus', 'taureaus.idBovin','=','bovins.idBovin')
         ->select('*')
         ->get();
@@ -98,13 +99,6 @@ class MainController extends Controller
         
         $velles =DB::select("SELECT * from vente_bovins, bovins where bovins.idBovin = $request->idVelle 
         and vente_bovins.bovin_id = $request->idVelle and  bovins.idBovin = vente_bovins.bovin_id");
-
-        // $velles = DB::table('vente_bovins')
-        // ->join('bovins', 'bovins.idBovin', '=', 'vente_bovins.bovin_id')
-        // // ->join('commandes', 'commandes.idCom','=','vente_bovins.commande_id')
-        // ->join('velles', 'velles.idBovin','=','bovins.idBovin')
-        // ->select('*')
-        // ->get($request->idBovin);
 
         return view("shop.produits.velle", compact('velles'));
     }

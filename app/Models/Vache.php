@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Vache extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'idBovin';
 
     protected $fillable = [
         'idBovin',
@@ -22,5 +23,4 @@ class Vache extends Model
         return $this->hasMany('App\Models\ProductionLait');
     }
     public $incrementing = false;
-    protected $primaryKey = 'idBovin';
 }

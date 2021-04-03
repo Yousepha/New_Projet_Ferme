@@ -51,7 +51,7 @@ class TaureauController extends Controller
      */
     public function store(Request $request)
     {
-        $codeBovin = Helper::IDGenerator(new Taureau,'idBovin', 'codeBovin', 6, 'TAU');
+        $codeBovin = Helper::IDGenerator(new Taureau,'idBovin', 'codeBovin', 2, 'TAU');
         $q = new Taureau;
         $q->codeBovin = $codeBovin;
 
@@ -62,10 +62,12 @@ class TaureauController extends Controller
         $request->validate([
             'nom'    =>  'required',
             'etat'     =>  'required',
+            'prix'     =>  'nullable',
+            'situation'     =>  'nullable',
             'dateNaissance'     =>  'required|date',
             'etatDeSante'     =>  'required',
-            'geniteur'     =>  'required',
-            'genitrice'     =>  'required',
+            'geniteur'     =>  'nullable|string',
+            'genitrice'     =>  'nullable|string',
             'photo'         =>  'required|image|max:2048'
         ]);
 
@@ -83,6 +85,8 @@ class TaureauController extends Controller
             'geniteur'        =>       $request->geniteur,
             'genitrice'        =>       $request->genitrice,
             'race_id'        =>       $request->race_id,
+            'prix'        =>       $request->prix,
+            'situation'        =>       $request->situation,
             'photo'            =>   $new_name,
         );
         
@@ -152,15 +156,17 @@ class TaureauController extends Controller
         $photo = $request->file('photo');
         if($photo != '')  // here is the if part when you dont want to update the image required
         {
-            // unlink(public_path('images').'/'.$image_name);
+            unlink(public_path('images').'/'.$image_name);
 
             $request->validate([
                 'nom'    =>  'required',
                 'etat'     =>  'required',
                 'dateNaissance'     =>  'required|date',
                 'etatDeSante'     =>  'required',
-                'geniteur'     =>  'required',
-                'genitrice'     =>  'required',
+                'prix'     =>  'nullable',
+                'situation'     =>  'nullable',
+                'geniteur'     =>  'nullable|string',
+                'genitrice'     =>  'nullable|string',
                 'photo'         =>  'image|max:2048'
             ]);
 
@@ -174,8 +180,10 @@ class TaureauController extends Controller
                 'etat'     =>  'required',
                 'dateNaissance'     =>  'required|date',
                 'etatDeSante'     =>  'required',
-                'geniteur'     =>  'required',
-                'genitrice'     =>  'required',
+                'prix'     =>  'nullable',
+                'situation'     =>  'nullable',
+                'geniteur'     =>  'nullable|string',
+                'genitrice'     =>  'nullable|string',
             ]);
         }
 
@@ -187,6 +195,8 @@ class TaureauController extends Controller
             'geniteur'        =>       $request->geniteur,
             'genitrice'        =>       $request->genitrice,
             'race_id'        =>       $request->race_id,
+            'prix'        =>       $request->prix,
+            'situation'        =>       $request->situation,
             'photo'            =>   $image_name
         );
 

@@ -90,23 +90,42 @@
                                         </option>
                                         @if($data->etatDeSante == "Sain")
                                             <option>Malade</option>
-                                            <option>Guéri</option>
                                         @endif
                                         @if($data->etatDeSante == "Malade")
                                             <option>Sain</option>
-                                            <option>Guéri</option>
                                         @endif
-                                        @if($data->etatDeSante == "Guéri")
-                                            <option>Sain</option>
-                                            <option>Malade</option>
-                                        @endif
-
+                                        
                                         {{-- @endforeach --}}
                                     </select>
                                 </div>
                                 <div class="clearfix"></div>
                             
                             <!--  -->
+                        </div>
+
+                        <!-- Default input -->
+                        <div class="form-group col-md-6">
+                            <label for="genitrice">Situation</label>
+                            <div class="">
+                                <select name="situation" class="form-control" required>
+                                    <option value="{{ $data->situation }} "
+
+                                        @if($data->idBovin == $data->situation)
+                                        selected
+                                        @endif
+                                    
+                                    >
+                                        {{ $data->situation }}
+                                    </option>
+                                    @if($data->situation == "pas en vente")
+                                        <option>en vente</option>
+                                    @endif
+                                    @if($data->situation == "en vente")
+                                        <option>pas en vente</option>
+                                    @endif
+                                </select>
+                            </div>
+
                         </div>
 
                         <!--  -->
@@ -130,6 +149,14 @@
                                 <div class="clearfix"></div>
                         </div>
                         <!--  -->
+
+                        <!-- Default input -->
+                        <div class="form-group col-md-6">
+                            <label for="prix">Prix</label>
+                            <input mdbInput type="text" class="form-control" name="prix" id="prix" value="{{ $data->prix }}">
+                            <span style="color:red">@error('prix') {{$message}} @enderror</span>
+                        
+                        </div>
 
                         <!-- Default input -->
                         <div class="form-group col-md-6">

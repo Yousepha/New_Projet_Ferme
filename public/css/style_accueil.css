@@ -264,9 +264,9 @@ section {
     border-radius: 2rem;
 }
 
-/* .img-holder:hover {
-    transform: scale(2) rotate(45deg);
-} */
+.img-holder:hover {
+    transform: scale(2) rotate(0deg);
+}
 
 .item-info {
     display: flex;

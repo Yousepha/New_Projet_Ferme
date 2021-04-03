@@ -50,7 +50,7 @@
             </li>
             <li> <a href="{{ route('clients.index') }}"><i class="fa fa-users"></i> <span class="nav-label">Clients</span></a> </li>
             <li> <a href="{{ route('employee.index') }}"><i class="fa fa-user-o"></i> <span class="nav-label">Personnel</span></a> </li>
-            <li> <a href=""><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Statistiques</span> </a></li>
+            <li> <a href="{{ URL::to('10.156.93.175:4200') }}"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Statistiques</span> </a></li>
             
         </ul>
     </div>

@@ -14,7 +14,7 @@ class CreateVeausTable extends Migration
     public function up()
     {
         Schema::create('veaus', function (Blueprint $table) {
-            $table->id('idBovin')->unsigned(); 
+            $table->bigIncrements('idBovin')->unsigned(); 
             $table->foreign('idBovin')->references('idBovin')->on('bovins')->onUpdate('cascade')->onDelete('cascade');
             // $table->unsignedBigInteger('race_id');
             // $table->foreign('race_id')->references('idRace')->on('races')->onUpdate('cascade')->onDelete('cascade');

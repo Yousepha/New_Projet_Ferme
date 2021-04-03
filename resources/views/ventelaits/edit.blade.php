@@ -30,6 +30,13 @@
             </ul>
         </div>
     @endif--}}
+    
+    @if($message = Session::get('error'))
+    <div class="alert alert-danger">
+        <button class="close" data-dismiss="alert" type="button">x</button>
+        <p align="center"><strong>{{$message}}</strong></p>
+    </div>
+    @endif
   
     <form action="{{ route('ventelaits.update',$data->idVenteLait) }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -37,9 +44,34 @@
    
          <div class="row card shadow">
 
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Mettre en ligne:</strong>
+                    <div class="">
+                        <select name="enLigne" class="form-control" required>
+                            <option value="{{ $data->enLigne }} "
+
+                                @if($data->idBovin == $data->enLigne)
+                                selected
+                                @endif
+                            
+                            >
+                                {{ $data->enLigne }}
+                            </option>
+                            @if($data->enLigne == "pas en ligne")
+                                <option>en ligne</option>
+                            @endif
+                            @if($data->enLigne == "en ligne")
+                                <option>pas en ligne</option>
+                            @endif
+                        </select>
+                    </div>
+                </div>
+            </div>
+
             <!--  -->
             <div class="form-group col-md-12">
-                <label for="race"><strong>Choisir capacité de la Bouteille:</strong></label>
+                <label for="race"><strong>Capacité de la Bouteille:</strong></label>
                 <div class="">
                     <select name="bouteille_id" class="form-control" required>
                         @foreach($bouteilles as $bouteille[0])
@@ -55,14 +87,25 @@
                         @endforeach
                     </select>
                 </div>
+                <span style="color:red">@error('bouteille_id') {{$message}} @enderror</span>
+                
                 <div class="clearfix"></div>
             </div>
             <!--  -->            
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
+                    <strong>Prix Bouteille:</strong>
+                    <input type="number" min="0" name="prix" value="{{ $bouteilles[0]->prix }}" oninput="this.value = Math.abs(this.value)" class="form-control">
+                    <span style="color:red">@error('prix') {{$message}} @enderror</span>
+               
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
                     <strong>Description:</strong>
-                    <textarea class="form-control" style="height:80px" name="description">{{ $data->description }}</textarea>
+                    <textarea class="form-control" style="height:80px" name="description">{{ $bouteilles[0]->description }}</textarea>
                     <span style="color:red">@error('description') {{$message}} @enderror</span>
                 
                 </div>
@@ -70,18 +113,9 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Prix bouteille:</strong>
-                    <input type="number" name="prixBouteille" value="{{ $data->prixBouteille }}" class="form-control">
-                    <span style="color:red">@error('prixBouteille') {{$message}} @enderror</span>
-                
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Nombre Bouteille:</strong>
-                    <input type="number" name="nbrBouteille" value="{{ $data->nbrBouteille }}" class="form-control">
-                    <span style="color:red">@error('nbrBouteille') {{$message}} @enderror</span>
+                    <strong>Nombre Bouteille Vendu:</strong>
+                    <input type="number" min="0" name="nombreDispo" value="{{ $bouteilles[0]->nbrBouteilleVendu }}" oninput="this.value = Math.abs(this.value)" class="form-control">
+                    <span style="color:red">@error('nombreDispo') {{$message}} @enderror</span>
                
                 </div>
             </div>
@@ -120,6 +154,35 @@ function previewFile(input){
 }
 </script>
 <script>
+
+$(document).ready(function() {
+  $("input.positive-numeric-only").on("keydown", function(e) {
+    var char = e.originalEvent.key.replace(/[^0-9^.^,]/, "");
+    if (char.length == 0 && !(e.originalEvent.ctrlKey || e.originalEvent.metaKey)) {
+      e.preventDefault();
+    }
+  });
+
+  $("input.positive-numeric-only").bind("paste", function(e) {
+    var numbers = e.originalEvent.clipboardData
+      .getData("text")
+      .replace(/[^0-9^.^,]/g, "");
+    e.preventDefault();
+    var the_val = parseFloat(numbers);
+    if (the_val > 0) {
+      $(this).val(the_val.toFixed(2));
+    }
+  });
+
+  $("input.positive-numeric-only").focusout(function(e) {
+    if (!isNaN(this.value) && this.value.length != 0) {
+      this.value = Math.abs(parseFloat(this.value)).toFixed(2);
+    } else {
+      this.value = 0;
+    }
+  });
+});
+
  //---------------------Browse image----------------
  $('#browse_file').on('click',function(){
     $('#image').click();                 

@@ -21,6 +21,9 @@ class Bovin extends Model
         'etatDeSante',
         'geniteur',
         'genitrice',
+        'situation',
+        'prix',
+        'description',
         'race_id'
     ];
 

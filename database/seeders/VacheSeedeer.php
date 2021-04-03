@@ -17,7 +17,7 @@ class VacheSeedeer extends Seeder
         $vaches = [
             [
                 'idBovin' => 3,
-                'codeBovin' => "VAC-1",
+                'codeBovin' => "VAC-00",
                 'periode_id' => 1,
             ],
             // [

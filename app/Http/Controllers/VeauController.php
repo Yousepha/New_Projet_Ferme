@@ -51,7 +51,7 @@ class VeauController extends Controller
      */
     public function store(Request $request)
     {
-        $codeBovin = Helper::IDGenerator(new Veau,'idBovin', 'codeBovin', 6, 'VEA');
+        $codeBovin = Helper::IDGenerator(new Veau,'idBovin', 'codeBovin', 2, 'VEA');
         $q = new Veau;
         $q->codeBovin = $codeBovin;
 
@@ -63,9 +63,11 @@ class VeauController extends Controller
             'nom'    =>  'required',
             'etat'     =>  'required',
             'dateNaissance'     =>  'required|date',
+            'prix'     =>  'nullable',
+            'situation'     =>  'nullable',
             'etatDeSante'     =>  'required',
-            'geniteur'     =>  'required',
-            'genitrice'     =>  'required',
+            'geniteur'     =>  'nullable|string',
+            'genitrice'     =>  'nullable|string',
             'photo'         =>  'required|image|max:2048'
         ]);
 
@@ -83,6 +85,8 @@ class VeauController extends Controller
             'geniteur'        =>       $request->geniteur,
             'genitrice'        =>       $request->genitrice,
             'race_id'        =>       $request->race_id,
+            'prix'        =>       $request->prix,
+            'situation'        =>       $request->situation,
             'photo'            =>   $new_name,
         );
         
@@ -159,8 +163,10 @@ class VeauController extends Controller
                 'etat'     =>  'required',
                 'dateNaissance'     =>  'required|date',
                 'etatDeSante'     =>  'required',
-                'geniteur'     =>  'required',
-                'genitrice'     =>  'required',
+                'prix'     =>  'nullable',
+                'situation'     =>  'nullable',
+                'geniteur'     =>  'nullable|string',
+                'genitrice'     =>  'nullable|string',
                 'photo'         =>  'image|max:2048'
             ]);
 
@@ -174,8 +180,10 @@ class VeauController extends Controller
                 'etat'     =>  'required',
                 'dateNaissance'     =>  'required|date',
                 'etatDeSante'     =>  'required',
-                'geniteur'     =>  'required',
-                'genitrice'     =>  'required',
+                'prix'     =>  'nullable',
+                'situation'     =>  'nullable',
+                'geniteur'     =>  'nullable|string',
+                'genitrice'     =>  'nullable|string',
             ]);
         }
 
@@ -187,6 +195,8 @@ class VeauController extends Controller
             'geniteur'        =>       $request->geniteur,
             'genitrice'        =>       $request->genitrice,
             'race_id'        =>       $request->race_id,
+            'prix'        =>       $request->prix,
+            'situation'        =>       $request->situation,
             'photo'            =>   $image_name
         );
 

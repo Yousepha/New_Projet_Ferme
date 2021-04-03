@@ -13,7 +13,7 @@
         <div class="food-category">
             <div class="zoom play-on-scroll">
                 <button class="active" data-food-type="all">
-                    Nos produits
+                    Tout
                 </button>
             </div>
             <div class="zoom play-on-scroll delay-2">
@@ -83,6 +83,33 @@
             @endforeach
             @else
             <!-- <tr><td>pas encore disponible !</td></tr> -->
+
+            <div class="food-item ipsum-type">
+                <div class="item-wrap bottom-up play-on-scroll">
+                    <div class="item-img">
+                        <!-- {{--<div class="img-holder bg-img"
+                        style="background-image: url('{{ asset('images/'.$prod->photo)}}')"></div>--}} -->
+                    </div>
+                    <div class="item-info">
+                        <div>
+                            <h3>
+                                Taureau Non disponible
+                            </h3>
+                            <span>
+                                {{--<strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <h6> {{$prod->description}} </h6>--}}
+                            </span>
+                        </div>
+                        <div class="cart-btn">
+                            {{--<a href="{{route('voir_produit_genisse', ['idGenisse'=>$prod->idBovin])}}">
+                                <i class='bx bx-cart-alt'></i>
+                            </a>--}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @endif
             @endif
 
@@ -117,6 +144,33 @@
             @endforeach
             @else
             <!-- <tr><td>pas encore disponible !</td></tr> -->
+
+            <div class="food-item velles-type">
+                <div class="item-wrap bottom-up play-on-scroll">
+                    <div class="item-img">
+                        <!-- {{--<div class="img-holder bg-img"
+                        style="background-image: url('{{ asset('images/'.$prod->photo)}}')"></div>--}} -->
+                    </div>
+                    <div class="item-info">
+                        <div>
+                            <h3>
+                                Velle Non disponible
+                            </h3>
+                            <span>
+                                {{--<strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <h6> {{$prod->description}} </h6>--}}
+                            </span>
+                        </div>
+                        <div class="cart-btn">
+                            {{--<a href="{{route('voir_produit_genisse', ['idGenisse'=>$prod->idBovin])}}">
+                                <i class='bx bx-cart-alt'></i>
+                            </a>--}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @endif
             @endif
 
@@ -135,10 +189,10 @@
                                 Lait frais
                             </h3>
                             <span>
-                                <strike> {{$prod->prixBouteille + 1000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBouteille}} Fcfa</h4>
-                                <h4> {{$prod->nbrBouteille}} en stock</h4>
-                                <h6> {{$prod->description}} </h6>
+                                <strike> {{$prod->prix + 1000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
+                                <h4> {{$prod->nombreDispo}} en stock</h4>
+                                <h6> {{$prod->description}} </h6>{{-- --}}
                             </span>
                         </div>
                         <div class="cart-btn">
@@ -152,6 +206,33 @@
             @endforeach
             @else
             <!-- <tr><td>pas encore disponible !</td></tr> -->
+
+            <div class="food-item dolor-type">
+                <div class="item-wrap bottom-up play-on-scroll">
+                    <div class="item-img">
+                        <!-- {{--<div class="img-holder bg-img"
+                        style="background-image: url('{{ asset('images/'.$prod->photo)}}')"></div>--}} -->
+                    </div>
+                    <div class="item-info">
+                        <div>
+                            <h3>
+                                Laits Non disponible
+                            </h3>
+                            <span>
+                                {{--<strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <h6> {{$prod->description}} </h6>--}}
+                            </span>
+                        </div>
+                        <div class="cart-btn">
+                            {{--<a href="{{route('voir_produit_genisse', ['idGenisse'=>$prod->idBovin])}}">
+                                <i class='bx bx-cart-alt'></i>
+                            </a>--}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @endif
             @endif
 
@@ -187,6 +268,33 @@
             @endforeach
             @else
             <!-- <tr><td>pas encore disponible !</td></tr> -->
+
+            <div class="food-item salad-type">
+                <div class="item-wrap bottom-up play-on-scroll">
+                    <div class="item-img">
+                        <!-- {{--<div class="img-holder bg-img"
+                        style="background-image: url('{{ asset('images/'.$prod->photo)}}')"></div>--}} -->
+                    </div>
+                    <div class="item-info">
+                        <div>
+                            <h3>
+                                Vache Non disponible
+                            </h3>
+                            <span>
+                                {{--<strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <h6> {{$prod->description}} </h6>--}}
+                            </span>
+                        </div>
+                        <div class="cart-btn">
+                            {{--<a href="{{route('voir_produit_genisse', ['idGenisse'=>$prod->idBovin])}}">
+                                <i class='bx bx-cart-alt'></i>
+                            </a>--}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @endif
             @endif
 
@@ -222,6 +330,33 @@
             @endforeach
             @else
             <!-- <tr><td>pas encore disponible !</td></tr> -->
+            
+            <div class="food-item lorem-type">
+                <div class="item-wrap bottom-up play-on-scroll">
+                    <div class="item-img">
+                        <!-- {{--<div class="img-holder bg-img"
+                        style="background-image: url('{{ asset('images/'.$prod->photo)}}')"></div>--}} -->
+                    </div>
+                    <div class="item-info">
+                        <div>
+                            <h3>
+                                Genisse Non disponible
+                            </h3>
+                            <span>
+                                {{--<strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <h6> {{$prod->description}} </h6>--}}
+                            </span>
+                        </div>
+                        <div class="cart-btn">
+                            {{--<a href="{{route('voir_produit_genisse', ['idGenisse'=>$prod->idBovin])}}">
+                                <i class='bx bx-cart-alt'></i>
+                            </a>--}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @endif
             @endif
 
@@ -256,6 +391,33 @@
             @endforeach
             @else
             <!-- <tr><td>pas encore disponible !</td></tr> -->
+                    
+            <div class="food-item veaux-type">
+                <div class="item-wrap bottom-up play-on-scroll">
+                    <div class="item-img">
+                        <!-- {{--<div class="img-holder bg-img"
+                        style="background-image: url('{{ asset('images/'.$prod->photo)}}')"></div>--}} -->
+                    </div>
+                    <div class="item-info">
+                        <div>
+                            <h3>
+                                Veaux Non disponible
+                            </h3>
+                            <span>
+                                {{--<strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <h6> {{$prod->description}} </h6>--}}
+                            </span>
+                        </div>
+                        <div class="cart-btn">
+                            {{--<a href="{{route('voir_produit_genisse', ['idGenisse'=>$prod->idBovin])}}">
+                                <i class='bx bx-cart-alt'></i>
+                            </a>--}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @endif
             @endif
 

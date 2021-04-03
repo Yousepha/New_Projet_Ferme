@@ -11,11 +11,11 @@ class VenteLait extends Model
     protected $primaryKey = 'idVenteLait';
 
     protected $fillable = [
-        'prixBouteille',
-        'nbrBouteille',    
+        'prixTotale',
         'commande_id',
-        'description',
         'bouteille_id',
+        'enLigne',
+        'nbrBouteilleVendu'
     ];
     
     

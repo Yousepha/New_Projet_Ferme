@@ -20,8 +20,8 @@ class CreateVenteBovinsTable extends Migration
             $table->unsignedBigInteger('commande_id')->nullable();
             $table->foreign('commande_id')->references('idCom')->on('commandes')->onUpdate('cascade')->onDelete('cascade');          
             $table->integer('prixBovin');
-            $table->date('dateVenteBovin');
-            $table->text('description')->nullable();
+            $table->string('enLigne')->default('pas en ligne');
+            $table->dateTime('dateVenteBovin')->default(DB::raw('CURRENT_TIMESTAMP'))->unique();
             $table->timestamps();
         });
     }

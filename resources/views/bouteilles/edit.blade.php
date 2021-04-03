@@ -30,6 +30,14 @@
             </ul>
         </div>
     @endif--}}
+    
+    @if($message = Session::get('error'))
+    <div class="alert alert-danger">
+        <button class="close" data-dismiss="alert" type="button">x</button>
+        <p align="center"><strong>{{$message}}</strong></p>
+    </div>
+    @endif
+
   
     <form action="{{ route('bouteilles.update',$data->idBouteille) }}" method="POST">
         @csrf
@@ -39,12 +47,21 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Capacite:</strong>
-                    <input type="number" name="capacite" value="{{ $data->capacite }}" class="form-control">
+                    <input type="number" oninput="this.value = Math.abs(this.value)" name="capacite" value="{{ $data->capacite }}" class="form-control">
                     <span style="color:red">@error('capacite') {{$message}} @enderror</span>
                 
                 </div>
             </div>
-        
+            
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Nombre Bouteille Dispo:</strong>
+                    <input type="number" min="1" name="nombreDispo" value="{{ $data->nombreDispo }}" oninput="this.value = Math.abs(this.value)" class="form-control">
+                    <span style="color:red">@error('nombreDispo') {{$message}} @enderror</span>
+               
+                </div>
+            </div>
+
             <!--  -->
             {{--<div class="form-group col-md-12">
                 <label for="race"><strong>Nom Maladie</strong></label>

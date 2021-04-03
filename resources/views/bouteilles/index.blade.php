@@ -29,6 +29,7 @@
     <table class="table table-bordered table-striped bg-dark" style="color:white; border:none">
         <tr class="text-center">
             <th>Capacite</th>
+            <th>Nombre Bouteille</th>
             
             <th width="250px">Action</th>
         </tr>
@@ -36,6 +37,7 @@
         <tbody style="color:black; font:blod; background:#ffff">
             <tr class="text-center">
                 <td>{{ $bouteilles->capacite }} Litre(s)</td>
+                <td>{{ $bouteilles->nombreDispo }}</td>
                 
                 <td width="25%">
                     <form action="{{ route('bouteilles.destroy',$bouteilles->idBouteille) }}" method="POST">

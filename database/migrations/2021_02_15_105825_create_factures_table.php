@@ -17,6 +17,7 @@ class CreateFacturesTable extends Migration
             $table->bigIncrements('idFacture'); 
             $table->integer('montant');
             $table->date('datePaiement');
+            $table->string('moyenDePaiement');
             $table->unsignedBigInteger('commande_id')->nullable();
             $table->foreign('commande_id')->references('idCom')->on('commandes')->onUpdate('cascade')->onDelete('cascade'); 
             $table->timestamps();          

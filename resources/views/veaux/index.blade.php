@@ -35,8 +35,8 @@
             <th >Race</th>
             <th >codeBovin</th>
             <th >Etat</th>
-            <th >Date de Naissance</th>
-            <th >Etat De Sante</th>
+            <th >Date Naissance</th>
+            <th >Etat Sante</th>
             <th >geniteur</th>
             <th >genitrice</th>
             <th >Action</th>

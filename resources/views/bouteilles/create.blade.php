@@ -30,19 +30,35 @@
         </ul>
     </div>
 @endif--}}
-   
+
+    @if($message = Session::get('error'))
+    <div class="alert alert-danger">
+        <button class="close" data-dismiss="alert" type="button">x</button>
+        <p align="center"><strong>{{$message}}</strong></p>
+    </div>
+    @endif
+
 <form action="{{ route('bouteilles.store') }}" method="POST">
     @csrf
      <div class="row jumbotron text-white bg-dark">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Capacite:</strong>
-                <input type="number" name="capacite" class="form-control" placeholder="Capacite"  value="{{ old('capacite') }}">
+                <input type="number" name="capacite" class="form-control" placeholder="Capacite"  oninput="this.value = Math.abs(this.value)" value="{{ old('capacite') }}">
                 <span style="color:red">@error('capacite') {{$message}} @enderror</span>
             
             </div>
         </div>
         
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Nombre Bouteille Dispo:</strong>
+                <input type="number" min="0" name="nombreDispo" class="form-control" placeholder="Nombre Bouteille" oninput="this.value = Math.abs(this.value)" value="{{ old('nombreDispo') }}">
+                <span style="color:red">@error('nombreDispo') {{$message}} @enderror</span>
+            
+            </div>
+        </div>
+
         <!--  -->
         {{--<div class="form-group col-md-12">
             <!-- <div class="row"> -->

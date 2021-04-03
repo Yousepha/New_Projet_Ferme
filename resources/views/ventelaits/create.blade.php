@@ -30,17 +30,37 @@
         </ul>
     </div>
 @endif--}}
+
+    @if($message = Session::get('error'))
+    <div class="alert alert-danger">
+        <button class="close" data-dismiss="alert" type="button">x</button>
+        <p align="center"><strong>{{$message}}</strong></p>
+    </div>
+    @endif
+
    
 <form action="{{ route('ventelaits.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
      <div class="row card shadow">
         
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Mettre en ligne:</strong>
+                <select  name="enLigne" id="etatSante" class="form-control" required>
+                    <option>pas en ligne</option>
+                    <option>en ligne</option>
+                    
+                </select>
+                <span style="color:red">@error('enLigne') {{$message}} @enderror</span>
+            
+            </div>
+        </div>
         <!--  -->
         <div class="form-group col-md-12">
             <!-- <div class="row"> -->
                 <label for=""><strong>Choisir capacité de la Bouteille:</strong></label>
                 <div class="">
-                    <select name="bouteille_id" class="form-control" required>
+                    <select name="bouteille_id" class="form-control">
 
                         @foreach($bouteilles as $bouteille)
                         <option value="{{ $bouteille->idBouteille }} ">
@@ -59,8 +79,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Prix Bouteille:</strong>
-                <input type="number" name="prixBouteille" class="form-control" placeholder="Prix Bouteille" value="{{ old('prixBouteille') }}">
-                <span style="color:red">@error('prixBouteille') {{$message}} @enderror</span>
+                <input type="number" min="0" name="prix" class="form-control" placeholder="Nombre Bouteille" oninput="this.value = Math.abs(this.value)" value="{{ old('prix') }}">
+                <span style="color:red">@error('prix') {{$message}} @enderror</span>
             
             </div>
         </div>
@@ -68,12 +88,12 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nombre Bouteille:</strong>
-                <input type="number" name="nbrBouteille" class="form-control" placeholder="Nombre Bouteille" value="{{ old('nbrBouteille') }}">
-                <span style="color:red">@error('nbrBouteille') {{$message}} @enderror</span>
+                <input type="number" min="0" name="nombreDispo" class="form-control" placeholder="Nombre Bouteille" oninput="this.value = Math.abs(this.value)" value="{{ old('nombreDispo') }}">
+                <span style="color:red">@error('nombreDispo') {{$message}} @enderror</span>
             
             </div>
         </div>
-
+        
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description :</strong>
@@ -82,7 +102,6 @@
             
             </div>
         </div>
-        
 
         <div class="form-group col-md-6">
             <label for = "image" class=""><strong>La Photo</strong></label>
@@ -90,7 +109,7 @@
             <img id="previewImg" alt="Image" class="rounded-circle" width="70" >
             <span style="color:red">@error('photo') {{$message}} @enderror</span>
         
-        </div>
+        </div>{{----}}
 
 
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -114,6 +133,35 @@ function previewFile(input){
 </script>
 
 <script>
+
+$(document).ready(function() {
+  $("input.positive-numeric-only").on("keydown", function(e) {
+    var char = e.originalEvent.key.replace(/[^0-9^.^,]/, "");
+    if (char.length == 0 && !(e.originalEvent.ctrlKey || e.originalEvent.metaKey)) {
+      e.preventDefault();
+    }
+  });
+
+  $("input.positive-numeric-only").bind("paste", function(e) {
+    var numbers = e.originalEvent.clipboardData
+      .getData("text")
+      .replace(/[^0-9^.^,]/g, "");
+    e.preventDefault();
+    var the_val = parseFloat(numbers);
+    if (the_val > 0) {
+      $(this).val(the_val.toFixed(2));
+    }
+  });
+
+  $("input.positive-numeric-only").focusout(function(e) {
+    if (!isNaN(this.value) && this.value.length != 0) {
+      this.value = Math.abs(parseFloat(this.value)).toFixed(2);
+    } else {
+      this.value = 0;
+    }
+  });
+});
+
  //---------------------Browse image----------------
  $('#browse_file').on('click',function(){
         $('#image').click();                 

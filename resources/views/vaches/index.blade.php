@@ -57,8 +57,8 @@
             <th >Phase</th>
             <th >codeBovin</th>
             <th >Etat</th>
-            <th >Date de Naissance</th>
-            <th >Etat De Sante</th>
+            <th >Date Naissance</th>
+            <th >Etat Sante</th>
             <th >geniteur</th>
             <th >genitrice</th>
             <th >Action</th>
@@ -81,7 +81,7 @@
                 <!-- here is the button action side where you can edit . view and delete the vaches record -->
                 <form action="{{ route('vaches.destroy', $vaches->idBovin) }}" method="post">
                     <a href="{{ route('vaches.show', $vaches->idBovin) }}" class="btn btn-sm btn-warning"><span class="fa fa-eye"></span> </a>
-                    <a href="{{ route('vaches.edit', $vaches->idBovin) }}" class="btn btn-sm btn-info"><span class="fa fa-edit"></span> Editer</a>
+                    <a href="{{ route('vaches.edit', $vaches->idBovin) }}" class="btn btn-sm btn-info"><span class="fa fa-edit"></span></a>
                     
                     @csrf
                     @method('DELETE')

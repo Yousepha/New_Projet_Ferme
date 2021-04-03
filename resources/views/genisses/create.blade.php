@@ -91,7 +91,17 @@
                             <select  name="etatDeSante" id="etatSante" class="form-control" required>
                                 <option>Sain</option>
                                 <option>Malade</option>
-                                <option>Guéri</option>
+                                
+                            </select>
+                        </div>
+
+                        <!-- Default input -->
+                        <div class="form-group col-md-6">
+                            <label for="etatSante" class="col-md-6"> Choisir la situation</label>
+                            
+                            <select  name="situation" id="etatSante" class="form-control" required>
+                                <option>pas en vente</option>
+                                <option>en vente</option>
                                 
                             </select>
                         </div>
@@ -117,8 +127,16 @@
 
                         <!-- Default input -->
                         <div class="form-group col-md-6">
+                            <label for="prix" class="col-md-6">Le Prix</label>
+                            <input mdbInput type="number" id="prix" class="form-control" name="prix" placeholder="Prix" value="{{ old('prix') }}">
+                            <span style="color:red">@error('prix') {{$message}} @enderror</span>
+                        
+                        </div>
+
+                        <!-- Default input -->
+                        <div class="form-group col-md-6">
                             <label for="geniteur" class="col-md-6">Le géniteur</label>
-                            <input mdbInput type="text" id="geniteur" class="form-control" name="geniteur" id="phone" placeholder="Geniteur" value="{{ old('geniteur') }}">
+                            <input mdbInput type="text" id="geniteur" class="form-control" name="geniteur" placeholder="Geniteur" value="{{ old('geniteur') }}">
                             <span style="color:red">@error('geniteur') {{$message}} @enderror</span>
                         
                         </div>
@@ -126,7 +144,7 @@
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                             <label for="genitrice" class="col-md-6">La génitrice</label>
-                            <input mdbInput type="text" id="genitrice" class="form-control" name="genitrice" id="phone" placeholder="Genitrice" value="{{ old('genitrice') }}">
+                            <input mdbInput type="text" id="genitrice" class="form-control" name="genitrice" placeholder="Genitrice" value="{{ old('genitrice') }}">
                             <span style="color:red">@error('genitrice') {{$message}} @enderror</span>
                         
                         </div>

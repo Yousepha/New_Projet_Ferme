@@ -17,7 +17,7 @@ class GenisseSeedeer extends Seeder
         $genisses = [
             [
                 'idBovin' => 1,
-                'codeBovin' => "GEN-1",
+                'codeBovin' => "GEN-00",
                 'dateIA' => '2020-02-01',
                 'phase' => "gestant",
             ],

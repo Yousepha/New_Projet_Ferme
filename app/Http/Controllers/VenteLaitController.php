@@ -48,33 +48,54 @@ class VenteLaitController extends Controller
      */
     public function store(Request $request)
     {
+        // $prixUnitBouteille = DB::select("SELECT prix from bouteilles where idBouteille = $request->bouteille_id");
+        $nbrDispo = DB::select("SELECT * from bouteilles where idBouteille = $request->bouteille_id");
+        // dd( );
+        // $prixTotal = $prixUnitBouteille[0]->prix * $nbrDispo[0]->nombreDispo;
+        
         $request->validate([
-            'nbrBouteille' => 'required|integer',
-            'prixBouteille' => 'required|integer',
+            'nombreDispo' => 'required|integer',
+            'prix' => 'required|integer',
             'description' => 'required|string',
+            'enLigne' => 'required|string',
             'photo'   =>  'required|image|max:2048',   
-            'bouteille_id'   =>  'unique:vente_laits'   
+            'bouteille_id'   =>  'required|unique:vente_laits'   
         ]);
 
-        $input_data = array(
-            'nbrBouteille' => $request->nbrBouteille,
-            'prixBouteille' => $request->prixBouteille,
-            'description' => $request->description,
-            'bouteille_id' => $request->bouteille_id,
-            'commande_id' => $request->idCom,
-        );
-
-        VenteLait::create($input_data);
-        
         $photo = $request->file('photo');
         
         $new_name = rand() . '.' . $photo->getClientOriginalExtension();
         $photo->move(public_path('images'), $new_name);
 
-        $image_bouteille = array(
-            'photo'   =>   $new_name,
+        if($request->nombreDispo <= $nbrDispo[0]->nombreDispo){
+            
+            $image_bouteille = array(
+                'photo'   =>   $new_name,
+                'description' => $request->description,
+                'prix' => $request->prix,
+                'nombreDispo' => $nbrDispo[0]->nombreDispo - $request->nombreDispo,
+            );
+
+        }
+        else{
+            return redirect()->route('ventelaits.create')
+                ->with('error','Le nombre de bouteilles de lait '.$nbrDispo[0]->capacite .' litre(s) saisie est supérieur à celle dans le stock.
+                 Stock Actuel = '.$nbrDispo[0]->nombreDispo .' Bouteille(s)');
+        }
+
+        $prixTotal = $request->prix * $request->nombreDispo;
+        
+        $input_data = array(
+            'enLigne' => $request->enLigne,
+            'prixTotale' =>  $prixTotal,
+            // 'description' => $request->description,
+            'bouteille_id' => $request->bouteille_id,
+            'nbrBouteilleVendu' => $request->nombreDispo,
+            'commande_id' => $request->idCom,
         );
 
+        VenteLait::create($input_data);
+              
         Bouteille::whereidbouteille($request->bouteille_id)->update($image_bouteille);
         
         return redirect()->route('ventelaits.index')
@@ -134,21 +155,20 @@ class VenteLaitController extends Controller
      */
     public function update(Request $request, $idVenteLait)
     {
+        // $prixUnitBouteille = DB::select("SELECT prix from bouteilles where idBouteille = $request->bouteille_id");
+        // $prixTotal_ancien = DB::select("SELECT prixTotale from vente_laits, bouteilles where vente_laits.bouteille_id = bouteilles.idBouteille");
+        // $prixTotal_ancien_maj = $prixTotal_ancien[0]->prixTotale;
+
+        $nbr_vendu = DB::select("SELECT * from vente_laits where vente_laits.idVenteLait = $idVenteLait");
+
+        $nbrDispo_ancien = $nbr_vendu[0]->nbrBouteilleVendu;
+        // dd($nbrDispo_ancien);
+
         $request->validate([
-            'nbrBouteille' => 'required|integer',
-            'prixBouteille' => 'required|integer',
+            'nombreDispo' => 'required|integer',
+            'prix' => 'required|integer',
             'description' => 'required|string',
         ]);
-
-        $input_data = array(
-            'nbrBouteille' => $request->nbrBouteille,
-            'prixBouteille' => $request->prixBouteille,
-            'description' => $request->description,
-            'bouteille_id' => $request->bouteille_id,
-            'commande_id' => $request->idCom,
-        );
-
-        VenteLait::whereidventelait($idVenteLait)->update($input_data);        
         
         $image_name = $request->hidden_image;
         $photo = $request->file('photo');
@@ -169,9 +189,37 @@ class VenteLaitController extends Controller
             
         }
         
-        $image_bouteille = array(
-            'photo'   =>   $image_name,
+        $nbrDispo = DB::select("SELECT * from bouteilles where idBouteille = $request->bouteille_id");
+        
+        $nbrBouteille_total = $nbrDispo[0]->nombreDispo + $nbrDispo_ancien;
+
+        if($request->nombreDispo <= $nbrBouteille_total){
+            
+            $image_bouteille = array(
+                'photo'   =>   $image_name,
+                'description' => $request->description,
+                'prix' => $request->prix,
+                'nombreDispo' => $nbrBouteille_total - $request->nombreDispo,
+            );
+        }
+        else{
+            return redirect()->route('ventelaits.edit', $idVenteLait)
+                ->with('error','Le nombre de bouteilles de lait '.$nbrDispo[0]->capacite .' litre(s) saisie est supérieur à celle dans le stock.
+                 Stock Actuel = '. $nbrBouteille_total .' Bouteille(s)');
+        }
+
+        $prixTotal = $request->prix * $request->nombreDispo;
+        
+        $input_data = array(
+            'enLigne' => $request->enLigne,
+            'prixTotale' => $prixTotal,
+            // 'description' => $request->description,
+            'nbrBouteilleVendu' => $request->nombreDispo,
+            'bouteille_id' => $request->bouteille_id,
+            'commande_id' => $request->idCom,
         );
+
+        VenteLait::whereidventelait($idVenteLait)->update($input_data);        
 
         Bouteille::whereidbouteille($request->bouteille_id)->update($image_bouteille);
         
@@ -194,6 +242,16 @@ class VenteLaitController extends Controller
         $data = VenteLait::findOrFail($idVenteLait);
         unlink(public_path('images').'/'.$bouteilles[0]->photo);
 
+        
+        $nbr_vendu = DB::select("SELECT * from vente_laits where vente_laits.idVenteLait = $idVenteLait");
+        $nbrDispo_ancien = $nbr_vendu[0]->nbrBouteilleVendu;        
+        $nbrBouteille_total = $bouteilles[0]->nombreDispo + $nbrDispo_ancien;
+
+        $image_bouteille = array(
+            'nombreDispo' => $nbrBouteille_total
+        );
+
+        Bouteille::whereidbouteille($bouteilles[0]->bouteille_id)->update($image_bouteille);
         $data->delete();
         
         return redirect()->route('ventelaits.index')

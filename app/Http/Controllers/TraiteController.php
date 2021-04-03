@@ -7,6 +7,7 @@ use App\Models\TraiteDuJour;
 use App\Models\ProductionLait;
 use App\Models\Bovin;
 use App\Models\Vache;
+use App\Models\StockLait;
 use DB;
 
 class TraiteController extends Controller
@@ -24,8 +25,10 @@ class TraiteController extends Controller
         ->join('bovins', 'bovins.idBovin', '=', 'vaches.idBovin')
         ->select('*')
         ->paginate(5);
+
+        $stock = DB::table('stock_laits')->get();
         
-        return view('traites.index',compact('data'));
+        return view('traites.index',compact('data', 'stock'));
     }
 
     /**
@@ -61,19 +64,35 @@ class TraiteController extends Controller
         $request->validate([
             'traiteMatin' => 'required',
             'traiteSoir' => 'required',
-            'dateTraite' => 'required|date',
+            // 'dateTraite' => 'required|date',
         ]);
 
         $input_data = array(
             'fermier_id' => $fermier_id[0]->id,
             'traiteMatin' => $request->traiteMatin,
             'traiteSoir' => $request->traiteSoir,
-            'dateTraite' => $request->dateTraite,
+            // 'dateTraite' => $request->dateTraite,
             'productionLait_id' => $prod->idProductionLait,
         );
 
-        TraiteDuJour::create($input_data);
+        $traite = TraiteDuJour::create($input_data);
         
+        if($traite->idTraiteDuJour == 1){
+            StockLait::create();
+        }
+        
+        /*code du stock */
+        $stock = DB::select("SELECT * from stock_laits where idStock = 1");
+
+        $input_stock = array(
+            'quantiteTotale' => $stock[0]->quantiteTotale + $request->traiteMatin + $request->traiteSoir,
+            // 'quantiteDispo' => $stock[0]->quantiteDispo + $request->traiteMatin + $request->traiteSoir,
+        );
+
+
+        StockLait::whereidstock(1)->update($input_stock);
+        /*end code du stock */
+
         return redirect()->route('traites.index')
                         ->with('success','La traite a été ajouté avec succès!.');
     }
@@ -130,22 +149,40 @@ class TraiteController extends Controller
 
         $arr = DB::select("SELECT idProductionLait from production_laits, traite_du_jours where production_laits.idProductionLait = traite_du_jours.productionLait_id and traite_du_jours.idTraiteDuJour = $idTraiteDuJour");
         
+        $traite = DB::select("SELECT * from traite_du_jours where traite_du_jours.idTraiteDuJour = $idTraiteDuJour");
+        
+        $traite_matin_actu = $traite[0]->traiteMatin;
+        $traite_soir_actu = $traite[0]->traiteSoir;
+
         ProductionLait::whereidproductionlait($arr[0]->idProductionLait)->update($production);
 
         $request->validate([
             'traiteMatin' => 'required',
             'traiteSoir' => 'required',
-            'dateTraite' => 'required|date'
+            // 'dateTraite' => 'required|date'
         ]);
         
         $input_data = array(
             'traiteMatin' => $request->traiteMatin,
             'traiteSoir' => $request->traiteSoir,
-            'dateTraite' => $request->dateTraite,
-            // 'productionLait_id' =>$arr[0]->idProductionLait,
+            // 'dateTraite' => $request->dateTraite,
+            'productionLait_id' =>$arr[0]->idProductionLait,
         );
   
         TraiteDuJour::whereidtraitedujour($idTraiteDuJour)->update($input_data);
+        
+        /* code du stock */
+        $stock = DB::select("SELECT quantiteTotale from stock_laits where idStock = 1");
+        $stock_lait = $stock[0]->quantiteTotale - ($traite_matin_actu + $traite_soir_actu);
+        
+        // dd($traite_matin_actu);
+        
+        $input_stock = array(
+            'quantiteTotale' => $stock_lait + $request->traiteMatin + $request->traiteSoir,
+        );
+
+        StockLait::whereidstock(1)->update($input_stock);
+        /* end code du stock */
   
         return redirect()->route('traites.index')
                         ->with('success','Mise à jour de la traite réussie !');
@@ -164,6 +201,21 @@ class TraiteController extends Controller
         // dd($arr);
         $product = DB::table("production_laits")->where("idProductionLait", $arr[0]->idProductionLait);
         
+        $traite = DB::select("SELECT * from traite_du_jours where traite_du_jours.idTraiteDuJour = $idTraiteDuJour");
+        $traite_matin_actu = $traite[0]->traiteMatin;
+        $traite_soir_actu = $traite[0]->traiteSoir;
+        
+        /*code du stock */
+        $stock = DB::select("SELECT quantiteTotale from stock_laits where idStock = 1");
+        $stock_lait = $stock[0]->quantiteTotale - ($traite_matin_actu + $traite_soir_actu);
+
+        $input_stock = array(
+            'quantiteTotale' => $stock_lait,
+        );
+
+        StockLait::whereidstock(1)->update($input_stock);
+        /*end code*/
+
         $data = TraiteDuJour::findOrFail($idTraiteDuJour);
         $data->delete();
         

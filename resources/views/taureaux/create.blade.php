@@ -54,6 +54,17 @@
 
                         <!-- Default input -->
                         <div class="form-group col-md-6">
+                            <label for="etatSante" class="col-md-6"> Choisir la situation</label>
+                            
+                            <select  name="situation" id="etatSante" class="form-control" required>
+                                <option>pas en vente</option>
+                                <option>en vente</option>
+                                
+                            </select>
+                        </div>
+
+                        <!-- Default input -->
+                        <div class="form-group col-md-6">
                             <label for="dateNaiss" class="col-md-6">Date de Naissance</label>
                             <input mdbInput type="date" id="dateNaiss" class="form-control" name="dateNaissance" id="email" placeholder="Date Naissance" value="{{ old('dateNaissance') }}" value="{{ old('nom') }}">
                             <span style="color:red">@error('dateNaissance') {{$message}} @enderror</span>
@@ -68,7 +79,6 @@
                             <select  name="etatDeSante" id="etatSante" class="form-control" required>
                                 <option>Sain</option>
                                 <option>Malade</option>
-                                <option>Guéri</option>
                                 
                             </select>
                         </div>
@@ -91,6 +101,14 @@
                             <!-- </div> -->
                         </div>
                         <!--  -->
+                        
+                        <!-- Default input -->
+                        <div class="form-group col-md-6">
+                            <label for="prix" class="col-md-6">Le Prix</label>
+                            <input mdbInput type="number" id="prix" class="form-control" name="prix" placeholder="Prix" value="{{ old('prix') }}">
+                            <span style="color:red">@error('prix') {{$message}} @enderror</span>
+                        
+                        </div>
 
                         <!-- Default input -->
                         <div class="form-group col-md-6">

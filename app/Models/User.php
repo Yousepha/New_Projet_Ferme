@@ -23,7 +23,7 @@ class User extends Authenticatable
         'photo',
         'adresse',
         'login',
-        'email',
+        // 'email',
         'profile',
         'password',
         'est_admin',

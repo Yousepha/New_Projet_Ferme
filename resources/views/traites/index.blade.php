@@ -32,6 +32,7 @@
             <th>Nom Vache</th>
             <th>Traite Matin</th>
             <th>Traite Soir</th>
+            <th>Date Traite</th>
             <th width="250px">Action</th>
         </tr>
         @foreach ($data as $traites)
@@ -41,6 +42,7 @@
                 <td>{{ $traites->nom }}</td>
                 <td>{{ $traites->traiteMatin }} Litres</td>
                 <td>{{ $traites->traiteSoir }} Litres</td>
+                <td>{{ $traites->dateTraite }}</td>
                 <td width="25%">
                     <form action="{{ route('traites.destroy',$traites->idTraiteDuJour) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('traites.show',$traites->idTraiteDuJour) }}"><span class="fa fa-eye"></a>
@@ -51,8 +53,15 @@
                     </form>
                 </td>
             </tr>
-        </tbody> 
+        </tbody>
         @endforeach
+        <tfoot>
+            <tr style="color:black; font:blod; background:#ffff">
+                
+                <td colspan="4"></td>
+                <td>Stock disponible:{{ number_format($stock[0]->quantiteTotale, 2) }} litre(s)</td>
+            </tr>
+            </tfoot>
     </table>
     
     <div class="pagination-block">

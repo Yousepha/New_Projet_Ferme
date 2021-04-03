@@ -66,7 +66,17 @@ Route::get('/produitvelle/{idVelle}', [App\Http\Controllers\Shop\MainController:
 
 Route::get('/produitlait/{idLait}', [App\Http\Controllers\Shop\MainController::class, 'produitLait'])->name('voir_produit_lait');
 
-Route::get('/categorie/{idCategorie}', [App\Http\Controllers\Shop\MainController::class, 'viewByCatery'])->name('categorie');
+// Route::get('/categorie/{idCategorie}', [App\Http\Controllers\Shop\MainController::class, 'viewByCatery'])->name('categorie');
+
+/* Partie panier */
+Route::post('/panier/add/{idV}', [App\Http\Controllers\Shop\CartController::class, 'add'])->name('cart_add');
+Route::post('/produittaureau/add/{idT}', [App\Http\Controllers\Shop\CartController::class, 'addTaureau'])->name('cart_add_T');
+Route::post('/produitgenisse/add/{idG}', [App\Http\Controllers\Shop\CartController::class, 'addGenisse'])->name('cart_add_G');
+Route::post('/produitveau/add/{idVea}', [App\Http\Controllers\Shop\CartController::class, 'addVeau'])->name('cart_add_Vea');
+Route::post('/produitvelle/add/{idVel}', [App\Http\Controllers\Shop\CartController::class, 'addVelle'])->name('cart_add_Vel');
+Route::post('/produitlait/add/{idB}', [App\Http\Controllers\Shop\CartController::class, 'addBouteille'])->name('cart_add_B');
+
+Route::get('/panier_index', [App\Http\Controllers\Shop\CartController::class, 'index'])->name('cart_index');
 
 Auth::routes();
 

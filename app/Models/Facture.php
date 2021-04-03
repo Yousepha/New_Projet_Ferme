@@ -11,10 +11,10 @@ class Facture extends Model
 
     protected $primaryKey ='idFacture';
     protected $fillable = [
-        'idFacture',
         'montant',
         'datePaiement',
         'commande_id',
+        'moyenDePaiement'
     ];
    
 }

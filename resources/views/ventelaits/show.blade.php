@@ -21,20 +21,26 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Prix Bouteille:</strong>
-                {{ $data->prixBouteille }} Fcfa
+                <strong>Prix unitaire Bouteille:</strong>
+                {{ $bouteilles[0]->prix }} Fcfa
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Prix Total:</strong>
+                {{ $data->prixTotale }} Fcfa
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Description:</strong>
-                {{ $data->description }}
+                {{ $bouteilles[0]->description }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Nombre Bouteille:</strong>
-                {{ $data->nbrBouteille }}
+                <strong>Nombre Bouteille Vendu:</strong>
+                {{ $bouteilles[0]->nbrBouteilleVendu }}
             </div>
         </div>
         

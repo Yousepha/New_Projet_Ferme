@@ -39,12 +39,29 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Date Vente Bovin:</strong>
-                    <input type="date" name="dateVenteBovin" value="{{ $data->dateVenteBovin }}" class="form-control">
-                    <span style="color:red">@error('dateVenteBovin') {{$message}} @enderror</span>
-                
+                    <strong>Mettre en ligne:</strong>
+                    <div class="">
+                        <select name="enLigne" class="form-control" required>
+                            <option value="{{ $data->enLigne }} "
+
+                                @if($data->idBovin == $data->enLigne)
+                                selected
+                                @endif
+                            
+                            >
+                                {{ $data->enLigne }}
+                            </option>
+                            @if($data->enLigne == "pas en ligne")
+                                <option>en ligne</option>
+                            @endif
+                            @if($data->enLigne == "en ligne")
+                                <option>pas en ligne</option>
+                            @endif
+                        </select>
+                    </div>
                 </div>
             </div>
+            {{----}}
 
             <!--  -->
             <div class="form-group col-md-12">
@@ -71,7 +88,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Description:</strong>
-                    <textarea class="form-control" style="height:80px" name="description">{{ $data->description }}</textarea>
+                    <textarea class="form-control" style="height:80px" name="description">{{ $bovins[0]->description }}</textarea>
                     <span style="color:red">@error('description') {{$message}} @enderror</span>
                 
                 </div>

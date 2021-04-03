@@ -17,7 +17,7 @@ class VelleSeedeer extends Seeder
         $velles = [
             [
                 'idBovin' => 5,
-                'codeBovin' => "VEL-1",
+                'codeBovin' => "VEL-00",
             ],
             // [
             //     'codeBovin' => "VEL-2",

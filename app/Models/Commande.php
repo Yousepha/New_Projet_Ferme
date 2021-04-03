@@ -13,7 +13,7 @@ class Commande extends Model
 
     protected $fillable = [
         'client_id',
-        'dateCom'
+        'dateCom',
     ];
 
     public function client(){

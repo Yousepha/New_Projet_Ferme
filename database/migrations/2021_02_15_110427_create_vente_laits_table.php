@@ -19,9 +19,9 @@ class CreateVenteLaitsTable extends Migration
             $table->foreign('commande_id')->references('idCom')->on('commandes')->onUpdate('cascade')->onDelete('cascade'); 
             $table->unsignedBigInteger('bouteille_id')->nullable();
             $table->foreign('bouteille_id')->references('idBouteille')->on('bouteilles')->onUpdate('cascade')->onDelete('cascade');          
-            $table->integer('prixBouteille');
-            $table->integer('nbrBouteille');
-            $table->text('description')->nullable();
+            $table->integer('prixTotale');
+            $table->integer('nbrBouteilleVendu')->nullable();
+            $table->string('enLigne')->default('pas en ligne');
             $table->timestamps();
         });
     }

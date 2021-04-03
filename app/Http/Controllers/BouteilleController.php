@@ -43,24 +43,42 @@ class BouteilleController extends Controller
      */
     public function store(Request $request)
     {
-        $stock_id = DB::select("SELECT idStock from stock_laits, bouteilles where stock_laits.idStock = bouteilles.stock_id");
+        $stock_id = DB::select("SELECT idStock from stock_laits where stock_laits.idStock = 1");
 
         $request->validate([
-            'capacite' => 'required|integer',
+            'capacite' => 'required|integer|unique:bouteilles',
+            'nombreDispo' => 'required|integer',
         ]);
 
         $input_data = array(
             'stock_id' => $stock_id[0]->idStock,
             'capacite' => $request->capacite,
+            'nombreDispo' => $request->nombreDispo,
         );
 
-        Bouteille::create($input_data);
         
-        // $etat_stock = array(
-        //     'quantiteVendue' => $request->capacite,
-        // );
-
-        // StockLait::whereidstock($request->idStock)->update($etat_stock);
+        $stock_dispo = $request->capacite * $request->nombreDispo;
+        
+        /* code relatif au stock */
+        $stock = DB::select("SELECT * from stock_laits where idStock = 1");
+        
+        if($stock[0]->quantiteTotale >= $stock_dispo ){
+            
+            $input_stock = array(
+                'quantiteTotale' => $stock[0]->quantiteTotale - $stock_dispo,
+                // 'quantiteDispo' => $stock[0]->quantiteDispo + $stock_dispo,
+            );
+            
+        }
+        else{
+            return redirect()->route('bouteilles.create')
+            ->with('error','La Quantité de lait saisie est supérieur à celle dans le stock.
+            Stock Actuel = '.$stock[0]->quantiteTotale .'Litres');
+        }
+        
+        Bouteille::create($input_data);
+        StockLait::whereidstock(1)->update($input_stock);
+        /* end code */
         
         return redirect()->route('bouteilles.index')
                         ->with('success','Le Bouteille a été ajouté avec succès!.');
@@ -109,15 +127,47 @@ class BouteilleController extends Controller
      */
     public function update(Request $request, $idBouteille)
     {
+        
+        $bouteille = DB::select("SELECT * from bouteilles where bouteilles.idBouteille = $idBouteille");
+        $capacite = $bouteille[0]->capacite;
+        $nombreDispo = $bouteille[0]->nombreDispo;
+        $stock_ancien = $capacite * $nombreDispo;
+
         $request->validate([
             'capacite' => 'required|integer',
+            'nombreDispo' => 'required|integer',
         ]);
+
+        
+        /* code relatif au stock */
+        
+        // 
+        $stock = DB::select("SELECT * from stock_laits, bouteilles where idStock = 1 and bouteilles.idBouteille = $idBouteille");
+        $stock_dispo_a_ajouter = $stock[0]->quantiteTotale + $stock_ancien;
+        
+        // dd($stock_dispo_a_ajouter);
+        
+        if($stock_dispo_a_ajouter >= ($request->capacite * $request->nombreDispo) ){
+
+            $input_stock = array(
+                'quantiteTotale' => $stock_dispo_a_ajouter - ($request->capacite * $request->nombreDispo),
+            );
+            
+        }
+        else{
+            return redirect()->route('bouteilles.edit', $idBouteille)
+            ->with('error','La Quantité de lait saisie est supérieur à celle dans le stock.
+            Stock Actuel = '.$stock_dispo_a_ajouter .'Litre(s)');
+        }
 
         $input_data = array(
             // 'stock_id' => $request->idStock,
             'capacite' => $request->capacite,
+            'nombreDispo' => $request->nombreDispo,
         );
-  
+
+        StockLait::whereidstock(1)->update($input_stock);
+
         Bouteille::whereidbouteille($idBouteille)->update($input_data);
 
         return redirect()->route('bouteilles.index')
@@ -133,8 +183,23 @@ class BouteilleController extends Controller
     public function destroy($idBouteille)
     {
         $data = Bouteille::findOrFail($idBouteille);
-        $data->delete();
         
+        $bouteille = DB::select("SELECT * from bouteilles where bouteilles.idBouteille = $idBouteille");
+        $capacite = $bouteille[0]->capacite;
+        $nombreDispo = $bouteille[0]->nombreDispo;
+        $stock_ancien = $capacite * $nombreDispo;
+        
+        $stock = DB::select("SELECT * from stock_laits, bouteilles where idStock = 1 and bouteilles.idBouteille = $idBouteille");
+        $stock_dispo_a_ajouter = $stock[0]->quantiteTotale + $stock_ancien;
+        
+        $input_stock = array(
+            'quantiteTotale' => $stock_dispo_a_ajouter,
+        );
+        
+        StockLait::whereidstock(1)->update($input_stock);
+
+        $data->delete();
+
         return redirect()->route('bouteilles.index')
         ->with('error','La Bouteille est supprimée avec succès !');
     }

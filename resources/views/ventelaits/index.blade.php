@@ -31,8 +31,10 @@
         <tr class="text-center">
             <th width="10%">Photo</th>
             <th>Capacite</th>
-            <th>Prix Bouteille</th>
-            <th>Nombre Bouteille</th>
+            <th>Prix Unitaire</th>
+            <th>Prix Total</th>
+            <th>Bouteille Vendu</th>
+            <th>Bouteille Dispo</th>
             <th>Description</th>
             <th width="250px">Action</th>
         </tr>
@@ -41,8 +43,10 @@
             <tr class="text-center">
                 <td><img src="{{ URL::to('/') }}/images/{{ $ventelaits->photo }}" class="rounded-circle" width="60" height="50" /></td>
                 <td>{{ $ventelaits->capacite }} Litres(s)</td>
-                <td>{{ $ventelaits->prixBouteille }} Fcfa</td>
-                <td>{{ $ventelaits->nbrBouteille }}</td>
+                <td>{{ $ventelaits->prix }} Fcfa</td>
+                <td>{{ $ventelaits->prixTotale }} Fcfa</td>
+                <td>{{ $ventelaits->nbrBouteilleVendu }}</td>
+                <td>{{ $ventelaits->nombreDispo }}</td>
                 <td>{{ $ventelaits->description }}</td>
                 <td width="25%">
                     <form action="{{ route('ventelaits.destroy',$ventelaits->idVenteLait) }}" method="POST">

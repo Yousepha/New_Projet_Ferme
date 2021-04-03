@@ -51,21 +51,20 @@ class GenisseController extends Controller
      */
     public function store(Request $request)
     {
-        $codeBovin = Helper::IDGenerator(new Genisse,'idBovin', 'codeBovin', 6, 'GEN');
+        $codeBovin = Helper::IDGenerator(new Genisse,'idBovin', 'codeBovin', 2, 'GEN');
         $q = new Genisse;
         $q->codeBovin = $codeBovin;
-
-        // $errorMessage = [
-        //     'required' => 'Le champ :attribute est obligatoire'
-        // ];
 
         $request->validate([
             'nom'    =>  'required',
             'etat'     =>  'required',
             'dateNaissance'     =>  'required|date',
             'etatDeSante'     =>  'required',
-            'geniteur'     =>  'required',
-            'genitrice'     =>  'required',
+            'prix'     =>  'nullable',
+            'situation'     =>  'nullable',
+            'dateIA'     =>  'required',
+            'geniteur'     =>  'nullable|string',
+            'genitrice'     =>  'nullable|string',
             'photo'         =>  'required|image|max:2048'
         ]);
 
@@ -83,6 +82,8 @@ class GenisseController extends Controller
             'geniteur'        =>       $request->geniteur,
             'genitrice'        =>       $request->genitrice,
             'race_id'        =>       $request->race_id,
+            'prix'        =>       $request->prix,
+            'situation'        =>       $request->situation,
             'photo'            =>   $new_name,
         );
         
@@ -154,15 +155,18 @@ class GenisseController extends Controller
         $photo = $request->file('photo');
         if($photo != '')  // here is the if part when you dont want to update the image required
         {
-            // unlink(public_path('images').'/'.$image_name);
+            unlink(public_path('images').'/'.$image_name);
 
             $request->validate([
                 'nom'    =>  'required',
                 'etat'     =>  'required',
                 'dateNaissance'     =>  'required|date',
                 'etatDeSante'     =>  'required',
-                'geniteur'     =>  'required',
-                'genitrice'     =>  'required',
+                'prix'     =>  'nullable',
+                'situation'     =>  'nullable',
+                'dateIA'     =>  'required',
+                'geniteur'     =>  'nullable|string',
+                'genitrice'     =>  'nullable|string',
                 'photo'         =>  'image|max:2048'
             ]);
 
@@ -176,8 +180,11 @@ class GenisseController extends Controller
                 'etat'     =>  'required',
                 'dateNaissance'     =>  'required|date',
                 'etatDeSante'     =>  'required',
-                'geniteur'     =>  'required',
-                'genitrice'     =>  'required',
+                'prix'     =>  'nullable',
+                'situation'     =>  'nullable',
+                'dateIA'     =>  'required',
+                'geniteur'     =>  'nullable|string',
+                'genitrice'     =>  'nullable|string',
             ]);
         }
 
@@ -189,6 +196,8 @@ class GenisseController extends Controller
             'geniteur'        =>       $request->geniteur,
             'genitrice'        =>       $request->genitrice,
             'race_id'        =>       $request->race_id,
+            'prix'        =>       $request->prix,
+            'situation'        =>       $request->situation,
             'photo'            =>   $image_name
         );
 

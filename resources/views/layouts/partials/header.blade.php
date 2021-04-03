@@ -22,12 +22,12 @@
       </form>
 
       <ul class="navbar-nav">
-      <a href="{{route('panierVisiteur')}}">
-      <li>
-          <span class="fa fa-shopping-cart fa-lg my-3 mx-5" style="color: yellow;"></span>
-        </li>
+      <a href="{{route('cart_index')}}">
+      <li class="fa fa-shopping-cart fa-lg my-3 mx-5" style="color: yellow;">
+          <span class="badge badge-pill badge-dark"style="color: yellow;" >{{ Cart::getTotalQuantity() }}</span>
+      </li>
       </a>  
-      
+       
 
 
         <li class="nav-item dropdown lang-dropdown active">

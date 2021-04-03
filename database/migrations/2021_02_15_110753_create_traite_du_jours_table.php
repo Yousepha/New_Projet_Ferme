@@ -15,7 +15,7 @@ class CreateTraiteDuJoursTable extends Migration
     {
         Schema::create('traite_du_jours', function (Blueprint $table) {
             $table->bigIncrements('idTraiteDuJour'); 
-            $table->date('dateTraite')->unique();
+            $table->dateTime('dateTraite')->default(DB::raw('CURRENT_TIMESTAMP'))->unique();
             $table->unsignedBigInteger('productionLait_id');
             $table->foreign('productionLait_id')->references('idProductionLait')->on('production_laits')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('fermier_id');

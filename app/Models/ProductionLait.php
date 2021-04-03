@@ -11,7 +11,6 @@ class ProductionLait extends Model
     protected $primaryKey ='idProductionLait';
 
     protected $fillable = [
-        'idProductionLait',
         'bovin_id'
     ];
     public function vache(){

@@ -57,7 +57,7 @@ class AchatGenisseController extends Controller
      */
     public function store(Request $request)
     {
-        $codeBovin = Helper::IDGenerator(new Genisse,'idBovin', 'codeBovin', 6, 'GEN');
+        $codeBovin = Helper::IDGenerator(new Genisse,'idBovin', 'codeBovin', 2, 'GEN');
         $q = new Genisse;
         $q->codeBovin = $codeBovin;
 

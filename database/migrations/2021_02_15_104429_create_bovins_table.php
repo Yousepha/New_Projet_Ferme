@@ -21,10 +21,13 @@ class CreateBovinsTable extends Migration
             $table->string('nom');
             $table->string('photo')->nullable();
             $table->string('etatDeSante');
+            $table->string('situation')->default('pas en vente');
+            $table->integer('prix')->nullable();
             $table->date('dateNaissance')->nullable();
             $table->string('geniteur')->nullable();
             $table->string('genitrice')->nullable();
-            $table->string('etat');
+            $table->text('description')->nullable();
+            $table->string('etat')->default('Vivant');
             $table->timestamps();
         });
     }
