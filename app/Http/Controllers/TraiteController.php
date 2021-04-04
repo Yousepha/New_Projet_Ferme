@@ -26,9 +26,12 @@ class TraiteController extends Controller
         ->select('*')
         ->paginate(5);
 
+        $traiteMatin = DB::table("traite_du_jours")->get()->sum("traiteMatin");
+        $traiteSoir = DB::table("traite_du_jours")->get()->sum("traiteSoir");
+        $stockTotale = $traiteMatin + $traiteSoir;
         $stock = DB::table('stock_laits')->get();
         
-        return view('traites.index',compact('data', 'stock'));
+        return view('traites.index',compact('data', 'stock', 'stockTotale'));
     }
 
     /**

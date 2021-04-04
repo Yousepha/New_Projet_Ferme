@@ -1,10 +1,10 @@
-@extends('/layouts.base_shop')
+@extends('/layouts.client_master')
 @section('content') 
 <main role="main">
 
     <section class="py-5">
         <div class="container">
-                <h1 class="jumbotron-heading"> <span class="badge badge-primary ">Votre panier </span></h1>
+            <h1 class="jumbotron-heading"> <span class="badge badge-primary ">Votre panier </span></h1>
             <table class="table table-bordered table-responsive-sm">
                 <thead>
                     <tr>
@@ -55,7 +55,7 @@
                 </tr>
                 </tfoot>
             </table>
-            <a class="btn btn-block btn-outline-primary" href="{{ route('login') }}">Commander</a>
+            <a class="btn btn-block btn-outline-primary" href="{{ route('home') }}">Commander</a>
         </div>
     </section>
 

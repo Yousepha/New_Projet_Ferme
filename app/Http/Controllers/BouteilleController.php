@@ -20,8 +20,10 @@ class BouteilleController extends Controller
         ->join('stock_laits', 'stock_laits.idStock', '=', 'bouteilles.stock_id')
         ->select('*')
         ->paginate(5);
+
+        $stock = DB::table('stock_laits')->get();
         
-        return view('bouteilles.index',compact('data'));
+        return view('bouteilles.index',compact('data', 'stock'));
     }
 
     /**

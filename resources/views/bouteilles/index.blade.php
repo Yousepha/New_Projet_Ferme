@@ -51,6 +51,17 @@
             </tr>
         </tbody> 
         @endforeach
+        <tfoot>
+            <tr style="color:black; font:blod; background:#ffff">
+                
+                <td colspan="2"></td>
+                @if(isset($stock))
+                @if(count($stock) > 0)              
+                <td>Stock lait disponible:{{ number_format($stock[0]->quantiteTotale, 2) }} litre(s)</td>
+                @endif
+                @endif
+            </tr>
+        </tfoot>
     </table>
     
     <div class="pagination-block">

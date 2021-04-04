@@ -22,7 +22,7 @@
                     </td>
                     <td>
 
-                                <input style="display: inline-block" id="qte" class="form-control col-sm-4" type="number" value="1">
+                                <input style="display: inline-block" id="qte" class="form-control col-sm-4" type="number" value="1" disabled>
 
 
                                 <a  class="pl-2" href=""><i class="fas fa-sync"></i> </a>

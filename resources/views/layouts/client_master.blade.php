@@ -187,13 +187,13 @@
 		<div class="sidebar_inner">
 		<ul>
             <li>
-                <a href="{{route('home')}}">
+                <a href="{{route('accueil_client')}}">
                     <span class="icon"><i class="fa fa-home fa-2x"></i></span>
                     <span class="text">Accueil</span>
                 </a>
             </li>
             <li>
-                <a href="{{route('commander')}}">
+                <a href="{{route('cart_index_client')}}">
                     <span class="icon"><i class="fa fa-shopping-cart fa-2x"></i></span>
                     <span class="text">Panier</span>
                 </a>

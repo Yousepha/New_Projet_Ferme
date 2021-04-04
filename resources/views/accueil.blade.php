@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -129,6 +128,7 @@
         </div>
     </section>
     <!-- END SECTION HOME -->
+
     <!-- SECION ABOUT -->
     <section class="about fullheight align-items-center" id="about">
         <div class="container">
@@ -152,6 +152,7 @@
         </div>
     </section>
     <!-- END SECION ABOUT -->
+
     <!-- FOOD MENU SECTION -->
     <section class="align-items-center bg-img bg-img-fixed" id="food-menu-section"
         style="background-image: url(assets/vache_blancs.jpg);">
@@ -160,6 +161,7 @@
 
     </section>
     <!-- END FOOD MENU SECTION -->
+    
     <!-- TESTIMONIAL SECTION -->
     <section id="testimonial">
         <div class="container">

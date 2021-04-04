@@ -54,21 +54,19 @@ use App\Http\Controllers\VenteLaitController;
 // });
 Route::get('/', [App\Http\Controllers\Shop\MainController::class, 'index'])->name('accueil');
 
+Route::get('/shop/clients', [App\Http\Controllers\Shop\MainController::class, 'indexClient'])->name('accueil_client');
+
+/* Voir un produit spécifique coté visiteur */
 Route::get('/produitvache/{idVache}', [App\Http\Controllers\Shop\MainController::class, 'produitVache'])->name('voir_produit_vache');
-
 Route::get('/produittaureau/{idTaureau}', [App\Http\Controllers\Shop\MainController::class, 'produitTaureau'])->name('voir_produit_taureau');
-
 Route::get('/produitgenisse/{idGenisse}', [App\Http\Controllers\Shop\MainController::class, 'produitGenisse'])->name('voir_produit_genisse');
-
 Route::get('/produitveau/{idVeau}', [App\Http\Controllers\Shop\MainController::class, 'produitVeau'])->name('voir_produit_veau');
-
 Route::get('/produitvelle/{idVelle}', [App\Http\Controllers\Shop\MainController::class, 'produitVelle'])->name('voir_produit_velle');
-
 Route::get('/produitlait/{idLait}', [App\Http\Controllers\Shop\MainController::class, 'produitLait'])->name('voir_produit_lait');
 
 // Route::get('/categorie/{idCategorie}', [App\Http\Controllers\Shop\MainController::class, 'viewByCatery'])->name('categorie');
 
-/* Partie panier */
+/* Partie panier Visiteur*/
 Route::post('/panier/add/{idV}', [App\Http\Controllers\Shop\CartController::class, 'add'])->name('cart_add');
 Route::post('/produittaureau/add/{idT}', [App\Http\Controllers\Shop\CartController::class, 'addTaureau'])->name('cart_add_T');
 Route::post('/produitgenisse/add/{idG}', [App\Http\Controllers\Shop\CartController::class, 'addGenisse'])->name('cart_add_G');
@@ -78,9 +76,27 @@ Route::post('/produitlait/add/{idB}', [App\Http\Controllers\Shop\CartController:
 
 Route::get('/panier_index', [App\Http\Controllers\Shop\CartController::class, 'index'])->name('cart_index');
 
+/* Voir un produit spécifique coté client */
+Route::get('/produitva/{idVache}', [App\Http\Controllers\Shop\MainController::class, 'produitVacheClient'])->name('voir_produit_vache_client');
+Route::get('/produittau/{idTaureau}', [App\Http\Controllers\Shop\MainController::class, 'produitTaureauClient'])->name('voir_produit_taureau_client');
+Route::get('/produitgen/{idGenisse}', [App\Http\Controllers\Shop\MainController::class, 'produitGenisseClient'])->name('voir_produit_genisse_client');
+Route::get('/produitvea/{idVeau}', [App\Http\Controllers\Shop\MainController::class, 'produitVeauClient'])->name('voir_produit_veau_client');
+Route::get('/produitvel/{idVelle}', [App\Http\Controllers\Shop\MainController::class, 'produitVelleClient'])->name('voir_produit_velle_client');
+Route::get('/produitla/{idLait}', [App\Http\Controllers\Shop\MainController::class, 'produitLaitClient'])->name('voir_produit_lait_client');
+
+/* Partie panier Client*/
+Route::post('/panier_client/add/{idV}', [App\Http\Controllers\Shop\CartController::class, 'addVacheClient'])->name('cart_add_V_client');
+Route::post('/produittaureau_client/add/{idT}', [App\Http\Controllers\Shop\CartController::class, 'addTaureauClient'])->name('cart_add_T_client');
+Route::post('/produitgenisse_client/add/{idG}', [App\Http\Controllers\Shop\CartController::class, 'addGenisseClient'])->name('cart_add_G_client');
+Route::post('/produitveau_client/add/{idVea}', [App\Http\Controllers\Shop\CartController::class, 'addVeauClient'])->name('cart_add_Vea_client');
+Route::post('/produitvelle_client/add/{idVel}', [App\Http\Controllers\Shop\CartController::class, 'addVelleClient'])->name('cart_add_Vel_client');
+Route::post('/produitlait_client/add/{idB}', [App\Http\Controllers\Shop\CartController::class, 'addBouteilleClient'])->name('cart_add_B_client');
+
+Route::get('/panier_index_client', [App\Http\Controllers\Shop\CartController::class, 'indexClient'])->name('cart_index_client');
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'indexClient'])->name('home');
 
 // route pour la recherche des bovins
 Route::get('/find',[SearchController::class, 'find'])->name('web.find');
