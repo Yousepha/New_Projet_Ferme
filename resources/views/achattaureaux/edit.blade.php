@@ -139,7 +139,7 @@
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                             <label for="genitrice">Le montant du Taureau</label>
-                            <input mdbInput type="number" class="form-control" name="montantBovin" id="phone" value="{{ $achat_taureau[0]->montantBovin }}">
+                            <input mdbInput type="number" class="form-control" oninput="this.value = Math.abs(this.value)" name="montantBovin" id="phone" value="{{ $achat_taureau[0]->montantBovin }}">
                             <span style="color:red">@error('montantBovin') {{$message}} @enderror</span>
                         
                         </div>

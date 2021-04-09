@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AlimentationDuJour;
+use App\Models\AchatAliment;
 use DB;
 
 class AlimentationDuJourController extends Controller
@@ -15,8 +16,18 @@ class AlimentationDuJourController extends Controller
      */
     public function index()
     {
-        $data = AlimentationDuJour::latest()->paginate(3);
-        return view('alimentationjour.index',compact('data'))->with('i',(request()->input('page',1)-1)*3);
+        // $data = AlimentationDuJour::latest()->paginate(3);
+        // $qte_ach = DB::select("SELECT * from achat_aliments, alimentation_du_jours where achat_aliments.idAchatAliment = alimentation_du_jours.nomAlimentation");
+        // $qte_al = DB::select("SELECT * from alimentation_du_jours, achat_aliments where alimentation_du_jours.nomAlimentation = achat_aliments.idAchatAliment");
+        // $qte_totale = $qte_ach[0]->quantite + $qte_al[0]->quantite;
+
+        // dd($qte_totale);
+        $data = DB::table('achat_aliments')
+        ->join('alimentation_du_jours', 'alimentation_du_jours.nomAlimentation', '=', 'achat_aliments.idAchatAliment')
+        ->select('*')
+        ->paginate(5);
+
+        return view('alimentationjour.index',compact('data'));
     }
 
     /**
@@ -26,7 +37,8 @@ class AlimentationDuJourController extends Controller
      */
     public function create()
     {
-        return view('alimentationjour.create');
+        $achat_aliment = AchatAliment::all();
+        return view('alimentationjour.create', compact('achat_aliment'));
     }
 
     /**
@@ -45,14 +57,29 @@ class AlimentationDuJourController extends Controller
             'date' => 'required|date',
         ]);
             
+        $nom_aliment = DB::select("SELECT * from achat_aliments where achat_aliments.idAchatAliment = $request->nomAlimentation");
+
+        if($request->quantite <= $nom_aliment[0]->quantite){
+            $input_qte_aliment = array(
+                'quantite' => $nom_aliment[0]->quantite - $request->quantite,
+            );
+        }
+        else{
+            return redirect()->route('alimentationjour.create')
+            ->with('error','La Quantité de l\'aliment '. $nom_aliment[0]->nomAliment .' saisie est supérieur à celle dans le stock.
+            Stock Actuel = '.$nom_aliment[0]->quantite.' kg');
+        }
+
         $input_data = array(
             'fermier_id' => $fermier_id[0]->id,
             'nomAlimentation' => $request->nomAlimentation,
             'quantite' => $request->quantite,
             'date' => $request->date,
         );
+        
 
         AlimentationDuJour::create($input_data);
+        AchatAliment::whereidachataliment($request->nomAlimentation)->update($input_qte_aliment);
    
         return redirect()->route('alimentationjour.index')
                         ->with('success','L\'aliment a été ajouté avec succès!.');
@@ -79,7 +106,10 @@ class AlimentationDuJourController extends Controller
     public function edit($idAlimentation)
     {
         $data = AlimentationDuJour::findOrFail($idAlimentation);
-        return view('alimentationjour.edit',compact('data'));
+        $achat_aliment = DB::select("SELECT * from achat_aliments, alimentation_du_jours where achat_aliments.idAchatAliment = alimentation_du_jours.nomAlimentation
+        and alimentation_du_jours.idAlimentation = $idAlimentation");
+        // dd($achat_aliment);
+        return view('alimentationjour.edit',compact('data','achat_aliment'));
     }
 
     /**
@@ -90,12 +120,30 @@ class AlimentationDuJourController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $idAlimentation)
-    {
+    {        
+        $nom_aliment = DB::select("SELECT * from achat_aliments, alimentation_du_jours where achat_aliments.idAchatAliment = alimentation_du_jours.nomAlimentation
+        and alimentation_du_jours.idAlimentation = $idAlimentation
+        ");
+        $nom_aliment_jour = DB::select("SELECT * from alimentation_du_jours, achat_aliments where alimentation_du_jours.idAlimentation = $idAlimentation
+        and alimentation_du_jours.nomAlimentation = achat_aliments.idAchatAliment");
+        $qte_avant = $nom_aliment_jour[0]->quantite + $nom_aliment[0]->quantite;
+        
         $request->validate([
             'nomAlimentation' => 'required',
             'quantite' => 'required',
             'date' => 'required|date',
         ]);
+
+        if($request->quantite <= $qte_avant){
+            $input_qte_aliment = array(
+                'quantite' => $qte_avant - $request->quantite,
+            );
+        }
+        else{
+            return redirect()->route('alimentationjour.edit', $idAlimentation)
+            ->with('error','La Quantité de l\'aliment '. $nom_aliment[0]->nomAliment .' saisie est supérieur à celle dans le stock.
+            Stock Actuel = '.$qte_avant.' kg');
+        }
 
         $input_data = array(
             'nomAlimentation' => $request->nomAlimentation,
@@ -104,6 +152,7 @@ class AlimentationDuJourController extends Controller
         );
 
         AlimentationDuJour::whereidalimentation($idAlimentation)->update($input_data);
+        AchatAliment::whereidachataliment($request->nomAlimentation)->update($input_qte_aliment);
   
         return redirect()->route('alimentationjour.index')
                         ->with('success','Mise à jour de l\'aliment réussie !');
@@ -118,9 +167,23 @@ class AlimentationDuJourController extends Controller
     public function destroy($idAlimentation)
     {
         $data = AlimentationDuJour::findOrFail($idAlimentation);
-        $data->delete();
         
+        $nom_aliment = DB::select("SELECT * from achat_aliments, alimentation_du_jours where achat_aliments.idAchatAliment = alimentation_du_jours.nomAlimentation
+        and alimentation_du_jours.idAlimentation = $idAlimentation
+        ");
+        $nom_aliment_jour = DB::select("SELECT * from alimentation_du_jours, achat_aliments where alimentation_du_jours.idAlimentation = $idAlimentation
+        and alimentation_du_jours.nomAlimentation = achat_aliments.idAchatAliment");
+        $qte_avant = $nom_aliment_jour[0]->quantite + $nom_aliment[0]->quantite;
+        
+        $input_qte_aliment = array(
+            'quantite' => $qte_avant,
+        );
+
+        AchatAliment::whereidachataliment($nom_aliment_jour[0]->nomAlimentation)->update($input_qte_aliment);
+
+        $data->delete();
+
         return redirect()->route('alimentationjour.index')
-                        ->with('error','L\'aliment est supprimée avec succès !');
+                        ->with('error','L\'aliment est supprimé avec succès !');
     }
 }

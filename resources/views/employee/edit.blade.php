@@ -57,7 +57,7 @@
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                             <label for="" class="col-md-6">Téléphone</label>
-                            <input mdbInput type="number" class="form-control" name="telephone" id="gender" value="{{ $data->telephone}}">
+                            <input mdbInput type="number" class="form-control" oninput="this.value = Math.abs(this.value)" name="telephone" id="gender" value="{{ $data->telephone}}">
                         </div>
 
                         <!-- Default input -->
@@ -75,7 +75,7 @@
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                             <label for="" class="col-md-6">Mot de passe</label>
-                            <input mdbInput type="password" class="form-control" name="password" id="phone" value="{{ $data->password }}">
+                            <input mdbInput type="password" class="form-control" name="password" id="phone" value="{{ $data->password }}" disabled>
                         </div>
 
                         <!-- Default input -->
@@ -87,7 +87,7 @@
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                             <label for="" class="col-md-6">Salaire</label>
-                            <input mdbInput type="number" class="form-control" name="salaire" id="phone" value="{{ $fermier[0]->salaire }}">
+                            <input mdbInput type="number" class="form-control" oninput="this.value = Math.abs(this.value)" name="salaire" id="phone" value="{{ $fermier[0]->salaire }}">
                         </div>
 
                         <div class="row">

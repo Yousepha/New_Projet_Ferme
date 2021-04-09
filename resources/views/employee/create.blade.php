@@ -59,7 +59,7 @@
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                             <label for="" class="col-md-6">Téléphone</label>
-                            <input mdbInput type="number" class="form-control" name="telephone" id="" placeholder="Tel" value="{{ old('telephone') }}">
+                            <input mdbInput type="number" oninput="this.value = Math.abs(this.value)" class="form-control" name="telephone" id="" placeholder="Tel" value="{{ old('telephone') }}">
                             <span style="color:red">@error('telephone') {{$message}} @enderror</span>
                         
                         </div>
@@ -88,7 +88,7 @@
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                             <label for="" class="col-md-6">Salaire</label>
-                            <input mdbInput type="number" class="form-control" name="salaire" id="" placeholder="Salaire" value="{{ old('salaire') }}">
+                            <input mdbInput type="number" oninput="this.value = Math.abs(this.value)" class="form-control" name="salaire" id="" placeholder="Salaire" value="{{ old('salaire') }}">
                             <span style="color:red">@error('salaire') {{$message}} @enderror</span>
                         </div>
 

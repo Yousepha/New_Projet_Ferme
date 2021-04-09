@@ -1,4 +1,4 @@
-<header class="navbar navbar-expand-md navbar-dark bg-info sticky-top">
+<header class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
     <a class="navbar-brand" href="/">FermeLaitiere</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Commuter la navigation">
       <span class="navbar-toggler-icon"></span>
@@ -6,10 +6,10 @@
     <div class="collapse navbar-collapse" id="navigation">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Lait <span class="sr-only">Lait</span></a>
+          <!-- <a class="nav-link" href="#">Lait <span class="sr-only">Lait</span></a> -->
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">Bovins</a>
+          <!-- <a class="nav-link" href="#">Bovins</a> -->
         </li>
       </ul>
       <form action="search" method="get" class="form-inline mx-auto pull-center">
@@ -23,8 +23,8 @@
 
       <ul class="navbar-nav">
       <a href="{{route('cart_index')}}">
-      <li class="fa fa-shopping-cart fa-lg my-3 mx-5" style="color: yellow;">
-          <span class="badge badge-pill badge-dark"style="color: yellow;" >{{ Cart::getTotalQuantity() }}</span>
+      <li class="fa fa-shopping-cart fa-lg my-2 mx-5" style="color: green;">
+          <sup class="badge badge-pill badge-dark"style="color: yellow;" >{{ Cart::getTotalQuantity() }}</sup>
       </li>
       </a>  
        
@@ -34,7 +34,7 @@
 
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="lang-dropdown">
 
-            <span class="fa fa-user fa-lg" style="color: yellow;"></span>
+            <span class="fa fa-user fa-lg" style="color: green;"></span>
             <span class="hidden-sm">Mon compte</span>
 
           </a>

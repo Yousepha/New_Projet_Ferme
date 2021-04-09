@@ -32,9 +32,20 @@ class BouteilleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {        
-        $stoklait = StockLait::all();
-        return view('bouteilles.create',compact('stoklait'));
+    {       
+        $data = DB::table('bouteilles')
+        ->join('stock_laits', 'stock_laits.idStock', '=', 'bouteilles.stock_id')
+        ->select('*')
+        ->paginate(5);
+
+        $stock = DB::table('stock_laits')->get();
+        if(count($stock) > 0){
+            return view('bouteilles.create');
+        }
+        else{
+            return redirect()->route('bouteilles.index',compact('data', 'stock'))
+                            ->with('error', 'le stock de lait est vide! Veuillez enregistrer une traite pour continuer');
+        }
     }
 
     /**
@@ -129,7 +140,6 @@ class BouteilleController extends Controller
      */
     public function update(Request $request, $idBouteille)
     {
-        
         $bouteille = DB::select("SELECT * from bouteilles where bouteilles.idBouteille = $idBouteille");
         $capacite = $bouteille[0]->capacite;
         $nombreDispo = $bouteille[0]->nombreDispo;
@@ -159,7 +169,7 @@ class BouteilleController extends Controller
         else{
             return redirect()->route('bouteilles.edit', $idBouteille)
             ->with('error','La Quantité de lait saisie est supérieur à celle dans le stock.
-            Stock Actuel = '.$stock_dispo_a_ajouter .'Litre(s)');
+            Stock Actuel = '.$stock_dispo_a_ajouter.'Litre(s)');
         }
 
         $input_data = array(

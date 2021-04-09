@@ -44,7 +44,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Capacite:</strong>
-                <input type="number" name="capacite" class="form-control" placeholder="Capacite"  oninput="this.value = Math.abs(this.value)" value="{{ old('capacite') }}">
+                <input type="number" min="0" name="capacite" class="form-control" placeholder="Capacite"  oninput="this.value = Math.abs(this.value)" value="{{ old('capacite') }}">
                 <span style="color:red">@error('capacite') {{$message}} @enderror</span>
             
             </div>
@@ -59,25 +59,6 @@
             </div>
         </div>
 
-        <!--  -->
-        {{--<div class="form-group col-md-12">
-            <!-- <div class="row"> -->
-                <label for="" class="col-md-6"><strong>Choisir le Stock</strong></label>
-                <div class="">
-                    <select name="idStock" class="form-control" required>
-
-                        @foreach($stoklaits as $stoklait)
-                        <option value="{{ $stoklait->idStock }} ">
-                            {{ $stoklait->nomstoklait }}
-                        </option>
-                        @endforeach
-
-                    </select>
-                </div>
-                <div class="clearfix"></div>
-            <!-- </div> -->
-        </div>--}}
-        <!--  -->
 
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-block btn-primary">Valider</button>

@@ -11,9 +11,15 @@
     <form class="login-form" action="{{ route('login') }}" method="post">
     @csrf
         <i class="fas fa-user-circle"></i>
-
+        
+        @if($message = Session::get('error'))
+        <div class="alert alert-danger">
+            <!-- <button class="close" data-dismiss="alert" type="button">x</button> -->
+            <p style="color:red" align="center"><strong>{{$message}}</strong></p>
+        </div>
+        @endif
         <!-- <input class="user-input" type="text" name="" placeholder="Username" required> -->
-        <input id="email" placeholder="Login" type="text" class="user-input form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus>
+        <input id="email" placeholder="Login" type="text" style="margin-bottom: 30px;" class="user-input form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus>
 
         @error('login')
             <span class="invalid-feedback" role="alert">
@@ -22,7 +28,7 @@
         @enderror
         
         <!-- <input class="user-input" type="password" name="" placeholder="Password" required> -->
-        <input id="password" placeholder="Password" type="password" class="user-input form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+        <input id="password" placeholder="Password" type="password" style="margin-bottom: 30px;" class="user-input form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
         @error('password')
             <span class="invalid-feedback " role="alert">
@@ -32,7 +38,7 @@
         
         <div class="options-01">
             <!-- <label class="remember-me"><input type="checkbox" name="">Remember me</label> -->
-            <label class="remember-me form-check-label" for="remember">
+            <label style="margin-bottom: 30px;" class="remember-me form-check-label" for="remember">
             
             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 

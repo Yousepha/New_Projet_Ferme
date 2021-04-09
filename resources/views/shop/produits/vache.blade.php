@@ -28,6 +28,7 @@
 
                     <label for="qty">Quantité</label>
                     <input class="form-control" name="qty" id="qty" type="number" value="1">
+                    <span style="color:red">@error('qty') {{$message}} @enderror</span>
                     </form>
                     <button type="submit" form="panier_add" class="btn btn-cart my-2 btn-block btn-warning"><i class="fa fa-lg fa-shopping-cart"></i> Ajouter au Panier</button>
 

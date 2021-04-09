@@ -20,16 +20,12 @@
     </div>
 </div>
    
-{{--@if ($errors->any())
+    @if($message = Session::get('error'))
     <div class="alert alert-danger">
-        <strong>Avertissement!</strong>Veuillez vérifier votre code d'entrée<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+        <button class="close" data-dismiss="alert" type="button">x</button>
+        <p align="center"><strong>{{$message}}</strong></p>
     </div>
-@endif--}}
+    @endif
    
 <form action="{{ route('alimentationjour.store') }}" method="POST">
     @csrf
@@ -37,15 +33,24 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nom Aliment:</strong>
-                <input type="text" name="nomAlimentation" class="form-control" placeholder="nom aliment" value="{{ old('nomAlimentation') }}">
-                <span style="color:red">@error('nomAlimentation') {{$message}} @enderror</span>
-            
+                <div class="">
+                    <select name="nomAlimentation" class="form-control" required>
+                        @foreach($achat_aliment as $aliment)
+                        <option value="{{ $aliment->idAchatAliment }}">
+                            {{ $aliment->nomAliment }}
+                        </option>
+                        @endforeach
+                    </select>
+                    <span style="color:red">@error('nomAlimentation') {{$message}} @enderror</span>
+                </div>
+                <!-- {{--<input type="text" name="nomAlimentation" class="form-control" placeholder="nom aliment" value="{{ old('nomAlimentation') }}">
+                <span style="color:red">@error('nomAlimentation') {{$message}} @enderror</span>--}}-->
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Quatite Aliment:</strong>
-                <input type="number" name="quantite" class="form-control" placeholder="quantite" value="{{ old('quantite') }}">
+                <input type="number" name="quantite" oninput="this.value = Math.abs(this.value)" class="form-control" placeholder="quantite" value="{{ old('quantite') }}">
                 <span style="color:red">@error('quantite') {{$message}} @enderror</span>
             
             </div>

@@ -13,31 +13,54 @@ class CartController extends Controller
 
     public function add(Request $request){
 
-        // $request->validate([
-        //     'bovin_id' => 'unique:vente_bovins'
-        // ]);
+        $request->validate([
+            'qty' => 'max:1'
+        ]);
 
         $vaches =DB::select("SELECT * from vente_bovins, bovins where bovins.idBovin = $request->idV 
         and vente_bovins.bovin_id = $request->idV and  bovins.idBovin = vente_bovins.bovin_id");
 
         Cart::add(array(
             'id' => $vaches[0]->idBovin, // inique row ID
-            'name' => $vaches[0]->nom,
+            'name' => $vaches[0]->description,
             'price' => $vaches[0]->prixBovin,
-            'quantity' => 1,//$request->qty,
+            'quantity' => $request->qty,
             'attributes' => array('photo'=>$vaches[0]->photo) //'size'=>$request->size, 
         ));
 
         return redirect(route('cart_index'));
     }
+
+    public function update(Request $request, $idu){
+        // dd($request->qty);
+        Cart::update($idu, array(
+            'quantity' => array(
+                'relative' => false ,
+                'value' => $request->qty
+           ),
+        ));
+        
+        return back();
+    }
+
+    public function destroy($idr){
+        Cart::remove($idr);
+        return back();
+    }
+
+
     public function addTaureau(Request $request){
+        
+        $request->validate([
+            'qty' => 'required|integer|max:1'
+        ]);
 
         $taureaux =DB::select("SELECT * from vente_bovins, bovins where bovins.idBovin = $request->idT 
         and vente_bovins.bovin_id = $request->idT and  bovins.idBovin = vente_bovins.bovin_id");
 
         Cart::add(array(
             'id' => $taureaux[0]->idBovin, // inique row ID
-            'name' => $taureaux[0]->nom,
+            'name' => $taureaux[0]->description,
             'price' => $taureaux[0]->prixBovin,
             'quantity' => 1,//$request->qty,
             'attributes' => array('photo'=>$taureaux[0]->photo) 
@@ -53,7 +76,7 @@ class CartController extends Controller
 
         Cart::add(array(
             'id' => $genisses[0]->idBovin, // inique row ID
-            'name' => $genisses[0]->nom,
+            'name' => $genisses[0]->description,
             'price' => $genisses[0]->prixBovin,
             'quantity' => 1,//$request->qty,
             'attributes' => array('photo'=>$genisses[0]->photo) 
@@ -69,7 +92,7 @@ class CartController extends Controller
 
         Cart::add(array(
             'id' => $veaux[0]->idBovin, // inique row ID
-            'name' => $veaux[0]->nom,
+            'name' => $veaux[0]->description,
             'price' => $veaux[0]->prixBovin,
             'quantity' => 1,//$request->qty,
             'attributes' => array('photo'=>$veaux[0]->photo) 
@@ -85,7 +108,7 @@ class CartController extends Controller
         
         Cart::add(array(
             'id' => $velles[0]->idBovin, // inique row ID
-            'name' => $velles[0]->nom,
+            'name' => $velles[0]->description,
             'price' => $velles[0]->prixBovin,
             'quantity' => 1,//$request->qty,
             'attributes' => array('photo'=>$velles[0]->photo) 
@@ -130,13 +153,13 @@ class CartController extends Controller
 
         Cart::add(array(
             'id' => $vaches[0]->idBovin, // inique row ID
-            'name' => $vaches[0]->nom,
+            'name' => $vaches[0]->description,
             'price' => $vaches[0]->prixBovin,
             'quantity' => 1,//$request->qty,
             'attributes' => array('photo'=>$vaches[0]->photo) //'size'=>$request->size, 
         ));
 
-        return redirect(route('cart_index'));
+        return redirect(route('cart_index_client'));
     }
     public function addTaureauClient(Request $request){
 
@@ -145,13 +168,13 @@ class CartController extends Controller
 
         Cart::add(array(
             'id' => $taureaux[0]->idBovin, // inique row ID
-            'name' => $taureaux[0]->nom,
+            'name' => $taureaux[0]->description,
             'price' => $taureaux[0]->prixBovin,
             'quantity' => 1,//$request->qty,
             'attributes' => array('photo'=>$taureaux[0]->photo) 
         ));
 
-        return redirect(route('cart_index'));
+        return redirect(route('cart_index_client'));
     }
 
     public function addGenisseClient(Request $request){
@@ -161,13 +184,13 @@ class CartController extends Controller
 
         Cart::add(array(
             'id' => $genisses[0]->idBovin, // inique row ID
-            'name' => $genisses[0]->nom,
+            'name' => $genisses[0]->description,
             'price' => $genisses[0]->prixBovin,
             'quantity' => 1,//$request->qty,
             'attributes' => array('photo'=>$genisses[0]->photo) 
         ));
 
-        return redirect(route('cart_index'));
+        return redirect(route('cart_index_client'));
     }
 
     public function addVeauClient(Request $request){
@@ -177,13 +200,13 @@ class CartController extends Controller
 
         Cart::add(array(
             'id' => $veaux[0]->idBovin, // inique row ID
-            'name' => $veaux[0]->nom,
+            'name' => $veaux[0]->description,
             'price' => $veaux[0]->prixBovin,
             'quantity' => 1,//$request->qty,
             'attributes' => array('photo'=>$veaux[0]->photo) 
         ));
 
-        return redirect(route('cart_index'));
+        return redirect(route('cart_index_client'));
     }
 
     public function addVelleClient(Request $request){
@@ -193,13 +216,13 @@ class CartController extends Controller
         
         Cart::add(array(
             'id' => $velles[0]->idBovin, // inique row ID
-            'name' => $velles[0]->nom,
+            'name' => $velles[0]->description,
             'price' => $velles[0]->prixBovin,
             'quantity' => 1,//$request->qty,
             'attributes' => array('photo'=>$velles[0]->photo) 
         ));
 
-        return redirect(route('cart_index'));
+        return redirect(route('cart_index_client'));
     }
 
     public function addBouteilleClient(Request $request){
@@ -217,7 +240,7 @@ class CartController extends Controller
             'attributes' => array('photo'=>$bouteilles[0]->photo) 
         ));
 
-        return redirect(route('cart_index'));
+        return redirect(route('cart_index_client'));
     }
 
     public function indexClient(){
@@ -228,4 +251,33 @@ class CartController extends Controller
         $total_prix_panier = Cart::getTotal();
         return view('cart.clients.index',compact('content', 'total_prix_panier'));
     }
+
+    public function indexCommande(){
+
+        $content =  Cart::getContent();
+        // dd($content);
+        if(count($content) > 0){
+            $total_prix_panier = Cart::getTotal();
+            return view('shop.clients.commande_confirm',compact('content', 'total_prix_panier'));
+        }
+        else{
+            return view('shop.clients.commande_vide');
+        }
+    }
+
+    public function updateexample(){
+        
+        Cart :: update ( $id , array (
+            'quantity' => array (
+                'relative' => false ,
+                'value' => 5
+           ),
+         ));
+    }
+
+    public function delete(){
+
+        Cart::remove($id);
+    }
+
 }

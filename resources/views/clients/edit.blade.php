@@ -59,7 +59,7 @@
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                             <label for="" class="col-md-6">Téléphone</label>
-                            <input mdbInput type="number" class="form-control" name="telephone" id="gender" value="{{ $data->telephone}}">
+                            <input mdbInput type="number" oninput="this.value = Math.abs(this.value)" class="form-control" name="telephone" id="gender" value="{{ $data->telephone}}">
                             <span style="color:red">@error('telephone') {{$message}} @enderror</span>
                         
                         </div>

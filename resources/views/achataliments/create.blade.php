@@ -53,7 +53,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <strong>Quantité:</strong>
-                <input type="number" name="quantite" class="form-control" placeholder="Quantité"  value="{{ old('quantite') }}">
+                <input type="number" name="quantite" class="form-control" oninput="this.value = Math.abs(this.value)" placeholder="Quantité"  value="{{ old('quantite') }}">
                 <span style="color:red">@error('quantite') {{$message}} @enderror</span>
 
             </div>
@@ -61,7 +61,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <strong>Montant:</strong>
-                <input type="number" name="montant" class="form-control" placeholder="Montant"  value="{{ old('montant') }}">
+                <input type="number" name="montant" class="form-control" oninput="this.value = Math.abs(this.value)" placeholder="Montant"  value="{{ old('montant') }}">
                 <span style="color:red">@error('montant') {{$message}} @enderror</span>
 
             </div>

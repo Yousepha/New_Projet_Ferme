@@ -37,7 +37,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Traite Matin:</strong>
-                <input type="number" name="traiteMatin" class="form-control" placeholder="Traite Matin" value="{{ old('traiteMatin') }}">
+                <input type="number" oninput="this.value = Math.abs(this.value)" name="traiteMatin" class="form-control" placeholder="Traite Matin" value="{{ old('traiteMatin') }}">
                 <span style="color:red">@error('traiteMatin') {{$message}} @enderror</span>
             
             </div>
@@ -45,7 +45,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Traite Soir:</strong>
-                <input type="number" name="traiteSoir" class="form-control" placeholder="Traite Soir" value="{{ old('traiteSoir') }}">
+                <input type="number" oninput="this.value = Math.abs(this.value)" name="traiteSoir" class="form-control" placeholder="Traite Soir" value="{{ old('traiteSoir') }}">
                 <span style="color:red">@error('traiteSoir') {{$message}} @enderror</span>
             
             </div>
@@ -64,7 +64,6 @@
                 <label for="race" class="col-md-6"><strong>Choisir la vache</strong></label>
                 <div class="">
                     <select name="idBovin" class="form-control" required>
-                        <!-- <option selected>Choisir la Race de la vache</option> -->
                         @foreach($bovins as $vache)
                         <option value="{{ $vache->idBovin }} ">
                             {{ $vache->nom }}

@@ -28,7 +28,6 @@
    
     <table class="table table-bordered table-striped bg-dark" style="color:white; border:none">
         <tr class="text-center">
-            <th>No</th>
             <th>Nom Aliment</th>
             <th>Quantite Aliment</th>
             <th>Date</th>
@@ -37,13 +36,12 @@
         @foreach ($data as $alimentationjour)
         <tbody style="color:black; font:blod; background:#ffff">
             <tr class="text-center">
-                <td>{{ ++$i }}</td>
-                <td>{{ $alimentationjour->nomAlimentation }}</td>
+                <td>{{ $alimentationjour->nomAliment}}</td>
                 <td>{{ $alimentationjour->quantite }} kg</td>
                 <td>{{ $alimentationjour->date }}</td>
                 <td width="25%">
                     <form action="{{ route('alimentationjour.destroy',$alimentationjour->idAlimentation) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('alimentationjour.show',$alimentationjour->idAlimentation) }}"><span class="fa fa-eye"></a>
+                    <!-- <a class="btn btn-info" href="{{ route('alimentationjour.show',$alimentationjour->idAlimentation) }}"><span class="fa fa-eye"></a> -->
                     <a class="btn btn-primary" href="{{ route('alimentationjour.edit',$alimentationjour->idAlimentation) }}"><span class="fa fa-edit"></span> Editer</a>
                         @csrf
                         @method('DELETE')

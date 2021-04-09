@@ -106,7 +106,7 @@
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                             <label for="genitrice" class="col-md-6">Le montant du veau</label>
-                            <input mdbInput type="number" id="genitrice" class="form-control" name="montantBovin" id="phone" placeholder="montant" value="{{ old('montantBovin') }}">
+                            <input mdbInput type="number" oninput="this.value = Math.abs(this.value)" id="genitrice" class="form-control" name="montantBovin" id="phone" placeholder="montant" value="{{ old('montantBovin') }}">
                             <span style="color:red">@error('montantBovin') {{$message}} @enderror</span>
                         
                         </div>

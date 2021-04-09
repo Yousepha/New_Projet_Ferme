@@ -74,6 +74,12 @@ Route::post('/produitveau/add/{idVea}', [App\Http\Controllers\Shop\CartControlle
 Route::post('/produitvelle/add/{idVel}', [App\Http\Controllers\Shop\CartController::class, 'addVelle'])->name('cart_add_Vel');
 Route::post('/produitlait/add/{idB}', [App\Http\Controllers\Shop\CartController::class, 'addBouteille'])->name('cart_add_B');
 
+/* supprimer dans le panier */
+Route::get('/cart/remove/{idr}', [App\Http\Controllers\Shop\CartController::class, 'destroy']);
+
+/* modifier dans le panier */
+Route::post('/cart/update/{idu}', [App\Http\Controllers\Shop\CartController::class, 'update']);
+
 Route::get('/panier_index', [App\Http\Controllers\Shop\CartController::class, 'index'])->name('cart_index');
 
 /* Voir un produit spécifique coté client */
@@ -93,6 +99,8 @@ Route::post('/produitvelle_client/add/{idVel}', [App\Http\Controllers\Shop\CartC
 Route::post('/produitlait_client/add/{idB}', [App\Http\Controllers\Shop\CartController::class, 'addBouteilleClient'])->name('cart_add_B_client');
 
 Route::get('/panier_index_client', [App\Http\Controllers\Shop\CartController::class, 'indexClient'])->name('cart_index_client');
+
+Route::get('/commande_client', [App\Http\Controllers\Shop\CartController::class, 'indexCommande'])->name('ma_commande');
 
 Auth::routes();
 
@@ -193,32 +201,6 @@ Route::resource('bouteilles', BouteilleController::class);
 
 // route pour les Stocks de laits 
 Route::resource('stocklaits', StockLaitController::class);
-
-/* Pour les bovins */
-// Route::get('/ajout-bovin', [App\Http\Controllers\BovinController::class, 'ajout']);
-// Route::post('/ajout-vache', [App\Http\Controllers\BovinController::class, 'enregistrerVache'])->name('bovins.enregistrer');
-// Route::get('/tous_les_bovins', [BovinController::class, 'ensembles_bovins'])->name('bovins.index');
-// Route::get('/modifier_bovins/{idBovin}', [BovinController::class, 'modifierBovin']);
-// Route::post('/bovin_a_jour', [BovinController::class, 'mise_a_jour'])->name('bovins.mise_a_jour');
-// Route::get('/bovin_a_supprimer/{idBovin}', [BovinController::class, 'supprimer_bovins']);
-
-/* Pour les vaches */
-// Route::get('/ajout-vache', [VacheController::class, 'ajout']);
-// Route::post('/ajout-vache', [VacheController::class, 'enregistrerVache'])->name('vaches.enregistrer');
-// Route::get('/toutes_les_vaches', [VacheController::class, 'ensembles_vaches'])->name('vaches.index');
-// Route::get('/modifier_vaches/{idBovin}', [VacheController::class, 'modifierVache']);
-// Route::post('/vache_a_jour', [VacheController::class, 'mise_a_jour'])->name('vaches.mise_a_jour');
-// Route::get('/vache_a_supprimer/{idBovin}', [VacheController::class, 'supprimer_vache']);
-
-
-/* Pour les taureaux */
-// Route::get('/ajout-taureau', [TaureauController::class, 'ajout']);
-// Route::post('/ajout-taureau', [TaureauController::class, 'enregistrerTaureau'])->name('taureaux.enregistrer');
-// Route::get('/tous_les_taureaux', [TaureauController::class, 'ensembles_taureaux'])->name('taureaux.index');
-// Route::get('/modifier_taureaux/{idBovin}', [TaureauController::class, 'modifierTaureau']);
-// Route::post('/taureau_a_jour', [TaureauController::class, 'mise_a_jour'])->name('taureaux.mise_a_jour');
-// Route::get('/taureau_a_supprimer/{idBovin}', [TaureauController::class, 'supprimer_taureau']);
-
 
 Route::view('/liste_produits','/liste_produits')->name('liste_produits');
 

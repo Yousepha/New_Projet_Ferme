@@ -39,7 +39,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Traite Matin:</strong>
-                    <input type="number" name="traiteMatin" value="{{ $data->traiteMatin }}" class="form-control">
+                    <input type="number" oninput="this.value = Math.abs(this.value)" name="traiteMatin" value="{{ $data->traiteMatin }}" class="form-control">
                     <span style="color:red">@error('traiteMatin') {{$message}} @enderror</span>
                 
                 </div>
@@ -47,7 +47,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Traite Soir:</strong>
-                    <input type="number" name="traiteSoir" value="{{ $data->traiteSoir }}" class="form-control">
+                    <input type="number" name="traiteSoir" oninput="this.value = Math.abs(this.value)" value="{{ $data->traiteSoir }}" class="form-control">
                     <span style="color:red">@error('traiteSoir') {{$message}} @enderror</span>
                 
                 </div>

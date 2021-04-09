@@ -20,8 +20,8 @@ class EstFermier
             return $next($request);
         }
 
-        //return redirect(‘home’)->with(‘error’,"Vous n'avez pas d'accès employer.");
-        return redirect()->route('home')->with($error,"Vous n'avez pas d'accès employer.");
+        return redirect('home')->with('error',"Vous n'avez pas d'accès employer.");
+        // return redirect()->route('home')->with($error,"Vous n'avez pas d'accès employer.");
 
     }
 }

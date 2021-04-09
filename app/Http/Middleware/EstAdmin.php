@@ -20,7 +20,7 @@ class EstAdmin
             return $next($request);
         }
 
-        return redirect(‘home’)->with(‘error’,"Vous n'avez pas d'accès administrateur.");
+        return redirect('home')->with('error',"Vous n'avez pas d'accès administrateur.");
         //return redirect()->route('home')->with($error,"Vous n'avez pas d'accès administrateur.");
     }
 }

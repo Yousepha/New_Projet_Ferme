@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Fermier;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Auth\Events\Registered;
+// use Illuminate\Foundation\Auth\RegistersUsers;
 
 class EmployeeController extends Controller
 {
+    // use RegistersUsers;
+
     protected $user, $fermier;
     public function __construct(){
         $this->user = new User;
@@ -26,6 +30,7 @@ class EmployeeController extends Controller
         ->where('users.est_fermier', '=', 1)
         ->select('*')
         ->paginate(3);
+
         return view('employee.index', compact('data'));
  
         
@@ -65,6 +70,7 @@ class EmployeeController extends Controller
             'profile'     =>  'nullable',
             'email'     =>  'nullable',
             'photo'         =>  'image|max:2048',
+            
         ]);
 
         $photo = $request->file('photo');
@@ -77,10 +83,11 @@ class EmployeeController extends Controller
             'telephone'        =>      $request->telephone,
             'adresse'        =>       $request->adresse,
             'login'        =>       $request->login,
-            'password'        =>       $request->password,
-            'profile'        =>       $request->profile,
+            'password'        =>       bcrypt($request->password),
+            'profile'        =>       "fermier",
             'email'        =>       $request->email,
             'est_fermier' => 1,
+            'est_admin' => 0,
             'photo'            =>   $new_name
         );        
 
@@ -99,6 +106,7 @@ class EmployeeController extends Controller
         } catch (Exception $ex) {
             DB::rollback();
         }
+        event(new Registered($this->create($input_data)));
 
         return redirect('employee')->with('Success', 'Employee Inseré avec Succès');
     }
@@ -183,7 +191,7 @@ class EmployeeController extends Controller
             'adresse'        =>       $request->adresse,
             'login'        =>       $request->login,
             'password'        =>      $request->password,
-            'profile'        =>       $request->profile,
+            // 'profile'        =>       "fermier",
             'email'        =>       $request->email,
             // 'est_fermier' => 1,
             'photo'            =>   $image_name

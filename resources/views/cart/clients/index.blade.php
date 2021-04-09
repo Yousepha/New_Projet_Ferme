@@ -12,6 +12,7 @@
                         <th>Qte</th>
                         <th>P.U</th>
                         <th>Total TTC</th>
+                        <th>Opération</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,15 +25,20 @@
                         {{ $produit->name }}
                     </td>
                     <td>
-                        <input style="display: inline-block" id="qte" class="form-control col-sm-4" type="number" value="{{ $produit->quantity }}">
-
-                        <a  class="pl-2" href=""><i class="fas fa-sync"></i> </a>
+                        <form  action="{{ url('/cart/update')}}/{{ $produit->id }}" method="post">
+                        <input style="display: inline-block" oninput="this.value = Math.abs(this.value)" name="qty" id="qte" class="form-control col-sm-4" type="number" value="{{ $produit->quantity }}">{{--disabled--}}
+                        @csrf
+                            <button type="submit" class="btn py-2 pl-3 pr-3 btn-circle btn-outline-success fas fa-refresh"> </button>
+                        </form>
                     </td>
                     <td>
                     {{ number_format($produit->price) }} Fcfa
                     </td>
                     <td>
                     {{ number_format($produit->price * $produit->quantity) }} Fcfa
+                    </td>
+                    <td>       
+                        <a href="{{ url('/cart/remove')}}/{{ $produit->id }}" class="btn btn-danger delete-confirm"><span class="fa fa-trash"> Retirer</span></a>
                     </td>
                 </tr>
                 @endforeach
@@ -55,7 +61,7 @@
                 </tr>
                 </tfoot>
             </table>
-            <a class="btn btn-block btn-outline-primary" href="{{ route('home') }}">Commander</a>
+            <a class="btn btn-block btn-outline-primary" href="{{ route('ma_commande') }}">Commander</a>
         </div>
     </section>
 

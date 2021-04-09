@@ -36,8 +36,8 @@ body{
 
 .form .user-input{
 	width: 320px;
-	height: 55px;
-	margin-bottom: 30px;
+	height: 45px;
+	margin-bottom: 15px;
 	outline: none;
 	border: none;
 	background: rgba(255, 255, 255, 0.2);
@@ -56,7 +56,7 @@ body{
 }
 
 .form .options-01{
-	margin-bottom: 50px;
+	margin-bottom: 25px;
 }
 
 .form .options-01 input{
@@ -85,7 +85,7 @@ body{
 	outline: none;
 	border: none;
 	width: 320px;
-	height: 55px;
+	height: 45px;
 	background: #4285F4;
 	color: #fff;
 	font-size: 18px;

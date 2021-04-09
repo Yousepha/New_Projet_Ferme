@@ -43,6 +43,8 @@ class TraiteController extends Controller
     {
         $bovins = DB::table('vaches')
         ->join('bovins', 'bovins.idBovin', '=', 'vaches.idBovin')
+        ->join('periodes', 'periodes.idPeriode','=','vaches.periode_id')
+        ->where('periodes.nomPeriode', 'lactation')
         ->get();
 
         return view('traites.create',compact('bovins'));

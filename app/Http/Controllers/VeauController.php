@@ -39,8 +39,20 @@ class VeauController extends Controller
     public function create()
     {   
         $races = Race::all();
-        
-        return view('veaux.create', compact('races'));
+
+        $geniteurs = DB::table('taureaus')
+        ->join('bovins', 'bovins.idBovin', '=', 'taureaus.idBovin')
+        // ->join('periodes', 'periodes.idPeriode','=','taureaus.periode_id')
+        ->select('*')
+        ->get();
+
+        $genitrices = DB::table('vaches')
+        ->join('bovins', 'bovins.idBovin', '=', 'vaches.idBovin')
+        ->join('periodes', 'periodes.idPeriode','=','vaches.periode_id')
+        ->where('periodes.phase', 'gestant')
+        ->get();
+
+        return view('veaux.create', compact('races', 'geniteurs', 'genitrices'));
     }
 
     /**

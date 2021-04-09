@@ -153,7 +153,7 @@
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                             <label for="prix">Prix</label>
-                            <input mdbInput type="text" class="form-control" name="prix" id="prix" value="{{ $data->prix }}">
+                            <input mdbInput type="text" oninput="this.value = Math.abs(this.value)" class="form-control" name="prix" id="prix" value="{{ $data->prix }}">
                             <span style="color:red">@error('prix') {{$message}} @enderror</span>
                         
                         </div>

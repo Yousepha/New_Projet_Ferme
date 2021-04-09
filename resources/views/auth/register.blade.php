@@ -34,7 +34,7 @@
         @enderror
         
         <!-- <input class="user-input" type="text" name="" placeholder="Username" required> -->
-        <input placeholder="Téléphone" id="telephone" type="number" class="user-input form-control @error('telephone') is-invalid @enderror" name="telephone" value="{{ old('telephone') }}" required autocomplete="telephone" autofocus>
+        <input placeholder="Téléphone" id="telephone" type="number" oninput="this.value = Math.abs(this.value)" class="user-input form-control @error('telephone') is-invalid @enderror" name="telephone" value="{{ old('telephone') }}" required autocomplete="telephone" autofocus>
 
         @error('telephone')
             <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
         <!-- mot de passe de confirmation -->
         <input placeholder="Confirmation de mot de passe" id="password-confirm" type="password" class="user-input form-control" name="password_confirmation" required autocomplete="new-password">
         
-        <input class="btn" type="submit" name="" value="SIGN UP">
+        <input class="btn" type="submit" name="" value="S'inscrire">
 
         <div class="options-02">
             <p>Déjà Inscrit? <a href="#">Se Connecter</a></p>

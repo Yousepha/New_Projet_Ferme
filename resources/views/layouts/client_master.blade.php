@@ -194,7 +194,9 @@
             </li>
             <li>
                 <a href="{{route('cart_index_client')}}">
-                    <span class="icon"><i class="fa fa-shopping-cart fa-2x"></i></span>
+                    <sup class="badge badge-pill badge-dark"style="color: yellow;" >{{ Cart::getTotalQuantity() }}</sup>
+                    <span class="icon"><i class="fa fa-shopping-cart fa-2x">
+                    </i></span>
                     <span class="text">Panier</span>
                 </a>
             </li>

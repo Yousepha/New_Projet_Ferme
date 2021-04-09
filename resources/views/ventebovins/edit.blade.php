@@ -97,7 +97,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Prix Bovin:</strong>
-                    <input type="number" name="prixBovin" value="{{ $data->prixBovin }}" class="form-control">
+                    <input type="number" oninput="this.value = Math.abs(this.value)" name="prixBovin" value="{{ $data->prixBovin }}" class="form-control">
                     <span style="color:red">@error('prixBovin') {{$message}} @enderror</span>
                 
                 </div>

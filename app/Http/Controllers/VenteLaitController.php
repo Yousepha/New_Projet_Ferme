@@ -49,18 +49,19 @@ class VenteLaitController extends Controller
     public function store(Request $request)
     {
         // $prixUnitBouteille = DB::select("SELECT prix from bouteilles where idBouteille = $request->bouteille_id");
-        $nbrDispo = DB::select("SELECT * from bouteilles where idBouteille = $request->bouteille_id");
         // dd( );
         // $prixTotal = $prixUnitBouteille[0]->prix * $nbrDispo[0]->nombreDispo;
-        
         $request->validate([
             'nombreDispo' => 'required|integer',
             'prix' => 'required|integer',
             'description' => 'required|string',
             'enLigne' => 'required|string',
+            'capacite' => 'required',
             'photo'   =>  'required|image|max:2048',   
             'bouteille_id'   =>  'required|unique:vente_laits'   
         ]);
+        
+        $nbrDispo = DB::select("SELECT * from bouteilles where idBouteille = $request->bouteille_id");
 
         $photo = $request->file('photo');
         

@@ -55,7 +55,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <strong>Montant:</strong>
-                    <input type="number" name="montant" value="{{ $data->montant }}" class="form-control" placeholder="Montant">
+                    <input type="number" oninput="this.value = Math.abs(this.value)" name="montant" value="{{ $data->montant }}" class="form-control" placeholder="Montant">
                     <span style="color:red">@error('montant') {{$message}} @enderror</span>
                 
                 </div>

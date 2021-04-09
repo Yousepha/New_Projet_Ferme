@@ -87,8 +87,8 @@
                                                 
                     <select  name="etatDeSante" id="etatSante" class="form-control" required>
                         <option>Malade</option>
-                        <option>Guéri</option>
                         <option>Sain</option>
+                        <!-- <option>Guéri</option> -->
                         
                     </select>
 

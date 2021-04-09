@@ -115,15 +115,9 @@
                             </option>
                             @if($bovins[0]->etatDeSante == "Sain")
                                 <option>Malade</option>
-                                <option>Guéri</option>
                             @endif
                             @if($bovins[0]->etatDeSante == "Malade")
                                 <option>Sain</option>
-                                <option>Guéri</option>
-                            @endif
-                            @if($bovins[0]->etatDeSante == "Guéri")
-                                <option>Sain</option>
-                                <option>Malade</option>
                             @endif
                             
                             {{-- @endforeach --}}

@@ -37,7 +37,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Poids:</strong>
-                <input type="number" name="poids" class="form-control" placeholder="Poids" value="{{ old('poids') }}">
+                <input type="number" oninput="this.value = Math.abs(this.value)" name="poids" class="form-control" placeholder="Poids" value="{{ old('poids') }}">
                 <span style="color:red">@error('poids') {{$message}} @enderror</span>
             
             </div>

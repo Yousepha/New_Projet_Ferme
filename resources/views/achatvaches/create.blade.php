@@ -135,15 +135,15 @@
 
                         <!-- Default input -->
                         <div class="form-group col-md-6">
-                            <label for="genitrice" class="col-md-6">Le montant de la Vache</label>
-                            <input mdbInput type="number" id="genitrice" class="form-control" name="montantBovin" id="phone" placeholder="montant" value="{{ old('montantBovin') }}">
+                            <label for="genitrice" class="">Le montant de la Vache</label>
+                            <input mdbInput type="number" oninput="this.value = Math.abs(this.value)" id="genitrice" class="form-control" name="montantBovin" id="phone" placeholder="montant" value="{{ old('montantBovin') }}">
                             <span style="color:red">@error('montantBovin') {{$message}} @enderror</span>
                         
                         </div>
 
                         <!-- Default input -->
                         <div class="form-group col-md-6">
-                            <label for="genitrice" class="col-md-6">La date de l'Achat de la Vache</label>
+                            <label for="genitrice" class="">La date de l'Achat de la Vache</label>
                             <input mdbInput type="date" id="genitrice" class="form-control" name="dateAchatBovin" id="phone" placeholder="date achat" value="{{ old('dateAchatBovin') }}">
                             <span style="color:red">@error('dateAchatBovin') {{$message}} @enderror</span>
                         
