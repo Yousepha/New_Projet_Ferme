@@ -16,8 +16,8 @@ class CreateFacturesTable extends Migration
         Schema::create('factures', function (Blueprint $table) {
             $table->bigIncrements('idFacture'); 
             $table->integer('montant');
-            $table->date('datePaiement');
-            $table->string('moyenDePaiement');
+            $table->dateTime('datePaiement')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('moyenDePaiement')->nullable();
             $table->unsignedBigInteger('commande_id')->nullable();
             $table->foreign('commande_id')->references('idCom')->on('commandes')->onUpdate('cascade')->onDelete('cascade'); 
             $table->timestamps();          

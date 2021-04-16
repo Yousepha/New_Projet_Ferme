@@ -5,9 +5,12 @@
 	<title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+	<!-- <script src="https://kit.fontawesome.com/b99e675b6e.js"></script> -->
 	<!-- <link rel="stylesheet" href="styles.css"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
 
     <style>
         
@@ -207,7 +210,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="{{route('historique')}}">
+				<a href="{{route('historique.index')}}">
 					<span class="icon"><i class="fa fa-clock-o fa-2x"></i></span>
 					<span class="text">Historique</span>
 				</a>

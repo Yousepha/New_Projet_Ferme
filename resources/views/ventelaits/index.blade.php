@@ -32,7 +32,7 @@
             <th width="10%">Photo</th>
             <th>Capacite</th>
             <th>Prix Unitaire</th>
-            <th>Prix Total</th>
+            <!-- <th>Prix Total</th> -->
             <th>Bouteille Vendu</th>
             <th>Bouteille Dispo</th>
             <th>Description</th>
@@ -44,19 +44,19 @@
                 <td><img src="{{ URL::to('/') }}/images/{{ $ventelaits->photo }}" class="rounded-circle" width="60" height="50" /></td>
                 <td>{{ $ventelaits->capacite }} Litres(s)</td>
                 <td>{{ $ventelaits->prix }} Fcfa</td>
-                <td>{{ $ventelaits->prixTotale }} Fcfa</td>
-                <td>{{ $ventelaits->nbrBouteilleVendu }}</td>
+                {{--<td>{{ $ventelaits->prixTotale }} Fcfa</td>--}}
+                {{--<td>{{ $ventelaits->nbrBouteilleVendu }}</td>--}}
                 <td>{{ $ventelaits->nombreDispo }}</td>
                 <td>{{ $ventelaits->description }}</td>
                 <td width="25%">
-                    <form action="{{ route('ventelaits.destroy',$ventelaits->idVenteLait) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('ventelaits.show',$ventelaits->idVenteLait) }}"><span class="fa fa-eye"></a>
-                    <a class="btn btn-primary" href="{{ route('ventelaits.edit',$ventelaits->idVenteLait) }}"><span class="fa fa-edit"></span> Editer</a>
+                    <form action="{{ route('ventelaits.destroy',$ventelaits->idBouteille) }}" method="POST">
+                    <a class="btn btn-info" href="{{ route('ventelaits.show',$ventelaits->idBouteille) }}"><span class="fa fa-eye"></a>
+                    <a class="btn btn-primary" href="{{ route('ventelaits.edit',$ventelaits->idBouteille) }}"><span class="fa fa-edit"></span> Editer</a>
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger delete-confirm"><span class="fa fa-trash"></span></button>
                     </form>
-                </td>
+                </td>{{----}}
             </tr>
         </tbody>
         @endforeach

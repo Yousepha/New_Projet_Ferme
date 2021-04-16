@@ -19,6 +19,7 @@ class CreateAchatAlimentsTable extends Migration
             $table->foreign('admin_id')->references('user_id')->on('admins')->onUpdate('cascade')->onDelete('cascade');
             $table->string('nomAliment');
             $table->integer('quantite');
+            $table->integer('prixUnitaire');
             $table->integer('montant');
             $table->date('dateAchatAliment');
             $table->timestamps();

@@ -36,6 +36,7 @@ class DiagnosticFermierController extends Controller
         $bovins = Bovin::all();
 
         $maladies = Maladie::all();
+        // afficher seulement les bovins sain
         
         return view('diagnosticfermiers.create',compact('bovins', 'maladies'));
     }

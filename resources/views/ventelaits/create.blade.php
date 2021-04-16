@@ -43,7 +43,7 @@
     @csrf
      <div class="row card shadow">
         
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        {{--<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Mettre en ligne:</strong>
                 <select  name="enLigne" id="etatSante" class="form-control" required>
@@ -54,11 +54,11 @@
                 <span style="color:red">@error('enLigne') {{$message}} @enderror</span>
             
             </div>
-        </div>
+        </div>--}}
         <!--  -->
         <div class="form-group col-md-12">
             <!-- <div class="row"> -->
-                <label for=""><strong>Choisir capacité de la Bouteille:</strong></label>
+                <label for=""><strong>Choisir la capacité de la Bouteille:</strong></label>
                 <div class="">
                     <select name="bouteille_id" class="form-control">
 
@@ -79,7 +79,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Prix Bouteille:</strong>
-                <input type="number" min="0" name="prix" class="form-control" placeholder="Nombre Bouteille" oninput="this.value = Math.abs(this.value)" value="{{ old('prix') }}">
+                <input type="number" min="0" name="prix" class="form-control" placeholder="Prix Unitaire Bouteille" oninput="this.value = Math.abs(this.value)" value="{{ old('prix') }}">
                 <span style="color:red">@error('prix') {{$message}} @enderror</span>
             
             </div>

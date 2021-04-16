@@ -17,7 +17,7 @@
                 <div class="col-6">
 
                     <h1 class="jumbotron-heading">Génisse à vendre</h1>
-                    <h5>{{$genisses[0]->prixBovin}} Fcfa</h5>
+                    <h5>{{$genisses[0]->prix}} Fcfa</h5>
                     <p class="lead text-muted">
                     {{$genisses[0]->description}}
                     </p>
@@ -27,7 +27,8 @@
                     @csrf
 
                     <label for="qty">Quantité</label>
-                    <input class="form-control" name="qty" id="qty" type="number" value="1">
+                    <input class="form-control" name="qty" id="qty" oninput="this.value = Math.abs(this.value)" type="number">
+                    <span style="color:red">@error('qty') {{$message}} @enderror</span>
                     </form>
                     <button type="submit" form="panier_add" class="btn btn-cart my-2 btn-block btn-warning"><i class="fa fa-lg fa-shopping-cart"></i> Ajouter au Panier</button>
 

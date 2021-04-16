@@ -20,28 +20,28 @@
     </div>
 </div>
    
-@if ($errors->any())
+{{--@if ($errors->any())
     <div class="alert alert-danger">
         <strong>Avertissement!</strong>Veuillez vérifier votre code d'entrée<br><br>
-        {{-- <ul>
+         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
-        </ul>--}}
+        </ul>
     </div>
-@endif
+@endif--}}
    
 <form action="{{ route('achataliments.store') }}" method="POST">
     @csrf
      <div class="row card shadow">
-        <div class="col-md-12">
+        {{--<div class="col-md-12">
             <div class="form-group">
                 <strong>Date Achat Aliment:</strong>
                 <input type="date" name="dateAchatAliment" class="form-control" placeholder="Date achat aliment" value="{{ old('dateAchatAliment') }}">
                 <span style="color:red">@error('dateAchatAliment') {{$message}} @enderror</span>
 
             </div>
-        </div>
+        </div>--}}
         <div class="col-md-12">
             <div class="form-group">
                 <strong>Nom Aliment:</strong>
@@ -60,12 +60,20 @@
         </div>
         <div class="col-md-12">
             <div class="form-group">
+                <strong>Prix Unitaire:</strong>
+                <input type="number" name="prixUnitaire" class="form-control" oninput="this.value = Math.abs(this.value)" placeholder="Prix du 1kg"  value="{{ old('prixUnitaire') }}">
+                <span style="color:red">@error('prixUnitaire') {{$message}} @enderror</span>
+
+            </div>
+        </div>
+        {{--<div class="col-md-12">
+            <div class="form-group">
                 <strong>Montant:</strong>
                 <input type="number" name="montant" class="form-control" oninput="this.value = Math.abs(this.value)" placeholder="Montant"  value="{{ old('montant') }}">
                 <span style="color:red">@error('montant') {{$message}} @enderror</span>
 
             </div>
-        </div>
+        </div>--}}
         <div class="col-md-12 text-center">
                 <button type="submit" class="btn btn-primary btn-block">Valider</button>
         </div>

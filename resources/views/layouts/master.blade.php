@@ -8,7 +8,6 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style_dashboard_admin.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/home_dashboard_style.css') }}">
     <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>

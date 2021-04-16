@@ -46,7 +46,7 @@
             <td width="25%">
                 <form action="{{ route('achataliments.destroy',$achataliments->idAchatAliment) }}" method="POST">
                 <a class="btn btn-info" href="{{ route('achataliments.show',$achataliments->idAchatAliment) }}"><span class="fa fa-eye"></a>
-                <a class="btn btn-primary" href="{{ route('achataliments.edit',$achataliments->idAchatAliment) }}"><span class="fa fa-edit"></span> Editer</a>
+                <a class="btn btn-primary" href="{{ route('achataliments.edit',$achataliments->idAchatAliment) }}"><span class="fa fa-edit"></span> Ajout</a>
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger delete-confirm"><span class="fa fa-trash"></span></button>

@@ -86,11 +86,11 @@
                         </div>
 
                         <!-- Default input -->
-                        <div class="form-group col-md-6">
+                        {{--<div class="form-group col-md-6">
                             <label for="" class="col-md-6">Profile</label>
                             <input mdbInput type="text" class="form-control" name="profile" id="" placeholder="profile" value="{{ old('profile') }}" required>
                             <span style="color:red">@error('profile') {{$message}} @enderror</span>
-                        </div>
+                        </div>--}}
 
                         <div class="form-group col-md-3">
                             <label for="image" class="col-md-6">Photo</label>

@@ -24,10 +24,10 @@
     @endif
 
     </div>
-    <!-- <div align="right">
+    <!-- --><div align="right">
         <a href="{{ route('clients.create') }}" class="btn btn-default">
         <span class="fa fa-plus-circle"> Ajouter un nouveau Client</span></a>
-    </div> -->
+    </div> 
     <table class="table table-bordered table-striped bg-dark" style="color:white; border:none">
         <tr class="text-center">
             <th width="10%">Photo</th>

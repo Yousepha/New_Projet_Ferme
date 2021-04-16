@@ -16,7 +16,7 @@ class VachesController extends Controller
     public function __construct(){
         $this->bovin = new Bovin;
         $this->vache = new Vache;
-        $this->periode = new Periode;
+        // $this->periode = new Periode;
     }
     /**
      * Display a listing of the resource.
@@ -89,22 +89,24 @@ class VachesController extends Controller
             'photo'            =>   $new_name,
         );
         
-
+        $periode = DB::select("SELECT * from periode where nomPeriode = $request->nomPeriode and phase = $request->phase");
+        
+        dd($periode[0]->idPeriode);
         DB::beginTransaction();
         try {
             $bovin = Bovin::create($input_data);
-            $periode = $this->periode->create([
-                'nomPeriode' => $request->nomPeriode,
-                'phase' => $request->phase,
-            ]);
+            // $periode = $this->periode->create([
+            //     'nomPeriode' => $request->nomPeriode,
+            //     'phase' => $request->phase,
+            // ]);
                 
             $vache = $this->vache->create([
                 'idBovin' => $bovin->idBovin,
-                'periode_id' => $periode->idPeriode,
+                'periode_id' => $periode[0]->idPeriode,
                 'codeBovin' => $q->codeBovin,
             ]);
 
-            if($bovin && $vache && $periode){
+            if($bovin && $vache){
                 DB::commit();
             }else{
                 DB::rollback();
@@ -217,15 +219,19 @@ class VachesController extends Controller
             'phase' => $request->phase,
         );
 
-        $arr = DB::select("SELECT idPeriode from periodes, vaches where periodes.idPeriode = vaches.periode_id and vaches.idBovin = $idBovin");
+        $periode = DB::select("SELECT * from periode where nomPeriode = $request->nomPeriode and phase = $request->phase");
+        
+        dd($periode[0]->idPeriode);
+
+        // $arr = DB::select("SELECT idPeriode from periodes, vaches where periodes.idPeriode = vaches.periode_id and vaches.idBovin = $idBovin");
 
         // dd($arr[0]->idPeriode);
         $vache = array(
-            'periode_id'  =>  $arr[0]->idPeriode,
+            'periode_id'  =>  $periode[0]->idPeriode,
         );
         Vache::whereIdbovin($idBovin)->update($vache);
 
-        Periode::whereIdperiode($arr[0]->idPeriode)->update($periode);
+        // Periode::whereIdperiode($arr[0]->idPeriode)->update($periode);
 
 
         return redirect('vaches')->with('Success', 'Vache modifié avec Succès');
@@ -239,7 +245,6 @@ class VachesController extends Controller
      */
     public function destroy($idBovin)
     {
-        
         $data = Bovin::findOrFail($idBovin);
         unlink(public_path('images').'/'.$data->photo);
         
@@ -247,13 +252,13 @@ class VachesController extends Controller
 
         $vache = DB::table("vaches")->where("idBovin", $idBovin);
         
-        $arr = DB::select("SELECT idPeriode from periodes, vaches where periodes.idPeriode = vaches.periode_id and vaches.idBovin = $idBovin");
+        // $arr = DB::select("SELECT idPeriode from periodes, vaches where periodes.idPeriode = vaches.periode_id and vaches.idBovin = $idBovin");
         
-        DB::table("periodes")->where("idPeriode", $arr[0]->idPeriode)->delete();
+        // DB::table("periodes")->where("idPeriode", $arr[0]->idPeriode)->delete();
         
         $vache->delete();
 
-        return redirect('vaches')->with('error', 'Vache supprimé avec Succès');
+        return redirect('vaches')->with('error', 'Vache supprimée avec Succès');
     }
 
 }

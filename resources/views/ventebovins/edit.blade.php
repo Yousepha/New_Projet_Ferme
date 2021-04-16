@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="">
-                <h2 class="alert alert-dark text-center" style="color:red; text:bold">Modifier la Vente du Bovin {{ $bovins[0]->nom }}</h2>
+                <h2 class="alert alert-dark text-center" style="color:red; text:bold">Modifier la Vente du Bovin {{ $data->nom }}</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary fa fa-reply-all" href="{{ route('ventebovins.index') }}"> Retour</a>
@@ -31,12 +31,12 @@
         </div>
     @endif--}}
   
-    <form action="{{ route('ventebovins.update',$data->idVenteBovin) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('ventebovins.update',$data->idBovin) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
    
          <div class="row card shadow">
-
+            {{--
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Mettre en ligne:</strong>
@@ -61,24 +61,22 @@
                     </div>
                 </div>
             </div>
-            {{----}}
+            --}}
 
             <!--  -->
             <div class="form-group col-md-12">
                 <label for="race"><strong>Nom Bovin:</strong></label>
                 <div class="">
                     <select name="bovin_id" class="form-control" required>
-                        @foreach($bovins as $bovin[0])
-                        <option value="{{ $bovin[0]->idBovin }}"
+                        <option value="{{ $data->idBovin }}"
 
-                            @if($bovin[0]->idBovin == $bovins[0]->bovin_id)
+                            @if($data->idBovin == $data->bovin_id)
                             selected
                             @endif
                         
                         >
-                            {{ $bovin[0]->nom }}
+                            {{ $data->nom }}
                         </option>
-                        @endforeach
                     </select>
                 </div>
                 <div class="clearfix"></div>
@@ -88,7 +86,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Description:</strong>
-                    <textarea class="form-control" style="height:80px" name="description">{{ $bovins[0]->description }}</textarea>
+                    <textarea class="form-control" style="height:80px" name="description">{{ $data->description }}</textarea>
                     <span style="color:red">@error('description') {{$message}} @enderror</span>
                 
                 </div>
@@ -97,8 +95,8 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Prix Bovin:</strong>
-                    <input type="number" oninput="this.value = Math.abs(this.value)" name="prixBovin" value="{{ $data->prixBovin }}" class="form-control">
-                    <span style="color:red">@error('prixBovin') {{$message}} @enderror</span>
+                    <input type="number" oninput="this.value = Math.abs(this.value)" name="prix" value="{{ $data->prix }}" class="form-control">
+                    <span style="color:red">@error('prix') {{$message}} @enderror</span>
                 
                 </div>
             </div>
@@ -112,8 +110,8 @@
                 
                 </div>
                 <div class="form-group col-md-3">
-                    <img id="previewImg" src="{{ URL::to('/') }}/images/{{ $bovins[0]->photo }}" class="rounded-circle" width="70" />
-                    <input type="hidden" name="hidden_image" value="{{ $bovins[0]->photo }}" />
+                    <img id="previewImg" src="{{ URL::to('/') }}/images/{{ $data->photo }}" class="rounded-circle" width="70" />
+                    <input type="hidden" name="hidden_image" value="{{ $data->photo }}" />
                 </div>
             </div>
 

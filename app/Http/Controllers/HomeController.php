@@ -29,53 +29,40 @@ class HomeController extends Controller
 
     public function indexClient(){
 
-        $taureaux = DB::table('vente_bovins')
-        ->join('bovins', 'bovins.idBovin', '=', 'vente_bovins.bovin_id')
-        // ->join('commandes', 'commandes.idCom','=','vente_bovins.commande_id')
-        ->where('vente_bovins.enLigne', 'en ligne')
+        $taureaux = DB::table('bovins')
+        ->where('bovins.situation','en vente')
         ->join('taureaus', 'taureaus.idBovin','=','bovins.idBovin')
         ->select('*')
         ->get();
 
-        $vaches = DB::table('vente_bovins')
-        ->join('bovins', 'bovins.idBovin', '=', 'vente_bovins.bovin_id')
-        // ->join('commandes', 'commandes.idCom','=','vente_bovins.commande_id')
-        ->where('vente_bovins.enLigne', 'en ligne')
+        $vaches = DB::table('bovins')
+        ->where('bovins.situation','en vente')
         ->join('vaches', 'vaches.idBovin','=','bovins.idBovin')
         ->select('*')
         ->get();
 
-        $genisses = DB::table('vente_bovins')
-        ->join('bovins', 'bovins.idBovin', '=', 'vente_bovins.bovin_id')
-        // ->join('commandes', 'commandes.idCom','=','vente_bovins.commande_id')
-        ->where('vente_bovins.enLigne', 'en ligne')
+        $genisses = DB::table('bovins')
+        ->where('bovins.situation','en vente')
         ->join('genisses', 'genisses.idBovin','=','bovins.idBovin')
         ->select('*')
         ->get();
 
-        $veaux = DB::table('vente_bovins')
-        ->join('bovins', 'bovins.idBovin', '=', 'vente_bovins.bovin_id')
-        // ->join('commandes', 'commandes.idCom','=','vente_bovins.commande_id')
-        ->where('vente_bovins.enLigne', 'en ligne')
+        $veaux = DB::table('bovins')
+        ->where('bovins.situation','en vente')
         ->join('veaus', 'veaus.idBovin','=','bovins.idBovin')
         ->select('*')
         ->get();
 
-        $velles = DB::table('vente_bovins')
-        ->join('bovins', 'bovins.idBovin', '=', 'vente_bovins.bovin_id')
-        // ->join('commandes', 'commandes.idCom','=','vente_bovins.commande_id')
-        ->where('vente_bovins.enLigne', 'en ligne')
+        $velles = DB::table('bovins')
+        ->where('bovins.situation','en vente')
         ->join('velles', 'velles.idBovin','=','bovins.idBovin')
         ->select('*')
         ->get();
 
-        $bouteilles = DB::table('vente_laits')
-        ->join('bouteilles', 'bouteilles.idBouteille', '=', 'vente_laits.bouteille_id')
-        // ->join('commandes', 'commandes.idCom','=','vente_laits.commande_id')
-        ->where('vente_laits.enLigne', 'en ligne')
+        $bouteilles = DB::table('bouteilles')
+        ->where('prix', '!=', 'NULL')
         ->select('*')
         ->get();
-
 
         return view('shop.clients.index',compact('taureaux','vaches','genisses','veaux','velles','bouteilles'));
     }

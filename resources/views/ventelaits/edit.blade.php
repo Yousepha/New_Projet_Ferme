@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="">
-                <h2 class="alert alert-dark text-center" style="color:red; text:bold">Modifier la Vente du bouteille de :{{ $bouteilles[0]->capacite }} Litre(s)</h2>
+                <h2 class="alert alert-dark text-center" style="color:red; text:bold">Modifier la Vente du bouteille de :{{ $data->capacite }} Litre(s)</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary fa fa-reply-all" href="{{ route('ventelaits.index') }}"> Retour</a>
@@ -38,13 +38,13 @@
     </div>
     @endif
   
-    <form action="{{ route('ventelaits.update',$data->idVenteLait) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('ventelaits.update',$data->idBouteille) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
    
          <div class="row card shadow">
 
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            {{--<div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Mettre en ligne:</strong>
                     <div class="">
@@ -67,24 +67,22 @@
                         </select>
                     </div>
                 </div>
-            </div>
+            </div>--}}
 
             <!--  -->
             <div class="form-group col-md-12">
                 <label for="race"><strong>Capacité de la Bouteille:</strong></label>
                 <div class="">
                     <select name="bouteille_id" class="form-control" required>
-                        @foreach($bouteilles as $bouteille[0])
-                        <option value="{{ $bouteille[0]->idBouteille }}"
+                        <option value="{{ $data->idBouteille }}"
 
-                            @if($bouteille[0]->idBouteille == $bouteilles[0]->bouteille_id)
+                            @if($data->idBouteille == $data->bouteille_id)
                             selected
                             @endif
                         
                         >
-                            {{ $bouteille[0]->capacite }}
+                            {{ $data->capacite }}
                         </option>
-                        @endforeach
                     </select>
                 </div>
                 <span style="color:red">@error('bouteille_id') {{$message}} @enderror</span>
@@ -96,7 +94,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Prix Bouteille:</strong>
-                    <input type="number" min="0" name="prix" value="{{ $bouteilles[0]->prix }}" oninput="this.value = Math.abs(this.value)" class="form-control">
+                    <input type="number" min="0" name="prix" value="{{ $data->prix }}" oninput="this.value = Math.abs(this.value)" class="form-control">
                     <span style="color:red">@error('prix') {{$message}} @enderror</span>
                
                 </div>
@@ -105,7 +103,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Description:</strong>
-                    <textarea class="form-control" style="height:80px" name="description">{{ $bouteilles[0]->description }}</textarea>
+                    <textarea class="form-control" style="height:80px" name="description">{{ $data->description }}</textarea>
                     <span style="color:red">@error('description') {{$message}} @enderror</span>
                 
                 </div>
@@ -114,7 +112,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Nombre Bouteille Vendu:</strong>
-                    <input type="number" min="0" name="nombreDispo" value="{{ $bouteilles[0]->nbrBouteilleVendu }}" oninput="this.value = Math.abs(this.value)" class="form-control">
+                    <input type="number" min="0" name="nombreDispo" value="{{ $data->nombreDispo }}" oninput="this.value = Math.abs(this.value)" class="form-control">
                     <span style="color:red">@error('nombreDispo') {{$message}} @enderror</span>
                
                 </div>
@@ -129,8 +127,8 @@
                 
                 </div>
                 <div class="form-group col-md-3">
-                    <img id="previewImg" src="{{ URL::to('/') }}/images/{{ $bouteilles[0]->photo }}" class="rounded-circle" width="70" />
-                    <input type="hidden" name="hidden_image" value="{{ $bouteilles[0]->photo }}" />
+                    <img id="previewImg" src="{{ URL::to('/') }}/images/{{ $data->photo }}" class="rounded-circle" width="70" />
+                    <input type="hidden" name="hidden_image" value="{{ $data->photo }}" />
                 </div>
             </div>
 

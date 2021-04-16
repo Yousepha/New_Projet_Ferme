@@ -13,9 +13,10 @@
 	    transform: scale(1.5);
     }
 </style>
-    
-        <h2 class="alert alert-primary text-center" style="color:red; text:bold">Les derniers produits ajoutés !</h2>
-    
+
+    <div class="jumbotron bg-dark text-white text-center">
+        <h2 class="alert alert-dark text-center" style="color:red; text:bold">Les derniers produits ajoutés !</h2>
+    </div>
         
         @if(count($taureaux) > 0)
         @if(isset($taureaux))
@@ -30,8 +31,8 @@
                         <div class="card-body">
                             <p class="card-text">Taureau <br>{{$prod->description}}</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <del> {{$prod->prix + 10000}}  Fcfa</del>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <a href="{{route('voir_produit_taureau_client', ['idTaureau'=>$prod->idBovin])}}" class="btn btn-md btn-outline-secondary"><i class="fa fa-eye"></i></a>
                             </div>
                         </div>
@@ -56,8 +57,8 @@
                         <div class="card-body">
                             <p class="card-text">Velle <br>{{$prod->description}}</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <a href="{{route('voir_produit_velle_client', ['idVelle'=>$prod->idBovin])}}" class="btn btn-md btn-outline-secondary"><i class="fa fa-eye"></i></a>
                             </div>
                         </div>
@@ -108,8 +109,8 @@
                         <div class="card-body">
                             <p class="card-text">Vaches <br>{{$prod->description}}</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <a href="{{route('voir_produit_vache_client', ['idVache'=>$prod->idBovin])}}" class="btn btn-md btn-outline-secondary"><i class="fa fa-eye"></i></a>
                             </div>
                         </div>
@@ -133,8 +134,8 @@
                         <div class="card-body">
                             <p class="card-text">Genisse <br>{{$prod->description}}</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <a href="{{route('voir_produit_genisse_client', ['idGenisse'=>$prod->idBovin])}}" class="btn btn-md btn-outline-secondary"><i class="fa fa-eye"></i></a>
                             </div>
                         </div>
@@ -158,8 +159,8 @@
                         <div class="card-body">
                             <p class="card-text">Veau <br>{{$prod->description}}</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <a href="{{route('voir_produit_veau_client', ['idVeau'=>$prod->idBovin])}}" class="btn btn-md btn-outline-secondary"><i class="fa fa-eye"></i></a>
                             </div>
                         </div>

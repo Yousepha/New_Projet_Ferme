@@ -35,7 +35,7 @@
     @csrf
      <div class="row card shadow">
         
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        {{--<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Mettre en ligne:</strong>
                 <select  name="enLigne" id="etatSante" class="form-control" required>
@@ -47,7 +47,7 @@
             
             </div>
         </div>
-        {{----}}
+        --}}
         
         <!--  -->
         <div class="form-group col-md-12">
@@ -73,8 +73,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Prix Bovin :</strong>
-                <input type="number" oninput="this.value = Math.abs(this.value)" name="prixBovin" class="form-control" placeholder="Prix" value="{{ old('prixBovin') }}">
-                <span style="color:red">@error('prixBovin') {{$message}} @enderror</span>
+                <input type="number" oninput="this.value = Math.abs(this.value)" name="prix" class="form-control" placeholder="Prix" value="{{ old('prix') }}">
+                <span style="color:red">@error('prix') {{$message}} @enderror</span>
             
             </div>
         </div>
@@ -91,7 +91,7 @@
 
         <div class="form-group col-md-6">
             <label for = "image" class=""><strong>La Photo</strong></label>
-            <input type="file" name="photo" id="image" class="form-control" onchange="previewFile(this)">
+            <input type="file" name="photo" id="image" class="form-control" value="{{ old('photo') }}" onchange="previewFile(this)">
             <img id="previewImg" alt="Image" class="rounded-circle" width="70" >
             <span style="color:red">@error('photo') {{$message}} @enderror</span>
         

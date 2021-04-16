@@ -23,8 +23,6 @@ class ClientController extends Controller
     {
         $data = DB::table('users')
         ->join('clients', 'clients.user_id', '=', 'users.id')
-        // ->where('users.est_fermier', '=', 0)
-        // ->orWhere('users.est_admin', '=', 0)
         ->select('*')
         ->paginate(3);
         return view('clients.index', compact('data'));

@@ -19,10 +19,18 @@ class PeriodeSeedeer extends Seeder
                 'nomPeriode' => "lactation",
                 'phase' => "gestant",
             ],
-            // [
-            //     'nomPeriode' => "tarissement",
-            //     'phase' => "non gestant",
-            // ],
+            [
+                'nomPeriode' => "lactation",
+                'phase' => "non gestant",
+            ],
+            [
+                'nomPeriode' => "tarissement",
+                'phase' => "gestant",
+            ],
+            [
+                'nomPeriode' => "tarissement",
+                'phase' => "non gestant",
+            ],
             
         ];
         foreach ($periodes as $key => $value) {

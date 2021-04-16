@@ -17,7 +17,7 @@
                 <div class="col-6">
 
                     <h1 class="jumbotron-heading">Vache à vendre</h1>
-                    <h5>{{$vaches[0]->prixBovin}} Fcfa</h5>
+                    <h5>{{$vaches[0]->prix}} Fcfa</h5>
                     <p class="lead text-muted">
                     {{$vaches[0]->description}}
                     </p>

@@ -12,19 +12,19 @@
           <!-- <a class="nav-link" href="#">Bovins</a> -->
         </li>
       </ul>
-      <form action="search" method="get" class="form-inline mx-auto pull-center">
+      {{--<form action="search" method="get" class="form-inline mx-auto pull-center">
         <div class="input-group">
           <input type="text" name="search" class="form-control" placeholder="Je cherche...">
           <span class="input-group-append">
             <button type="submit" class="btn btn-warning border-0"><span class="fa fa-search"></span></button>
           </span>
         </div>
-      </form>
+      </form>--}}
 
       <ul class="navbar-nav">
       <a href="{{route('cart_index')}}">
       <li class="fa fa-shopping-cart fa-lg my-2 mx-5" style="color: green;">
-          <sup class="badge badge-pill badge-dark"style="color: yellow;" >{{ Cart::getTotalQuantity() }}</sup>
+          <sup class="badge badge-pill badge-primary"style="color: yellow;" >{{ Cart::getTotalQuantity() }}</sup>
       </li>
       </a>  
        

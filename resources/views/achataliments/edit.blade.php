@@ -36,7 +36,7 @@
         @method('PUT')
    
          <div class="row card shadow">
-            <div class="col-md-12">
+            {{--<div class="col-md-12">
                 <div class="form-group">
                     <strong>Date Achat Aliment:</strong>
                     <input type="date" name="dateAchatAliment" value="{{ $data->dateAchatAliment }}" class="form-control">
@@ -51,7 +51,7 @@
                     <span style="color:red">@error('nomAliment') {{$message}} @enderror</span>
 
                 </div>
-            </div>
+            </div>--}}
             <div class="col-md-12">
                 <div class="form-group">
                     <strong>Quantité:</strong>
@@ -60,14 +60,14 @@
                 
                 </div>
             </div>
-            <div class="col-md-12">
+            {{--<div class="col-md-12">
                 <div class="form-group">
                     <strong>Montant:</strong>
                     <input type="number" name="montant" value="{{ $data->montant }}" oninput="this.value = Math.abs(this.value)" class="form-control">
                     <span style="color:red">@error('montant') {{$message}} @enderror</span>
                
                 </div>
-            </div>
+            </div>--}}
             <div class="col-md-12 text-center">
               <button type="submit" class="btn btn-primary btn-block">Valider</button>
             </div>

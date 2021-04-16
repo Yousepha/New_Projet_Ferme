@@ -19,9 +19,12 @@ class TraiteController extends Controller
      */
     public function index()
     {
+        $date_actu = \Carbon\Carbon::now()->format('y.m.d');
+
         $data = DB::table('traite_du_jours')
         ->join('production_laits', 'production_laits.idProductionLait', '=', 'traite_du_jours.productionLait_id')
         ->join('vaches', 'vaches.idBovin','=','production_laits.bovin_id')
+        ->where('dateTraite', $date_actu)
         ->join('bovins', 'bovins.idBovin', '=', 'vaches.idBovin')
         ->select('*')
         ->paginate(5);
@@ -72,11 +75,12 @@ class TraiteController extends Controller
             // 'dateTraite' => 'required|date',
         ]);
 
+        $date_actu = \Carbon\Carbon::now()->format('y.m.d');
         $input_data = array(
             'fermier_id' => $fermier_id[0]->id,
             'traiteMatin' => $request->traiteMatin,
             'traiteSoir' => $request->traiteSoir,
-            // 'dateTraite' => $request->dateTraite,
+            'dateTraite' => $date_actu,
             'productionLait_id' => $prod->idProductionLait,
         );
 

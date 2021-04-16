@@ -17,7 +17,7 @@ class AchatAlimentController extends Controller
     {
         $data = AchatAliment::latest()->paginate(5);
         return view('achataliments.index',compact('data'))->with('i',(request()->input('page',1)-1)*5);
-     }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -37,21 +37,22 @@ class AchatAlimentController extends Controller
      */
     public function store(Request $request)
     {
-        $admin_id = DB::select("SELECT id from users where est_admin = 1");
+        $id_admin = auth()->user()->est_admin;
+        $admin_id = DB::select("SELECT id from users  where users.est_admin = $id_admin");
 
         $request->validate([
-            'dateAchatAliment' => 'required|date',
             'nomAliment' => 'required',
-            'quantite' => 'required',
-            'montant' => 'required|Integer',
+            'prixUnitaire' => 'required|Integer',
+            'quantite' => 'required|Integer',
         ]);
-  
+        $qte = $request->prixUnitaire * $request->quantite;
+
         $input_data = array(
             'admin_id' => $admin_id[0]->id,
-            'dateAchatAliment' => $request->dateAchatAliment,
             'nomAliment' => $request->nomAliment,
             'quantite' => $request->quantite,
-            'montant' => $request->montant,
+            'prixUnitaire' => $request->prixUnitaire,
+            'montant' => $qte,
         );
 
         AchatAliment::create($input_data);
@@ -93,18 +94,18 @@ class AchatAlimentController extends Controller
      */
     public function update(Request $request, $idAchatAliment)
     {
+        $nom_aliment = DB::select("SELECT * from achat_aliments where achat_aliments.idAchatAliment = $idAchatAliment");
+        $qte_avant = $nom_aliment[0]->quantite;
+
         $request->validate([
-            'dateAchatAliment' => 'required|date',
-            'nomAliment' => 'required',
             'quantite' => 'required',
-            'montant' => 'required|Integer',
         ]);
+
+        $qte = $nom_aliment[0]->prixUnitaire * ($qte_avant + $request->quantite);
         
         $input_data = array(
-            'dateAchatAliment' => $request->dateAchatAliment,
-            'nomAliment' => $request->nomAliment,
-            'quantite' => $request->quantite,
-            'montant' => $request->montant,
+            'quantite' => $qte_avant + $request->quantite,
+            'montant' => $qte,
         );
 
         AchatAliment::whereIdachataliment($idAchatAliment)->update($input_data);

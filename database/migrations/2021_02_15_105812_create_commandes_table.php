@@ -17,7 +17,7 @@ class CreateCommandesTable extends Migration
             $table->bigIncrements('idCom');
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('user_id')->on('clients')->onUpdate('cascade')->onDelete('cascade');           
-            $table->date('dateCom');
+            $table->dateTime('dateCom')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });
     }

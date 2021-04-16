@@ -38,9 +38,9 @@
                     <div class="">
                     <select name="nomAlimentation" class="form-control" required>
                         @foreach($achat_aliment as $achat_al[0])
-                        <option value="{{ $achat_al[0]->idAchatAliment }} "
+                        <option value="{{ $achat_al[0]->nomAliment }} "
 
-                            @if($achat_al[0]->idAchatAliment == $achat_aliment[0]->idAlimentation)
+                            @if($achat_al[0]->nomAliment == $achat_aliment[0]->nomAlimentation)
                             selected
                             @endif
                         
@@ -62,14 +62,14 @@
                 
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            {{--<div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Date:</strong>
                     <input type="date" name="date" value="{{ $data->date }}" class="form-control" placeholder="date">
                     <span style="color:red">@error('date') {{$message}} @enderror</span>
                 
                 </div>
-            </div>
+            </div>--}}
             
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
               <button type="submit" class="btn btn-primary btn-block">Valider</button>

@@ -16,7 +16,7 @@ class IsUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->est_fermier == 0 && auth()->user()->est_admin == 0){
+        if(auth()->user()->est_fermier != 1 && auth()->user()->est_admin != 1){
             return $next($request);
         }
 

@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="">
-            <h2 class="alert alert-dark text-center" style="color:red; text:bold">Créer l'Aliment</h2>
+            <h2 class="alert alert-dark text-center" style="color:red; text:bold">Ajouter l'Aliment</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-primary fa fa-reply-all" href="{{ route('alimentationjour.index') }}"> Retour</a>
@@ -21,6 +21,12 @@
 </div>
    
     @if($message = Session::get('error'))
+    <div class="alert alert-danger">
+        <button class="close" data-dismiss="alert" type="button">x</button>
+        <p align="center"><strong>{{$message}}</strong></p>
+    </div>
+    @endif
+    @if($message = Session::get('selected'))
     <div class="alert alert-danger">
         <button class="close" data-dismiss="alert" type="button">x</button>
         <p align="center"><strong>{{$message}}</strong></p>
@@ -36,7 +42,7 @@
                 <div class="">
                     <select name="nomAlimentation" class="form-control" required>
                         @foreach($achat_aliment as $aliment)
-                        <option value="{{ $aliment->idAchatAliment }}">
+                        <option value="{{ $aliment->nomAliment }}">
                             {{ $aliment->nomAliment }}
                         </option>
                         @endforeach
@@ -55,14 +61,14 @@
             
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        {{--<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Date:</strong>
                 <input type="date" name="date" class="form-control" placeholder="Date" value="{{ old('date') }}">
                 <span style="color:red">@error('date') {{$message}} @enderror</span>
             
             </div>
-        </div>
+        </div>--}}
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-block btn-primary">Valider</button>
         </div>

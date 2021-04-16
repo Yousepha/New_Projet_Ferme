@@ -266,16 +266,16 @@
 <table align="center" cellpadding="0" cellspacing="0" class="container-for-gmail-android" width="100%">
     
     <tr>
-        <td align="center" valign="top" width="100%" style="background-color: #f7f7f7;" class="content-padding">
+        <td align="center" valign="top" width="100%" class="jumbotron bg-dark text-white text-center" style="background-color: #f7f7f7;" class="content-padding">
             <center>
                 <table cellspacing="0" cellpadding="0" width="600" class="w320">
                     <tr>
-                        <td class="header-lg">
+                        <td class="header-lg text-white">
                             Merci pour votre commande !
                         </td>
                     </tr>
                     <tr>
-                        <td class="free-text">
+                        <td class="free-text text-white">
                            Nous avons bien pris en compte votre commande. <br> Elle est en cours de préparation.
                         </td>
                     </tr>
@@ -292,10 +292,11 @@
                                                         <tr>
                                                             <td class="mini-block">
                                                                 <span class="header-sm">Adresse de Livraison</span><br />
-                                                                {{ Auth::user()->full_name }} <br />
-                                                                {{ Auth::user()->telephone }} <br />
-                                                                {{ Auth::user()->adresse }} <br />
-                                                                Ville Code Postal Code Pays<br />
+                                                                Prenom & Nom: <strong>{{ Auth::user()->full_name }}</strong> <br />
+                                                                Telephone: <strong>{{ Auth::user()->telephone }}</strong> <br />
+                                                                Frais de livraison: <strong>{{ $frais }} Fcfa</strong><br />
+                                                                Adresse: <strong>{{ Auth::user()->adresse }}</strong> <br />
+                                                                Payé via <strong>{{ $moyen_pay }}</strong><br />
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -327,7 +328,7 @@
                                         Qté
                                     </td>
                                     <td class="title-dark" width="97">
-                                        Total TTC
+                                        Total
                                     </td>
                                 </tr>
 
@@ -365,16 +366,11 @@
                                     <td class="item-col item">
                                     </td>
                                     <td class="item-col quantity" style="text-align:right; padding-right: 10px; border-top: 1px solid #cccccc;">
-                                        {{--<span class="total-space">Sous-Total HT</span> <br />
-                                        <span class="total-space">TVA</span>  <br />--}}
 
                                         <span class="total-space" style="font-weight: bold; color: #4d4d4d">Total TTC</span>
                                     </td>
                                     <td class="item-col price" style="text-align: left; border-top: 1px solid #cccccc;">
-                                        {{--<span class="total-space">41.67 €</span> <br />
-                                        <span class="total-space"> 8.33 €</span>  <br />--}}
                                         <span class="total-space">{{ number_format($total_prix_panier) }} Fcfa</span>  <br />
-                                        <!-- <span class="total-space" style="font-weight:bold; color: #4d4d4d">$15.77</span> -->
                                     </td>
                                 </tr>
                             </table>

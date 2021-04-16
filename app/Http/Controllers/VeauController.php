@@ -42,7 +42,6 @@ class VeauController extends Controller
 
         $geniteurs = DB::table('taureaus')
         ->join('bovins', 'bovins.idBovin', '=', 'taureaus.idBovin')
-        // ->join('periodes', 'periodes.idPeriode','=','taureaus.periode_id')
         ->select('*')
         ->get();
 
@@ -66,10 +65,6 @@ class VeauController extends Controller
         $codeBovin = Helper::IDGenerator(new Veau,'idBovin', 'codeBovin', 2, 'VEA');
         $q = new Veau;
         $q->codeBovin = $codeBovin;
-
-        // $errorMessage = [
-        //     'required' => 'Le champ :attribute est obligatoire'
-        // ];
 
         $request->validate([
             'nom'    =>  'required',

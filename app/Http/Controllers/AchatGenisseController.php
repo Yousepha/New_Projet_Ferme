@@ -62,10 +62,6 @@ class AchatGenisseController extends Controller
         $q->codeBovin = $codeBovin;
 
         $admin_id = DB::select("SELECT id from users where est_admin = 1");
-                
-        // $errorMessage = [
-        //     'required' => 'Le champ :attribute est obligatoire'
-        // ];
 
         $request->validate([
             'nom'    =>  'required',

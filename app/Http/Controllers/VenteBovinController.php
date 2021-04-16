@@ -17,9 +17,7 @@ class VenteBovinController extends Controller
      */
     public function index()
     {
-        $data = DB::table('vente_bovins')
-        ->join('bovins', 'bovins.idBovin', '=', 'vente_bovins.bovin_id')
-        // ->join('commandes', 'commandes.idCom','=','vente_bovins.commande_id')
+        $data = DB::table('bovins')
         ->where('bovins.situation','en vente')
         ->select('*')
         ->paginate(5);
@@ -34,11 +32,9 @@ class VenteBovinController extends Controller
      */
     public function create()
     {
-        $bovins = Bovin::all()->where('situation','en vente');
-
-        $commandes = Commande::all();
+        $bovins = Bovin::all()->where('situation','pas en vente');
         
-        return view('ventebovins.create',compact('bovins', 'commandes'));    
+        return view('ventebovins.create',compact('bovins'));    
     }
 
     /**
@@ -50,24 +46,11 @@ class VenteBovinController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            // 'dateVenteBovin' => 'required|date',
-            'prixBovin' => 'required|integer',
+            'prix' => 'required|integer',
             'description' => 'required|string',
-            'enLigne' => 'required|string',
             'photo'   =>  'required|image|max:2048',
-            'bovin_id' => 'unique:vente_bovins'
+            'bovin_id' => 'unique:vente_bovins',
         ]);
-
-        $input_data = array(
-            'bovin_id' => $request->bovin_id,
-            'commande_id' => $request->idCom,
-            'prixBovin' => $request->prixBovin,
-            'enLigne' => $request->enLigne,
-            // 'dateVenteBovin' => $request->dateVenteBovin,
-        );
-        
-
-        VenteBovin::create($input_data);
         
         $photo = $request->file('photo');
         
@@ -77,7 +60,8 @@ class VenteBovinController extends Controller
         $image_bovin = array(
             'photo'   =>   $new_name,
             'description' => $request->description,
-            'prix' => $request->prixBovin,
+            'prix' => $request->prix,
+            'situation' => "en vente",
         );
 
         Bovin::whereidbovin($request->bovin_id)->update($image_bovin);
@@ -92,18 +76,9 @@ class VenteBovinController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($idVenteBovin)
+    public function show($idBovin)
     {
-        $arr['data'] = VenteBovin::findOrFail($idVenteBovin);
-        
-        $arr['bovins'] = DB::select("SELECT * from vente_bovins, bovins
-        where bovins.idBovin = vente_bovins.bovin_id
-        and vente_bovins.idVenteBovin = $idVenteBovin");
-
-        // $arr['commandes'] = DB::select("SELECT * from vente_bovins, commandes
-        // where commandes.idCom = vente_bovins.commande_id
-        // and vente_bovins.idVenteBovin = $idVenteBovin");
-
+        $arr['data'] = Bovin::findOrFail($idBovin);
 
         return view('ventebovins.show')->with($arr);
     }
@@ -114,19 +89,11 @@ class VenteBovinController extends Controller
      * @param  int  $id-
      * @return \Illuminate\Http\Response
      */
-    public function edit($idVenteBovin)
+    public function edit($idBovin)
     {
-        $arr['data'] = VenteBovin::findOrFail($idVenteBovin);
-        
-        $arr['bovins'] = DB::select("SELECT * from vente_bovins, bovins
-        where bovins.idBovin = vente_bovins.bovin_id
-        and vente_bovins.idVenteBovin = $idVenteBovin");
-        
-        // $arr['commandes'] = DB::select("SELECT * from vente_bovins, commandes
-        // where vente_bovins.idVenteBovin = $idVenteBovin");
-
-
-        return view('ventebovins.edit')->with($arr);    
+        $data = Bovin::findOrFail($idBovin);
+// dd($data->nom);
+        return view('ventebovins.edit', compact('data'));    
     }
 
     /**
@@ -136,23 +103,12 @@ class VenteBovinController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $idVenteBovin)
+    public function update(Request $request, $idBovin)
     {
         $request->validate([
-            // 'dateVenteBovin' => 'required|date',
-            'prixBovin' => 'required|integer',
+            'prix' => 'required|integer',
             'description' => 'required|string',
-        ]);
-
-        $input_data = array(
-            'bovin_id' => $request->bovin_id,
-            'enLigne' => $request->enLigne,
-            'commande_id' => $request->idCom,
-            'prixBovin' => $request->prixBovin,
-            // 'dateVenteBovin' => $request->dateVenteBovin,
-        );
-
-        VenteBovin::whereidventebovin($idVenteBovin)->update($input_data);        
+        ]);       
         
         $image_name = $request->hidden_image;
         $photo = $request->file('photo');
@@ -176,10 +132,10 @@ class VenteBovinController extends Controller
         $image_bovin = array(
             'photo'   =>   $image_name,
             'description' => $request->description,
-            'prix' => $request->prixBovin,
+            'prix' => $request->prix,
         );
 
-        Bovin::whereidbovin($request->bovin_id)->update($image_bovin);
+        Bovin::whereidbovin($idBovin)->update($image_bovin);
         
         return redirect()->route('ventebovins.index')
                         ->with('success','Mise à jour de la vente de bovin réussie !');
@@ -191,16 +147,12 @@ class VenteBovinController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($idVenteBovin)
+    public function destroy($idBovin)
     {
-        $bovins = DB::select("SELECT * from vente_bovins, bovins
-        where bovins.idBovin = vente_bovins.bovin_id
-        and vente_bovins.idVenteBovin = $idVenteBovin");
-
-        $data = VenteBovin::findOrFail($idVenteBovin);
-        unlink(public_path('images').'/'.$bovins[0]->photo);
-
-        $data->delete();
+        $hors_ligne = array(
+            'situation' => "pas en vente",
+        );
+        Bovin::whereidbovin($idBovin)->update($hors_ligne);
         
         return redirect()->route('ventebovins.index')
         ->with('error','La vente du bovin est supprimée avec succès !');

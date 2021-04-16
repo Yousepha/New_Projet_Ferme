@@ -2,6 +2,13 @@
 @section('content') 
 <main role="main">
 
+    @if($message = Session::get('error'))
+    <div class="alert alert-danger">
+        <button class="close" data-dismiss="alert" type="button">x</button>
+        <p align="center"><strong>{{$message}}</strong></p>
+    </div>
+    @endif
+
     <section class="py-5">
         <div class="container">
             <h1 class="jumbotron-heading"> <span class="badge badge-primary ">Votre panier </span></h1>
@@ -28,7 +35,7 @@
                         <form  action="{{ url('/cart/update')}}/{{ $produit->id }}" method="post">
                         <input style="display: inline-block" oninput="this.value = Math.abs(this.value)" name="qty" id="qte" class="form-control col-sm-4" type="number" value="{{ $produit->quantity }}">{{--disabled--}}
                         @csrf
-                            <button type="submit" class="btn py-2 pl-3 pr-3 btn-circle btn-outline-success fas fa-refresh"> </button>
+                            <button type="submit" class="btn py-1 pl-3 pr-3 btn-circle btn-outline-success fa fa-refresh"> </button>
                         </form>
                     </td>
                     <td>
@@ -61,9 +68,29 @@
                 </tr>
                 </tfoot>
             </table>
-            <a class="btn btn-block btn-outline-primary" href="{{ route('ma_commande') }}">Commander</a>
+            <a class="btn btn-block btn-outline-primary" href="{{ route('adresse_client') }}">Commander</a>{{--ma_commande--}}
         </div>
     </section>
 
 </main>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+$('.delete-confirm').on('click', function (event) {
+    event.preventDefault();
+    const url = $(this).attr('href');
+    swal({
+        title: 'Confirmez-vous la suppression ?',
+        text: 'Cet enregistrement et ses détails seront définitivement supprimés!',
+        icon: 'warning',
+        showCancelButton: true,
+        buttons: ["Annuler", "Oui!"],
+
+    }).then(function(value) {
+        if (value) {
+            window.location.href = url;
+        }
+    });
+});
+</script>  
+
 @endsection

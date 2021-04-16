@@ -56,6 +56,12 @@ Route::get('/', [App\Http\Controllers\Shop\MainController::class, 'index'])->nam
 
 Route::get('/shop/clients', [App\Http\Controllers\Shop\MainController::class, 'indexClient'])->name('accueil_client');
 
+Route::get('/shop/clients/address', [App\Http\Controllers\AdresseLivraisonController::class, 'index'])->name('adresse_client');
+Route::post('/paiement', [App\Http\Controllers\AdresseLivraisonController::class, 'store'])->name('adresse.store');
+
+/* Route pour l'historique du client*/
+Route::get('/historique', [App\Http\Controllers\HistoriqueCommandeController::class, 'index'])->name('historique.index');
+
 /* Voir un produit spécifique coté visiteur */
 Route::get('/produitvache/{idVache}', [App\Http\Controllers\Shop\MainController::class, 'produitVache'])->name('voir_produit_vache');
 Route::get('/produittaureau/{idTaureau}', [App\Http\Controllers\Shop\MainController::class, 'produitTaureau'])->name('voir_produit_taureau');
@@ -100,11 +106,13 @@ Route::post('/produitlait_client/add/{idB}', [App\Http\Controllers\Shop\CartCont
 
 Route::get('/panier_index_client', [App\Http\Controllers\Shop\CartController::class, 'indexClient'])->name('cart_index_client');
 
-Route::get('/commande_client', [App\Http\Controllers\Shop\CartController::class, 'indexCommande'])->name('ma_commande');
+Route::post('/commande_client', [App\Http\Controllers\Shop\CartController::class, 'indexCommande'])->name('ma_commande');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'indexClient'])->name('home');
+Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 
 // route pour la recherche des bovins
 Route::get('/find',[SearchController::class, 'find'])->name('web.find');
@@ -261,7 +269,7 @@ Route::view('achat_visiteur','visiteur.achat_visiteur')->name('achatVisiteur');
 Route::view('commander','client.commander')->name('commander');
 Route::view('promotion','client.promotion')->name('promotion');
 Route::view('compte','client.compte')->name('compte');
-Route::view('historique','client.historique')->name('historique');
+// Route::view('historique','client.historique')->name('historique');
 
 Route::view('dashboardClient1','client/.dashboardClient1')->name('dashboardClient1');
 Route::view('dashboardClient2','client/.dashboardClient2')->name('dashboardClient2');

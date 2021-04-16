@@ -89,12 +89,12 @@
                         </div>
 
                         <!-- Default input -->
-                        <div class="form-group col-md-6">
+                        {{--<div class="form-group col-md-6">
                             <label for="" class="col-md-6">Profile</label>
                             <input mdbInput type="text" class="form-control" name="profile" id="phone" value="{{ $data->profile }}">
                             <span style="color:red">@error('profile') {{$message}} @enderror</span>
                         
-                        </div>
+                        </div>--}}
 
                         <div class="row">
                             <div class="form-group col-md-4">

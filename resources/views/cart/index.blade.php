@@ -2,6 +2,13 @@
 @section('content') 
 <main role="main">
 
+    @if($message = Session::get('error'))
+    <div class="alert alert-danger">
+        <button class="close" data-dismiss="alert" type="button">x</button>
+        <p align="center"><strong>{{$message}}</strong></p>
+    </div>
+    @endif
+
     <section class="py-5">
         <div class="container">
                 <h1 class="jumbotron-heading"> <span class="badge badge-primary ">Votre panier </span></h1>
@@ -26,9 +33,9 @@
                     </td>
                     <td>
                         <form  action="{{ url('/cart/update')}}/{{ $produit->id }}" method="post">
-                        <input style="display: inline-block" name="qty" id="qte" class="form-control col-sm-4" type="number" value="{{ $produit->quantity }}">{{--disabled--}}
+                        <input style="display: inline-block" name="qty" id="qte" class="form-control col-sm-4" type="number" oninput="this.value = Math.abs(this.value)" value="{{ $produit->quantity }}">{{--disabled--}}
                         @csrf
-                            <button type="submit" class="fa fa-refresh"> </button>
+                            <button type="submit" class="btn py-1 pl-3 pr-3 btn-circle btn-outline-success fa fa-refresh"> </button>
                         </form>
                     </td>
                     <td>
@@ -66,25 +73,22 @@
     </section>
 
 </main>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-    <script>
-    $('.delete-confirm').click(function(event) {
-        var form =  $(this).closest("form");
-        var name = $(this).data("name");
-        event.preventDefault();
-        swal({
-            title: `Confirmez-vous la suppression ?`,
-            text: "Cet enregistrement et ses détails seront définitivement supprimés!",
-            icon: "warning",
-            buttons: true,
-            buttons: ["Annuler", "Oui!"],
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-            form.submit();
-            }
-        });
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+$('.delete-confirm').on('click', function (event) {
+    event.preventDefault();
+    const url = $(this).attr('href');
+    swal({
+        title: 'Confirmez-vous la suppression ?',
+        text: 'Cet enregistrement et ses détails seront définitivement supprimés!',
+        icon: 'warning',
+        showCancelButton: true,
+        buttons: ["Annuler", "Oui!"],
+
+    }).then(function(value) {
+        if (value) {
+            window.location.href = url;
+        }
     });
-    </script>  
-@endsection
+});
+</script>@endsection

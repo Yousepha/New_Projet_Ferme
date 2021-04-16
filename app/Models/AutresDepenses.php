@@ -20,4 +20,8 @@ class AutresDepenses extends Model
     public function admin(){
         return $this->belongsTo('App\Models\Admin');
     }
+
+    public function types(){
+        return $this->hasMany('App\Models\Type');
+    }
 }

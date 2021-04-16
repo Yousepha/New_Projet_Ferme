@@ -14,6 +14,7 @@ class AchatAliment extends Model
         'nomAliment',
         'quantite',
         'montant',
+        'prixUnitaire',
         'dateAchatAliment'
     ];
     

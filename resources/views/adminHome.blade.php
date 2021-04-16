@@ -1,6 +1,7 @@
 @extends('layouts.master')
     
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/home_dashboard_style.css') }}">
 
   
 <div class="container-fluid ">
@@ -12,9 +13,9 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <i class="fa fa-shopping-cart fa-3x text-info"></i>
-                                <div class="text-right text-dark">
+                                <div class="text-center text-dark">
                                     <h5>Salaire</h5>
-                                    <h3>10.000.000F</h3>
+                                    <h3>1.000.000F</h3>
                                 </div>
                             </div>
                         </div>

@@ -67,8 +67,8 @@
                                 Taureau
                             </h3>
                             <span>
-                                <strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <h6> {{$prod->description}} </h6>
                             </span>
                         </div>
@@ -96,8 +96,8 @@
                                 Taureau Non disponible
                             </h3>
                             <span>
-                                {{--<strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                {{--<strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <h6> {{$prod->description}} </h6>--}}
                             </span>
                         </div>
@@ -128,8 +128,8 @@
                                 Velle
                             </h3>
                             <span>
-                                <strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <h6> {{$prod->description}} </h6>
                             </span>
                         </div>
@@ -157,8 +157,8 @@
                                 Velle Non disponible
                             </h3>
                             <span>
-                                {{--<strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                {{--<strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <h6> {{$prod->description}} </h6>--}}
                             </span>
                         </div>
@@ -219,8 +219,8 @@
                                 Laits Non disponible
                             </h3>
                             <span>
-                                {{--<strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                {{--<strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <h6> {{$prod->description}} </h6>--}}
                             </span>
                         </div>
@@ -252,8 +252,8 @@
                                 Vache
                             </h3>
                             <span>
-                                <strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <h6> {{$prod->description}} </h6>
                             </span>
                         </div>
@@ -281,8 +281,8 @@
                                 Vache Non disponible
                             </h3>
                             <span>
-                                {{--<strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                {{--<strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <h6> {{$prod->description}} </h6>--}}
                             </span>
                         </div>
@@ -314,8 +314,8 @@
                                 Genisse
                             </h3>
                             <span>
-                                <strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <h6> {{$prod->description}} </h6>
                             </span>
                         </div>
@@ -343,8 +343,8 @@
                                 Genisse Non disponible
                             </h3>
                             <span>
-                                {{--<strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                {{--<strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <h6> {{$prod->description}} </h6>--}}
                             </span>
                         </div>
@@ -375,8 +375,8 @@
                                 Veau
                             </h3>
                             <span>
-                                <strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                <strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <h6> {{$prod->description}} </h6>
                             </span>
                         </div>
@@ -404,8 +404,8 @@
                                 Veaux Non disponible
                             </h3>
                             <span>
-                                {{--<strike> {{$prod->prixBovin + 10000}}  Fcfa</strike>
-                                <h4> {{$prod->prixBovin}} Fcfa</h4>
+                                {{--<strike> {{$prod->prix + 10000}}  Fcfa</strike>
+                                <h4> {{$prod->prix}} Fcfa</h4>
                                 <h6> {{$prod->description}} </h6>--}}
                             </span>
                         </div>
