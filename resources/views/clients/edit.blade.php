@@ -83,7 +83,7 @@
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                             <label for="" class="col-md-6">Mot de passe</label>
-                            <input mdbInput type="password" class="form-control" name="password" id="phone" value="{{ $data->password }}" disable>
+                            <input mdbInput type="password" class="form-control" name="password" id="phone" value="{{ $data->password }}">
                             <span style="color:red">@error('password') {{$message}} @enderror</span>
                         
                         </div>

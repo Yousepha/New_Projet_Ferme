@@ -17,17 +17,18 @@ class CreateUsersSeeder extends Seeder
         $user = [
             [
                 'nom'=>'Admin',
-                'prenom' => 'Modou',
+                'prenom' => 'Youseph',
                 'adresse' => 'Fatick',
                 'telephone' => 785262632,
                 'login'=>'Admin',
                 'email'=>'admin@gmail.com',
                 'est_admin'=>'1',
                 'est_fermier'=>'0',
+                'profile' => 'admin',
                 'password'=> bcrypt('adminlogin'),
             ],
             [
-                'nom'=>'Fermier',
+                'nom'=>'Diop',
                 'prenom' => 'Fallou',
                 'telephone' => 778523132,
                 'adresse' => 'Diourbel',
@@ -36,6 +37,7 @@ class CreateUsersSeeder extends Seeder
                 'profile' => 'fermier',
                 'est_admin'=>'0',
                 'est_fermier'=>'1',
+                'profile' => 'fermier',
                 'password'=> bcrypt('fermierlogin'),
             ],
             [
@@ -48,6 +50,7 @@ class CreateUsersSeeder extends Seeder
                'profile' => 'client',
                'est_admin'=>'0',
                'est_fermier'=>'0',
+               'profile' => 'client',
                'password'=> bcrypt('userlogin'),
             ],
         ];

@@ -89,9 +89,9 @@ class VachesController extends Controller
             'photo'            =>   $new_name,
         );
         
-        $periode = DB::select("SELECT * from periode where nomPeriode = $request->nomPeriode and phase = $request->phase");
+        $periode = DB::select("SELECT * from periodes where nomPeriode = '$request->nomPeriode' and phase = '$request->phase'");
         
-        dd($periode[0]->idPeriode);
+        // dd($periode[0]->idPeriode);
         DB::beginTransaction();
         try {
             $bovin = Bovin::create($input_data);

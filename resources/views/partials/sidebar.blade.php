@@ -17,8 +17,8 @@
                     <li class="active"><a href="{{ route('bovins') }}">Tous les Bovins</a></li>
                     <li class="active"><a href="{{ route('vaches.index') }}">Vaches</a></li>
                     <li><a href="{{ route('taureaux.index') }}">Taureaux</a></li>
-                    <li><a href="{{ route('veaux.index') }}">Veaux</a></li>
-                    <li><a href="{{ route('velles.index') }}">Velles</a></li>
+                    <!-- <li><a href="{{ route('veaux.index') }}">Veaux</a></li> -->
+                    <!-- <li><a href="{{ route('velles.index') }}">Velles</a></li> -->
                     <li><a href="{{ route('genisses.index') }}">Génisses</a></li>
                     <li><a href="{{ route('races.index') }}">Races</a></li>
                     

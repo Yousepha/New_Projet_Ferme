@@ -14,8 +14,8 @@
                             <div class="d-flex justify-content-between">
                                 <i class="fa fa-shopping-cart fa-3x text-info"></i>
                                 <div class="text-center text-dark">
-                                    <h5>Salaire</h5>
-                                    <h3>1.000.000F</h3>
+                                    <h5>Chiffre d'affaire</h5>
+                                    <h3>{{ $som_ventes }}F</h3>
                                 </div>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                                 <i class="fa fa-money fa-3x text-success"></i>
                                 <div class="text-right text-dark">
                                     <h5>Dépenses</h5>
-                                    <h3>6.000.000F</h3>
+                                    <h3>{{ $som_depenses }}F</h3>
                                 </div>
                             </div>
                         </div>
@@ -50,8 +50,8 @@
                             <div class="d-flex justify-content-between">
                                 <i class="fa fa-users fa-3x text-warning"></i>
                                 <div class="text-right text-dark">
-                                    <h5>Utilisateurs</h5>
-                                    <h3>30.000</h3>
+                                    <h5>Clients</h5>
+                                    <h3>{{ $users }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -68,8 +68,8 @@
                             <div class="d-flex justify-content-between">
                                 <i class="fa fa-bar-chart-o fa-3x text-danger"></i>
                                 <div class="text-right text-dark">
-                                    <h5>Visiteurs</h5>
-                                    <h3>2.000.000</h3>
+                                    <h5>Bénéfices</h5>
+                                    <h3>{{ $revenu }}F</h3>
                                 </div>
                             </div>
                         </div>
@@ -104,153 +104,66 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Salaire</th>
-                                    <th>Date</th>
+                                    <th>Photo</th>
                                     <th>Contact</th>
                                 </tr>
                             </thead>
+                            @foreach($fermiers as $fermier)
+
                             <tbody>
                                 <tr>
-                                    <th>1</th>
-                                    <td>Tidiane</td>
-                                    <td>60000F</td>
-                                    <td>10-09-2019</td>
-                                    <td><button type="button" class="btn btn-danger btn-sm">Un Message</button></td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td>Tapha</td>
-                                    <td>50000F</td>
-                                    <td>10-09-2019</td>
-                                    <td><button type="button" class="btn btn-danger btn-sm">Un Message</button></td>
-                                </tr>
-                                <tr>
-                                    <th>3</th>
-                                    <td>Fallou</td>
-                                    <td>70000F</td>
-                                    <td>10-09-2019</td>
-                                    <td><button type="button" class="btn btn-danger btn-sm">Un Message</button></td>
-                                </tr>
-                                <tr>
-                                    <th>4</th>
-                                    <td>Daouda</td>
-                                    <td>90000F</td>
-                                    <td>10-09-2019</td>
-                                    <td><button type="button" class="btn btn-danger btn-sm">Un Message</button></td>
+                                    <th>{{++$i}}</th>
+                                    <td>{{ $fermier->prenom}} {{ $fermier->nom }}</td>
+                                    <td>{{ $fermier->salaire }}F</td>
+                                    <td><img src="{{ URL::to('/') }}/images/{{ $fermier->photo }}" class="rounded-circle" width="60" height="50" /></td>
+                                    <td>{{ $fermier->telephone }}</td>
+                                    <!-- <td>10-09-2019</td> -->
+                                    <!-- <td><button type="button" class="btn btn-danger btn-sm">Un Message</button></td> -->
                                 </tr>
                             </tbody>
+                            @endforeach         
                         </table>
                         <!---Pagination-->
-                        <nav class="color">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item">
-                                    <a href="#" class="page-link_ad py-2 px-3">
-                                        <span>&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active">
-                                    <a href="#" class="page-link_ad py-2 px-3">
-                                        1
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link_ad py-2 px-3">
-                                        2
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link_ad py-2 px-3">
-                                        3
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link_ad py-2 px-3">
-                                        <span>&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <div class="pagination-block">
+                            
+                            {{  $fermiers->appends(request()->input())->links('layouts.paginationlinks') }}
+                        </div>
                         <!---End of Pagination-->
                     </div>
                     <div class="col-xl-6 col-12">
-                        <h3 class="text-dark text-center mb-3">Paiements récents</h3>
+                        <h3 class="text-dark text-center mb-3">Etat des Bovins</h3>
                         <table class="table table-color  table-hover">
                             <thead>
                                 <tr class="text-dark">
                                     <th>#</th>
                                     <th>Nom</th>
-                                    <th>Prix</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
+                                    <th>Code Bovin</th>
+                                    <th>Photo</th>
+                                    <th>Etat</th>
 
                                 </tr>
                             </thead> 
+                            @foreach($bovins as $bovin)
                             <tbody>
                                 <tr>
-                                    <th>1</th>
-                                    <td>Moussa</td>
-                                    <td>60000F</td>
-                                    <td>10-09-2019</td>
-                                    <td><span class="badge badge-success w-75 py-2">Approuvé</span></td>
+                                    <th>{{++$j}}</th>
+                                    <td>{{ $bovin->nom }}</td>
+                                    <td>{{ $bovin->codeBovin }}</td>
+                                    <td><img src="{{ URL::to('/') }}/images/{{ $bovin->photo }}" class="rounded-circle" width="60" height="50" /></td>
+                                    @if($bovin->etatDeSante == "Sain")
+                                        <td><span class="badge badge-success w-75 py-2">{{ $bovin->etatDeSante }}</span></td>
+                                    @else
+                                        <td><span class="badge badge-danger w-75 py-2">{{ $bovin->etatDeSante }}</span></td>
+                                    @endif
                                 </tr>  
-                                <tr>
-                                    <th>2</th>
-                                    <td>Modou</td>
-                                    <td>60000F</td>
-                                    <td>10-09-2019</td>
-                                    <td><span class="badge badge-success w-75 py-2">Approuvé</span></td>
-                                </tr>
-                                <tr>
-                                    <th>3</th>
-                                    <td>Daouda</td>
-                                    <td>60000F</td>
-                                    <td>10-09-2019</td>
-                                    <td><span class="badge badge-danger w-75 py-2">En attente</span></td>
-                                </tr>
-                                <tr>
-                                    <th>4</th>
-                                    <td>Famara</td>
-                                    <td>60000F</td>
-                                    <td>10-09-2019</td>
-                                    <td><span class="badge badge-danger w-75 py-2">En attente</span></td>
-                                </tr>
-                                    <tr>
-                                    <th>5</th>
-                                    <td>Souleymane</td>
-                                    <td>60000F</td>
-                                    <td>10-09-2019</td>
-                                    <td><span class="badge badge-success w-75 py-2">Approuvé</span></td>
-                                </tr>
                             </tbody>
+                            @endforeach         
                         </table>
-                        <nav>
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item">
-                                    <a href="#" class="page-link_ad py-2 px-3">
-                                        <span>Précédent</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active">
-                                    <a href="#" class="page-link_ad py-2 px-3">
-                                        1
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link_ad py-2 px-3">
-                                        2
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link_ad py-2 px-3">
-                                        3
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link_ad py-2 px-3">
-                                        <span>Suivant</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>        
+                        <!---Pagination-->
+                        <div class="pagination-block">
+                            {{  $fermiers->appends(request()->input())->links('layouts.paginationlinks') }}
+                        </div>
+                        <!---End of Pagination-->
                     </div>
                 </div>
             </div>

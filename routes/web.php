@@ -243,6 +243,7 @@ Route::group(['prefix' => 'fermier'], function(){
 
 });
 */
+Route::get('admin/accueil', [App\Http\Controllers\AccueilAdminController::class, 'index'])->name('admin.index');
 Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('est_admin');
 Route::get('fermier/home', [App\Http\Controllers\HomeController::class, 'fermierHome'])->name('fermier.home')->middleware('est_fermier');
 

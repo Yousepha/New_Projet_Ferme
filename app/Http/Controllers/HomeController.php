@@ -74,7 +74,25 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-        return view('adminHome');
+        $achat_bovin = DB::table("achat_bovins")->sum("montantBovin");
+        $achat_aliment = DB::table("achat_aliments")->sum("montant");
+        $autres_depense = DB::table("autres_depenses")->sum("montant");
+        $som_depenses = $achat_bovin + $achat_aliment + $autres_depense;
+    
+        $vente_bovin = DB::table("vente_bovins")->sum("prixBovin");
+        $vente_lait = DB::table("vente_laits")->sum("prixTotale");
+
+        $som_ventes = $vente_bovin + $vente_lait;
+        $revenu = ($som_ventes - $som_depenses);
+
+        $users = DB::table("users")->where('profile', 'client')->count();
+        
+        $fermiers = DB::table("fermiers")->join('users', 'users.id', 'fermiers.user_id')->select('*')->paginate(3);
+        $bovins = DB::table("bovins")->select('*')->paginate(3);
+
+        // dd($revenu);
+
+        return view('adminHome',compact('som_depenses', 'users', 'som_ventes', 'revenu', 'fermiers', 'bovins'))->with('i',(request()->input('page',1)-1)*3)->with('j',(request()->input('page',1)-1)*3);
     }
 
     /**

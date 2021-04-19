@@ -69,7 +69,7 @@ class ClientController extends Controller
             'adresse'        =>       $request->adresse,
             'login'        =>       $request->login,
             'password'        =>       $request->password,
-            'profile'        =>       $request->profile,
+            'profile'        =>       "client",
             'email'        =>       $request->email,
             'photo'            =>   $new_name
         );        
@@ -198,9 +198,10 @@ class ClientController extends Controller
     {
         $data = User::findOrFail($id);
         unlink(public_path('images').'/'.$data->photo);
-        $data->delete();
-
+        
         DB::table("clients")->where("user_id", $id)->delete();
+        
+        $data->delete();
 
         return redirect('clients')->with('error', 'Client supprimé avec Succès');
     }

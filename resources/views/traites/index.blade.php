@@ -61,7 +61,7 @@
                 <td colspan="4"></td>
                 @if(isset($stock))
                 @if(count($stock) > 0)              
-                <td>Stock lait disponible:{{ number_format($stock[0]->quantiteTotale, 2) }} litre(s)</td>
+                <td>Stock lait disponible:{{ number_format($stock[0]->quantiteDispo, 2) }} litre(s)</td>
                 @endif
                 @endif
             </tr>
@@ -69,7 +69,7 @@
                 <td colspan="4"></td>
                 @if(isset($stock))
                 @if(count($stock) > 0)              
-                <td class="bg-dark text-white">Stock Total:{{ number_format($stockTotale, 2) }} litre(s)</td>
+                <td class="bg-default">Stock Total:{{ number_format($stockTotale, 2) }} litre(s)</td>
                 @endif
                 @endif
             </tr>

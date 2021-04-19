@@ -313,6 +313,7 @@ class CartController extends Controller
                     'bovin_id' => $prod,
                     'commande_id' => $com->idCom,
                     'prixBovin' => $produit->price,
+                    'dateVenteBovin' => $date_actu,
                 );
 
                 VenteBovin::create($input_vente_bovin);

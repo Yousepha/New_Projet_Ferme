@@ -66,16 +66,18 @@ class TraiteController extends Controller
         $production = array(
             'bovin_id' => $request->idBovin
         );
-
+        
+        /**Enregistrment dans la table Production pour une vache en lactation spécifique */
         $prod = ProductionLait::create($production);
 
         $request->validate([
             'traiteMatin' => 'required',
             'traiteSoir' => 'required',
-            // 'dateTraite' => 'required|date',
         ]);
 
+        /**Recupération de la date actuelle !*/
         $date_actu = \Carbon\Carbon::now()->format('y.m.d');
+     
         $input_data = array(
             'fermier_id' => $fermier_id[0]->id,
             'traiteMatin' => $request->traiteMatin,
@@ -86,6 +88,9 @@ class TraiteController extends Controller
 
         $traite = TraiteDuJour::create($input_data);
         
+        /**Premier enregistrment d'une traite et création du stock de lait ce qui veut dire 
+         * que le stock n'existe pas avant l'enregistrement d'une traite*/
+
         if($traite->idTraiteDuJour == 1){
             StockLait::create();
         }
@@ -94,8 +99,8 @@ class TraiteController extends Controller
         $stock = DB::select("SELECT * from stock_laits where idStock = 1");
 
         $input_stock = array(
-            'quantiteTotale' => $stock[0]->quantiteTotale + $request->traiteMatin + $request->traiteSoir,
-            // 'quantiteDispo' => $stock[0]->quantiteDispo + $request->traiteMatin + $request->traiteSoir,
+            'quantiteDispo' => $stock[0]->quantiteDispo + $request->traiteMatin + $request->traiteSoir,
+            'quantiteTotale' => $stock[0]->quantiteDispo + $request->traiteMatin + $request->traiteSoir,
         );
 
 
@@ -168,26 +173,24 @@ class TraiteController extends Controller
         $request->validate([
             'traiteMatin' => 'required',
             'traiteSoir' => 'required',
-            // 'dateTraite' => 'required|date'
         ]);
         
         $input_data = array(
             'traiteMatin' => $request->traiteMatin,
             'traiteSoir' => $request->traiteSoir,
-            // 'dateTraite' => $request->dateTraite,
             'productionLait_id' =>$arr[0]->idProductionLait,
         );
   
         TraiteDuJour::whereidtraitedujour($idTraiteDuJour)->update($input_data);
         
         /* code du stock */
-        $stock = DB::select("SELECT quantiteTotale from stock_laits where idStock = 1");
-        $stock_lait = $stock[0]->quantiteTotale - ($traite_matin_actu + $traite_soir_actu);
+        $stock = DB::select("SELECT quantiteDispo from stock_laits where idStock = 1");
+        $stock_lait = $stock[0]->quantiteDispo - ($traite_matin_actu + $traite_soir_actu);
         
         // dd($traite_matin_actu);
         
         $input_stock = array(
-            'quantiteTotale' => $stock_lait + $request->traiteMatin + $request->traiteSoir,
+            'quantiteDispo' => $stock_lait + $request->traiteMatin + $request->traiteSoir,
         );
 
         StockLait::whereidstock(1)->update($input_stock);
@@ -205,21 +208,24 @@ class TraiteController extends Controller
      */
     public function destroy($idTraiteDuJour)
     {
-        $arr = DB::select("SELECT idProductionLait from production_laits, traite_du_jours where production_laits.idProductionLait = traite_du_jours.productionLait_id and traite_du_jours.idTraiteDuJour = $idTraiteDuJour");
+        $arr = DB::select("SELECT idProductionLait from production_laits, traite_du_jours 
+        where production_laits.idProductionLait = traite_du_jours.productionLait_id 
+        and traite_du_jours.idTraiteDuJour = $idTraiteDuJour");
         
         // dd($arr);
         $product = DB::table("production_laits")->where("idProductionLait", $arr[0]->idProductionLait);
         
-        $traite = DB::select("SELECT * from traite_du_jours where traite_du_jours.idTraiteDuJour = $idTraiteDuJour");
+        $traite = DB::select("SELECT * from traite_du_jours 
+        where traite_du_jours.idTraiteDuJour = $idTraiteDuJour");
         $traite_matin_actu = $traite[0]->traiteMatin;
         $traite_soir_actu = $traite[0]->traiteSoir;
         
         /*code du stock */
-        $stock = DB::select("SELECT quantiteTotale from stock_laits where idStock = 1");
-        $stock_lait = $stock[0]->quantiteTotale - ($traite_matin_actu + $traite_soir_actu);
+        $stock = DB::select("SELECT quantiteDispo from stock_laits where idStock = 1");
+        $stock_lait = $stock[0]->quantiteDispo - ($traite_matin_actu + $traite_soir_actu);
 
         $input_stock = array(
-            'quantiteTotale' => $stock_lait,
+            'quantiteDispo' => $stock_lait,
         );
 
         StockLait::whereidstock(1)->update($input_stock);

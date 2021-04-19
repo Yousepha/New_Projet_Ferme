@@ -105,7 +105,7 @@
                         <h1 class="left-to-right play-on-scroll">
                         {{ config('app.name', 'Laravel') }}
                         </h1>
-                        <p class="left-to-right play-on-scroll delay-2">
+                        <p style="color:white" class="left-to-right play-on-scroll delay-2">
                             Le développement du secteur laitier est un outil puissant, durable et équitable pour renforcer la croissance économique, la sécurité alimentaire et réduire la pauvreté, car la production laitière:
 
                             fournit une source régulière de revenus;

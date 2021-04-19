@@ -18,12 +18,14 @@
         <div class="sidebar-header">
             <div class="sidebar">
 
-                <div><img src="{{ asset('images/logo_vache.jpg') }}" alt="logo"></div>
+                <div><img style="border-radius:100%" src="{{ asset('logo/logo.jpg') }}" alt="logo"></div>
 
                 <ul>
-                    <li class="selected"><i class="fa fa-home"></i><a style="text-decoration:none" href="">Accueil</a></li>
+                    <li class="selected"><i class="fa fa-home"></i><a style="text-decoration:none" href="{{ route('fermier.home') }}">Accueil</a></li>
                     <li><i class="fa fa-flask"></i><a style="text-decoration:none" href="{{ route('traites.index') }}">Traite du jour</a></li>
-                    <li><i class="fa fa-filter"></i><a style="text-decoration:none" href="{{ route('bouteilles.index') }}">Les bouteilles de lait</a></li>
+                    <li><i class="fa fa-plus-circle"></i><a style="text-decoration:none" href="{{ route('veaux.index') }}">Ajout veaux</a></li>
+                    <li><i class="fa fa-plus-circle"></i><a style="text-decoration:none" href="{{ route('velles.index') }}">Ajout velle</a></li>
+                    <!-- <li><i class="fa fa-filter"></i><a style="text-decoration:none" href="{{ route('bouteilles.index') }}">Les bouteilles de lait</a></li> -->
                     <li><i class="fa fa-cogs"></i><a style="text-decoration:none" href="{{ route('pesages.index') }}">Pesage</a></li>
                     <li><i class="fa fa-medkit"></i><a style="text-decoration:none" href="{{ route('diagnosticfermiers.index') }}">Sante</a></li>
                     <li><i class="fa fa-user"></i><a style="text-decoration:none" href="{{ route('profile') }}">Mon compte</a></li>
@@ -54,7 +56,7 @@
                     <div id="desktop" class="menu-button">
                         <i class="fa fa-bars"></i>
                     </div>
-                    <h1>Espace Fermier</h1>
+                    <h1>{{ config('app.name', 'Laravel') }}</h1>
                     
                     <img src="{{ asset('images/fermier.jpg') }}" alt="">
                 </header>

@@ -42,14 +42,14 @@
         }
 
         .top_navbar .logo{
-            width: 250px;
+            width: 270px;
             font-size: 25px;
             font-weight: 600;
             padding: 0 25px;
             color: #007dc3;
             letter-spacing: 2px;
-            text-transform: uppercase;
-            border-right: 1px solid #f5f5f5;
+            /* text-transform: uppercase; */
+            /* border-right: 1px solid #f5f5f5; */
         }
 
         .top_navbar .logo span{
@@ -96,7 +96,7 @@
         }
 
         .hover_collapse .sidebar{
-            width: 70px;
+            width: 80px;
         }
 
         .hover_collapse .sidebar ul li a .text{
@@ -169,14 +169,15 @@
 	
 <div class="wrapper hover_collapse">
 	<div class="top_navbar sticky-top">
-		<div class="logo">Menu<span></span></div>
-		<div class="menu">
+		{{--<div ><img style="border-radius:100%" class="logo" src="{{ asset('logo/logo.jpg') }}" alt="logo"><span></span></div>--}}
+        <div class="logo">{{ config('app.name', 'Laravel') }}<span></span></div>
+        <div class="menu">
 			<div class="hamburger">
 				<i class="fa fa-bars"></i>
 			</div>
 			<div class="profile_wrap">
 				<div class="profile">
-					<img src="{{asset('images/fermier.jpg')}}" alt="profile_pic">
+					<img src="{{ URL::to('/') }}/images/{{ auth()->user()->photo }}" alt="profile_pic">
 					<span class="name">{{ Auth::user()->full_name }}</span>
 					<!-- <span class="icon">
 						<i class="fa fa-angle-down"></i>
@@ -203,12 +204,12 @@
                     <span class="text">Panier</span>
                 </a>
             </li>
-			<li>
+			<!-- {{--<li>
 				<a href="{{route('promotion')}}">
 					<span class="icon"><i class="fa fa-bell fa-2x"></i></span>
 					<span class="text">Promotion</span>
 				</a>
-			</li>
+			</li>--}} -->
 			<li>
 				<a href="{{route('historique.index')}}">
 					<span class="icon"><i class="fa fa-clock-o fa-2x"></i></span>
@@ -269,7 +270,6 @@
             }
         })
     })
-
 
 
     hamburger.addEventListener("click", () => {

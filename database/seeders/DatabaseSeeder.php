@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeedeer::class);
         $this->call(ClientSeedeer::class);
         $this->call(RaceSeedeer::class);
-        // $this->call(PeriodeSeedeer::class);
+        $this->call(PeriodeSeedeer::class);
         // $this->call(ProductionLaitSeedeer::class);
         $this->call(MaladieSeedeer::class);
         // $this->call(StockLaitSeedeer::class);

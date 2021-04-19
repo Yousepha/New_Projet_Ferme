@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.layout_fermier')
 @section('content')
 
 <style>

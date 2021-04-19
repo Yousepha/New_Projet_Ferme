@@ -62,28 +62,6 @@
                 </div>
             </div>
 
-            <!--  -->
-            {{--<div class="form-group col-md-12">
-                <label for="race"><strong>Nom Maladie</strong></label>
-                <div class="">
-                    <select name="idMaladie" class="form-control" required>
-                        @foreach($maladies as $maladie[0])
-                        <option value="{{ $maladie[0]->idMaladie }}"
-
-                            @if($maladie[0]->idMaladie == $maladies[0]->maladie_id)
-                            selected
-                            @endif
-                        
-                        >
-                            {{ $maladie[0]->nomMaladie }}
-                        </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="clearfix"></div>
-            </div>--}}
-            <!--  -->
-
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
               <button type="submit" class="btn btn-block btn-primary">Valider</button>
             </div>

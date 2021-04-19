@@ -39,12 +39,12 @@ class BouteilleController extends Controller
         ->paginate(5);
 
         $stock = DB::table('stock_laits')->get();
-        if(count($stock) > 0){
+        if((count($stock) > 0) || ($stock->quantiteDispo > 0)){
             return view('bouteilles.create');
         }
         else{
             return redirect()->route('bouteilles.index',compact('data', 'stock'))
-                            ->with('error', 'le stock de lait est vide! Veuillez enregistrer une traite pour continuer');
+            ->with('error', 'le stock de lait est vide! Veuillez enregistrer une traite pour continuer');
         }
     }
 
@@ -74,19 +74,18 @@ class BouteilleController extends Controller
         
         /* code relatif au stock */
         $stock = DB::select("SELECT * from stock_laits where idStock = 1");
-        
-        if($stock[0]->quantiteTotale >= $stock_dispo ){
+        /**Je Vérifie si la quantité dispo dans le stock est supérieur a la quantié dans les bouteilles*/
+        if($stock[0]->quantiteDispo >= $stock_dispo ){
             
             $input_stock = array(
-                'quantiteTotale' => $stock[0]->quantiteTotale - $stock_dispo,
-                // 'quantiteDispo' => $stock[0]->quantiteDispo + $stock_dispo,
+                'quantiteDispo' => $stock[0]->quantiteDispo - $stock_dispo,
             );
             
         }
         else{
             return redirect()->route('bouteilles.create')
-            ->with('error','La Quantité de lait saisie est supérieur à celle dans le stock.
-            Stock Actuel = '.$stock[0]->quantiteTotale .'Litres');
+            ->with('error','La Quantité '.$stock_dispo.' litres de lait saisie est supérieur à celle dans le stock.
+            Stock Actuel = '.$stock[0]->quantiteDispo .'Litres');
         }
         
         Bouteille::create($input_data);
@@ -153,22 +152,20 @@ class BouteilleController extends Controller
         
         /* code relatif au stock */
         
-        // 
+        // je récupère la quantité anciennement retirée ($stock_ancien) dans le stock pour l'ajouter avant de faire la modification
         $stock = DB::select("SELECT * from stock_laits, bouteilles where idStock = 1 and bouteilles.idBouteille = $idBouteille");
-        $stock_dispo_a_ajouter = $stock[0]->quantiteTotale + $stock_ancien;
-        
-        // dd($stock_dispo_a_ajouter);
+        $stock_dispo_a_ajouter = $stock[0]->quantiteDispo + $stock_ancien;
         
         if($stock_dispo_a_ajouter >= ($request->capacite * $request->nombreDispo) ){
 
             $input_stock = array(
-                'quantiteTotale' => $stock_dispo_a_ajouter - ($request->capacite * $request->nombreDispo),
+                'quantiteDispo' => $stock_dispo_a_ajouter - ($request->capacite * $request->nombreDispo),
             );
             
         }
         else{
             return redirect()->route('bouteilles.edit', $idBouteille)
-            ->with('error','La Quantité de lait saisie est supérieur à celle dans le stock.
+            ->with('error','La Quantité '.$request->capacite * $request->nombreDispo.' litres de lait saisie est supérieur à celle dans le stock.
             Stock Actuel = '.$stock_dispo_a_ajouter.'Litre(s)');
         }
 
@@ -183,7 +180,7 @@ class BouteilleController extends Controller
         Bouteille::whereidbouteille($idBouteille)->update($input_data);
 
         return redirect()->route('bouteilles.index')
-                        ->with('success','Mise à jour de la Bouteille réussie !');
+        ->with('success','Mise à jour de la Bouteille réussie !');
     }
 
     /**
@@ -201,11 +198,12 @@ class BouteilleController extends Controller
         $nombreDispo = $bouteille[0]->nombreDispo;
         $stock_ancien = $capacite * $nombreDispo;
         
+        /**ICI je récupère la quantité anciennement retirer dans le stock pour la remettre à sa place en l'ajoutant*/
         $stock = DB::select("SELECT * from stock_laits, bouteilles where idStock = 1 and bouteilles.idBouteille = $idBouteille");
-        $stock_dispo_a_ajouter = $stock[0]->quantiteTotale + $stock_ancien;
+        $stock_dispo_a_ajouter = $stock[0]->quantiteDispo + $stock_ancien;
         
         $input_stock = array(
-            'quantiteTotale' => $stock_dispo_a_ajouter,
+            'quantiteDispo' => $stock_dispo_a_ajouter,
         );
         
         StockLait::whereidstock(1)->update($input_stock);

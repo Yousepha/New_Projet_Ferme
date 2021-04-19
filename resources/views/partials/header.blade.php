@@ -1,7 +1,7 @@
 <!--header menu start-->
 <div class="header">
 				<div class="header-menu">
-					<div class="title">Ferme <span>Laitière</span></div>
+					<div class="title">KoSsam <span>Ferme</span></div>
 					<div class="sidebar-btn">
 						<i class="fa fa-bars"></i>
 					</div>

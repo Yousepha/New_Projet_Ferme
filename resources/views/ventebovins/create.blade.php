@@ -35,20 +35,6 @@
     @csrf
      <div class="row card shadow">
         
-        {{--<div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Mettre en ligne:</strong>
-                <select  name="enLigne" id="etatSante" class="form-control" required>
-                    <option>pas en ligne</option>
-                    <option>en ligne</option>
-                    
-                </select>
-                <span style="color:red">@error('enLigne') {{$message}} @enderror</span>
-            
-            </div>
-        </div>
-        --}}
-        
         <!--  -->
         <div class="form-group col-md-12">
             <!-- <div class="row"> -->

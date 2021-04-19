@@ -17,7 +17,7 @@ class FermierSeedeer extends Seeder
         $fermiers = [
             [
                 'user_id' => 2,
-                'salaire' => 100000,
+                'salaire' => 250000,
             ],
             // [
             //     'salaire' => 150000,

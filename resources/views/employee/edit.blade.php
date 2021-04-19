@@ -75,7 +75,7 @@
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                             <label for="" class="col-md-6">Mot de passe</label>
-                            <input mdbInput type="password" class="form-control" name="password" id="phone" value="{{ $data->password }}" disabled>
+                            <input mdbInput type="password" class="form-control" name="password" id="phone" value="{{ $data->password }}">
                         </div>
 
                         <!-- Default input -->
