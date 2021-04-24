@@ -18,7 +18,6 @@
                     <li class="active"><a href="{{ route('vaches.index') }}">Vaches</a></li>
                     <li><a href="{{ route('taureaux.index') }}">Taureaux</a></li>
                     <!-- <li><a href="{{ route('veaux.index') }}">Veaux</a></li> -->
-                    <!-- <li><a href="{{ route('velles.index') }}">Velles</a></li> -->
                     <li><a href="{{ route('genisses.index') }}">Génisses</a></li>
                     <li><a href="{{ route('races.index') }}">Races</a></li>
                     
@@ -41,11 +40,14 @@
             </li>
             <li> <a href="#" data-toggle="collapse" data-target="#e-commerce" class="collapsed active" ><i class="fa fa-shopping-cart"></i> <span class="nav-label">E-commerce</span><span class="fa fa-chevron-left pull-right"></span></a>
                 <ul  class="sub-menu collapse" id="e-commerce" >
-                    <li><a href="/liste_produits"> Liste des Products </a></li>
+                    <li><a href="{{ route('produits') }}">Produits en ligne</a></li>
+                    <li><a href="{{ route('paniers') }}">Le Panier</a></li>
                     <!-- <li><a href="{{ route('ajoutProduit') }}"> Ajouter un Product </a></li> -->
-                    <li><a href="{{ route('ventelaits.index') }}"> Vente Lait </a></li>
-                    <li><a href="{{ route('ventebovins.index') }}"> Vente Bovins </a></li>
-                    <li><a href="{{ route('commande') }}"> Panier </a> </li>
+                    <!-- <li><a href="{{ route('bouteilles.index') }}">Ajout Bouteilles</a></li> -->
+                    <!-- {{--<li><a href="{{ route('ventelaits.index') }}"> Vente Lait </a></li>--}} -->
+                    <!-- <li><a href="{{ route('ventebovins.index') }}"> Ajout Bovins </a></li>
+                    <li><a href="{{ route('liste_commandes') }}"> Panier Bovin</a> </li>
+                    <li><a href="{{ route('liste_commandes_lait') }}"> Panier Lait</a> </li> -->
                 </ul>
             </li>
             <li> <a href="{{ route('clients.index') }}"><i class="fa fa-users"></i> <span class="nav-label">Clients</span></a> </li>

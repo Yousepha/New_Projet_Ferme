@@ -14,6 +14,7 @@ class Bouteille extends Model
         'stock_id',
         'capacite',
         'prix',
+        'photo',
         'nombreDispo',
         'description',
     ];

@@ -24,7 +24,7 @@
         
         @if(count($taureaux) > 0)
         @if(isset($taureaux))
-        <h2 class="alert alert-primary text-center" style="color:red; text:bold">Les Taureaux<button class="pull-right text-white btn-dark">Voir tout</button></h2>
+        <h2 class="alert alert-primary text-center" style="color:red; text:bold">Les Taureaux <a href="{{route('voirTout.taureau') }}"><button class="pull-right text-white btn-dark">Voir tout</button></a></h2>
             <div class="row">
                 @foreach($taureaux as $prod)
                 <div class="col-md-4 card-deck container">
@@ -51,7 +51,7 @@
             
             @if(isset($velles))
             @if(count($velles) > 0)
-            <h2 class="alert alert-primary text-center" style="color:red; text:bold">Les Velles<button class="pull-right text-white btn-dark">Voir tout</button></h2>
+            <h2 class="alert alert-primary text-center" style="color:red; text:bold">Les Velles <a href="{{route('voirTout.velle') }}"><button class="pull-right text-white btn-dark">Voir tout</button></a></h2>
             <div class="row">
                 @foreach($velles as $prod)
                 <div class="col-md-4 card-deck container">
@@ -76,7 +76,7 @@
 
             @if(isset($bouteilles))
             @if(count($bouteilles) > 0)
-            <h2 class="alert alert-dark text-center" style="color:blue; text:bold">Les produits laitiers !<button class="pull-right text-white btn-dark">Voir tout</button></h2>
+            <h2 class="alert alert-dark text-center" style="color:blue; text:bold">Les produits laitiers ! <a href="{{route('voirTout.lait') }}"><button class="pull-right text-white btn-dark">Voir tout</button></a></h2>
             <div class="row">
                 @foreach($bouteilles as $prod)
                 <div class="col-md-4 card-deck container">
@@ -103,7 +103,7 @@
             
             @if(isset($vaches))
             @if(count($vaches) > 0)
-            <h2 class="alert alert-primary text-center" style="color:red; text:bold">Les Vaches<button class="pull-right text-white btn-dark">Voir tout</button></h2>
+            <h2 class="alert alert-primary text-center" style="color:red; text:bold">Les Vaches <a href="{{route('voirTout.vache') }}"><button class="pull-right text-white btn-dark">Voir tout</button></a></h2>
             <div class="row">
                 @foreach($vaches as $prod)
                 <div class="col-md-4 card-deck container">
@@ -128,7 +128,7 @@
             
             @if(isset($genisses))
             @if(count($genisses) > 0)
-            <h2 class="alert alert-primary text-center" style="color:red; text:bold">Les Genisses<button class="pull-right text-white btn-dark">Voir tout</button></h2>
+            <h2 class="alert alert-primary text-center" style="color:red; text:bold">Les Genisses <a href="{{route('voirTout.genisse') }}"><button class="pull-right text-white btn-dark">Voir tout</button></a></h2>
             <div class="row">
                 @foreach($genisses as $prod)
                 <div class="col-md-4 card-deck container">
@@ -153,7 +153,7 @@
 
             @if(isset($veaux))
             @if(count($veaux) > 0)
-            <h2 class="alert alert-primary text-center" style="color:red; text:bold">Les Veaux<button class="pull-right text-white btn-dark">Voir tout</button></h2>
+            <h2 class="alert alert-primary text-center" style="color:red; text:bold">Les Veaux <a href="{{route('voirTout.veau') }}"><button class="pull-right text-white btn-dark">Voir tout</button></a></h2>
             <div class="row">
                 @foreach($veaux as $prod)
                 <div class="col-md-4 card-deck container">

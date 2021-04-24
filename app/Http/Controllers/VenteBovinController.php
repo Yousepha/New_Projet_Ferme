@@ -155,6 +155,6 @@ class VenteBovinController extends Controller
         Bovin::whereidbovin($idBovin)->update($hors_ligne);
         
         return redirect()->route('ventebovins.index')
-        ->with('error','La vente du bovin est supprimée avec succès !');
+        ->with('error','Le bovin a été retiré avec succès !');
     }
 }

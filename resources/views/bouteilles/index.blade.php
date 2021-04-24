@@ -1,4 +1,4 @@
-@extends('layouts.layout_fermier')
+@extends('layouts.master')
  
 @section('content')
     <div class="row">
@@ -8,6 +8,9 @@
             </div>
             <div class="pull-right">
                 <a class="btn btn-success fa fa-plus-circle" href="{{ route('bouteilles.create') }}"> Ajouter un bouteille</a>
+            </div>
+            <div class="pull-left">
+                <a class="btn btn-primary fa fa-reply-all" href="{{ route('produits') }}"> Retour</a>
             </div>
         </div>
     </div>
@@ -28,20 +31,27 @@
    
     <table class="table table-bordered table-striped bg-dark" style="color:white; border:none">
         <tr class="text-center">
+        <th width="10%">Photo</th>
             <th>Capacite</th>
+            <th>Prix Unitaire</th>
+            <th>Prix Total</th>
             <th>Nombre Bouteille</th>
-            
+            <th>Description</th>
             <th width="250px">Action</th>
         </tr>
         @foreach ($data as $bouteilles)
         <tbody style="color:black; font:blod; background:#ffff">
             <tr class="text-center">
+                <td><img src="{{ URL::to('/') }}/images/{{ $bouteilles->photo }}" class="rounded-circle" width="60" height="50" /></td>
                 <td>{{ $bouteilles->capacite }} Litre(s)</td>
+                <td>{{ $bouteilles->prix }} Fcfa</td>
+                <td>{{ $bouteilles->nombreDispo * $bouteilles->prix }} Fcfa</td>
                 <td>{{ $bouteilles->nombreDispo }}</td>
+                <td>{{ $bouteilles->description }}</td>
                 
                 <td width="25%">
                     <form action="{{ route('bouteilles.destroy',$bouteilles->idBouteille) }}" method="POST">
-                    <!-- <a class="btn btn-info" href="{{ route('bouteilles.show',$bouteilles->idBouteille) }}"><span class="fa fa-eye"></a> -->
+                    <a class="btn btn-info" href="{{ route('bouteilles.show',$bouteilles->idBouteille) }}"><span class="fa fa-eye"></a>
                     <a class="btn btn-primary" href="{{ route('bouteilles.edit',$bouteilles->idBouteille) }}"><span class="fa fa-edit"></span> Editer</a>
                         @csrf
                         @method('DELETE')
@@ -54,7 +64,7 @@
         <tfoot>
             <tr style="color:black; font:blod; background:#ffff">
                 
-                <td colspan="2"></td>
+                <td colspan="6"></td>
                 @if(isset($stock))
                 @if(count($stock) > 0)              
                 <td>Stock lait disponible:{{ number_format($stock[0]->quantiteDispo, 2) }} litre(s)</td>

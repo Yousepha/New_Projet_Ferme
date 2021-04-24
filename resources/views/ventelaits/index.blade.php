@@ -33,7 +33,7 @@
             <th>Capacite</th>
             <th>Prix Unitaire</th>
             <!-- <th>Prix Total</th> -->
-            <th>Bouteille Vendu</th>
+            {{--<th>Bouteille Vendu</th>--}}
             <th>Bouteille Dispo</th>
             <th>Description</th>
             <th width="250px">Action</th>

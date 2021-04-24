@@ -33,35 +33,41 @@ class HomeController extends Controller
         ->where('bovins.situation','en vente')
         ->join('taureaus', 'taureaus.idBovin','=','bovins.idBovin')
         ->select('*')
+        ->limit(3)
         ->get();
 
         $vaches = DB::table('bovins')
         ->where('bovins.situation','en vente')
         ->join('vaches', 'vaches.idBovin','=','bovins.idBovin')
         ->select('*')
+        ->limit(3)
         ->get();
 
         $genisses = DB::table('bovins')
         ->where('bovins.situation','en vente')
         ->join('genisses', 'genisses.idBovin','=','bovins.idBovin')
         ->select('*')
+        ->limit(3)
         ->get();
 
         $veaux = DB::table('bovins')
         ->where('bovins.situation','en vente')
         ->join('veaus', 'veaus.idBovin','=','bovins.idBovin')
         ->select('*')
+        ->limit(3)
         ->get();
 
         $velles = DB::table('bovins')
         ->where('bovins.situation','en vente')
         ->join('velles', 'velles.idBovin','=','bovins.idBovin')
         ->select('*')
+        ->limit(3)
         ->get();
 
         $bouteilles = DB::table('bouteilles')
         ->where('prix', '!=', 'NULL')
         ->select('*')
+        ->limit(3)
         ->get();
 
         return view('shop.clients.index',compact('taureaux','vaches','genisses','veaux','velles','bouteilles'));

@@ -39,7 +39,7 @@ class BouteilleController extends Controller
         ->paginate(5);
 
         $stock = DB::table('stock_laits')->get();
-        if((count($stock) > 0) || ($stock->quantiteDispo > 0)){
+        if((count($stock) > 0) && ($stock[0]->quantiteDispo > 0)){
             return view('bouteilles.create');
         }
         else{
@@ -61,11 +61,22 @@ class BouteilleController extends Controller
         $request->validate([
             'capacite' => 'required|integer|unique:bouteilles',
             'nombreDispo' => 'required|integer',
+            'prix' => 'required|integer',
+            'description' => 'required|string',
+            'photo'   =>  'required|image|max:2048',
         ]);
+
+        $photo = $request->file('photo');
+        $new_name = rand() . '.' . $photo->getClientOriginalExtension();
+        $photo->move(public_path('images'), $new_name);
+        // dd($new_name);
 
         $input_data = array(
             'stock_id' => $stock_id[0]->idStock,
             'capacite' => $request->capacite,
+            'photo'   =>   $new_name,
+            'description' => $request->description,
+            'prix' => $request->prix,
             'nombreDispo' => $request->nombreDispo,
         );
 
@@ -104,7 +115,7 @@ class BouteilleController extends Controller
      */
     public function show($idBouteille)
     {
-        $arr['data'] = Bouteille::findOrFail($idBouteille);
+        $arr['bouteilles'] = Bouteille::findOrFail($idBouteille);
         
         $arr['stock_laits'] = DB::select("SELECT * from bouteilles, stock_laits
         where stock_laits.idStock = bouteilles.stock_id
@@ -123,9 +134,9 @@ class BouteilleController extends Controller
     {
         $arr['data'] = Bouteille::findOrFail($idBouteille);
         
-        $arr['stock_laits'] = DB::select("SELECT * from bouteilles, stock_laits
-        where stock_laits.idStock = bouteilles.stock_id
-        and bouteilles.idBouteille = $idBouteille");
+        // $arr['stock_laits'] = DB::select("SELECT * from bouteilles, stock_laits
+        // where stock_laits.idStock = bouteilles.stock_id
+        // and bouteilles.idBouteille = $idBouteille");
 
         return view('bouteilles.edit')->with($arr);
     }
@@ -147,8 +158,28 @@ class BouteilleController extends Controller
         $request->validate([
             'capacite' => 'required|integer',
             'nombreDispo' => 'required|integer',
+            'prix' => 'required|integer',
+            'description' => 'required|string',
         ]);
 
+        $image_name = $request->hidden_image;
+        $photo = $request->file('photo');
+
+        if($photo != '')  // here is the if part when you dont want to update the image required
+        {
+            // unlink(public_path('images').'/'.$image_name);
+
+            $request->validate([
+                'photo'   =>  'image|max:2048'
+            ]);
+            
+            $image_name = rand() . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('images'), $image_name);
+        }
+        else  // this is the else part when you dont want to update the image not required
+        {
+            
+        }
         
         /* code relatif au stock */
         
@@ -170,9 +201,11 @@ class BouteilleController extends Controller
         }
 
         $input_data = array(
-            // 'stock_id' => $request->idStock,
             'capacite' => $request->capacite,
             'nombreDispo' => $request->nombreDispo,
+            'photo'   =>   $image_name,
+            'description' => $request->description,
+            'prix' => $request->prix,
         );
 
         StockLait::whereidstock(1)->update($input_stock);

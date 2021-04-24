@@ -10,9 +10,11 @@
             <div class="pull-right">
                 <a class="btn btn-success fa fa-plus-circle" href="{{ route('ventebovins.create') }}"> Ajouter un produit</a>
             </div>
+            <div class="pull-left">
+                <a class="btn btn-primary fa fa-reply-all" href="{{ route('produits') }}"> Retour</a>
+            </div>
         </div>
     </div>
-   
     @if($message = Session::get('success'))
     <div class="alert alert-success">
         <button class="close" data-dismiss="alert" type="button">x</button>

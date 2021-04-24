@@ -108,11 +108,34 @@ Route::get('/panier_index_client', [App\Http\Controllers\Shop\CartController::cl
 
 Route::post('/commande_client', [App\Http\Controllers\Shop\CartController::class, 'indexCommande'])->name('ma_commande');
 
+/* Voir Tout */
+Route::get('/all_vaches', [App\Http\Controllers\VoirToutController::class, 'indexVache'])->name('voirTout.vache');
+Route::get('/all_taureaux', [App\Http\Controllers\VoirToutController::class, 'indexTaureau'])->name('voirTout.taureau');
+Route::get('/all_genisses', [App\Http\Controllers\VoirToutController::class, 'indexGenisse'])->name('voirTout.genisse');
+Route::get('/all_veaux', [App\Http\Controllers\VoirToutController::class, 'indexVeau'])->name('voirTout.veau');
+Route::get('/all_velles', [App\Http\Controllers\VoirToutController::class, 'indexVelle'])->name('voirTout.velle');
+Route::get('/all_laits', [App\Http\Controllers\VoirToutController::class, 'indexLait'])->name('voirTout.lait');
+
+/**Vues pour le e-commerce*/
+Route::view('produits','e-commerce.produit_en_ligne')->name('produits');
+Route::view('paniers','e-commerce.gestion_du_panier')->name('paniers');
+
+/* Gestion des Commandes */
+/**Pour les Bovins */
+Route::get('/liste_commandes', [App\Http\Controllers\CommandeController::class, 'index'])->name('liste_commandes');
+/** Voir Commandes */
+Route::get('/commandes/{idCom}', [App\Http\Controllers\CommandeController::class, 'show'])->name('commandes.show');
+
+/**Pour les laits */
+Route::get('/liste_commandes_lait', [App\Http\Controllers\CommandeController::class, 'lait_index'])->name('liste_commandes_lait');
+/** Voir Commandes */
+Route::get('/commandes_lait/{idLait}', [App\Http\Controllers\CommandeController::class, 'lait_show'])->name('commandes_lait.show');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'indexClient'])->name('home');
-Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
+// Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user');
+// Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 
 // route pour la recherche des bovins
 Route::get('/find',[SearchController::class, 'find'])->name('web.find');
@@ -243,7 +266,7 @@ Route::group(['prefix' => 'fermier'], function(){
 
 });
 */
-Route::get('admin/accueil', [App\Http\Controllers\AccueilAdminController::class, 'index'])->name('admin.index');
+// Route::get('admin/accueil', [App\Http\Controllers\AccueilAdminController::class, 'index'])->name('admin.index');
 Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('est_admin');
 Route::get('fermier/home', [App\Http\Controllers\HomeController::class, 'fermierHome'])->name('fermier.home')->middleware('est_fermier');
 

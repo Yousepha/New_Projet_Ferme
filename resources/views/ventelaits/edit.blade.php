@@ -44,31 +44,6 @@
    
          <div class="row card shadow">
 
-            {{--<div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Mettre en ligne:</strong>
-                    <div class="">
-                        <select name="enLigne" class="form-control" required>
-                            <option value="{{ $data->enLigne }} "
-
-                                @if($data->idBovin == $data->enLigne)
-                                selected
-                                @endif
-                            
-                            >
-                                {{ $data->enLigne }}
-                            </option>
-                            @if($data->enLigne == "pas en ligne")
-                                <option>en ligne</option>
-                            @endif
-                            @if($data->enLigne == "en ligne")
-                                <option>pas en ligne</option>
-                            @endif
-                        </select>
-                    </div>
-                </div>
-            </div>--}}
-
             <!--  -->
             <div class="form-group col-md-12">
                 <label for="race"><strong>Capacité de la Bouteille:</strong></label>
