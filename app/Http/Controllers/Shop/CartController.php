@@ -19,12 +19,20 @@ class CartController extends Controller
 
     public function add(Request $request){
 
-        $request->validate([
-            'qty' => 'required|numeric|min:1|max:1'
-        ]);
-
         $vaches =DB::select("SELECT * from bovins where bovins.idBovin = $request->idV");
+        
+        $content =  Cart::getContent();
+        foreach($content as $produit){
+            $prod = $produit->id;
 
+            if($prod == $request->idV){
+            
+                return redirect(route('cart_index'))
+                ->with('error','La Vache a été déjà ajouté dans le panier !');
+            
+            }
+        }
+        
         Cart::add(array(
             'id' => $vaches[0]->idBovin, 
             'name' => $vaches[0]->description,
@@ -44,26 +52,19 @@ class CartController extends Controller
             $prod = $produit->id;
 
             if($prod <= $lastOne->idBovin){
-                if($request->qty === 1){
-
-                }else{
-                    return back()
-                    ->with('error','vous ne pouvez pas augmenter la quantité ('. $request->qty .') ');
-                }
+               
                 
             }else{
                 $bouteille = DB::select("SELECT * from bouteilles where idBouteille = ($prod - $lastOne->idBovin)");
 
                 if($request->qty <= $bouteille[0]->nombreDispo){
-                    $input_bouteille = array(
-                        'nombreDispo' => $bouteille[0]->nombreDispo - $request->qty,
-                    );
+                    
                 }else{
                     return back()
-                    ->with('error','La Quantité de bouteilles ('. $request->qty .') saisie est supérieur à celle dans le stock.
+                    ->with('error','Le nombre de bouteilles ('. $request->qty .') saisie est supérieur à celle dans le stock.
                     Stock Actuel = '.$bouteille[0]->nombreDispo.' bouteille(s)');
                 }
-                Bouteille::whereidbouteille(($prod - $lastOne->idBovin))->update($input_bouteille);
+
             }
         }
 
@@ -86,12 +87,20 @@ class CartController extends Controller
 
 
     public function addTaureau(Request $request){
-        
-        $request->validate([
-            'qty' => 'required|integer|max:1'
-        ]);
 
         $taureaux =DB::select("SELECT * from bovins where bovins.idBovin = $request->idT");
+
+        $content =  Cart::getContent();
+        foreach($content as $produit){
+            $prod = $produit->id;
+
+            if($prod == $request->idT){
+            
+                return redirect(route('cart_index'))
+                ->with('error','Le Taureau a été déjà ajouté dans le panier !');
+            
+            }
+        }
 
         Cart::add(array(
             'id' => $taureaux[0]->idBovin, 
@@ -108,6 +117,18 @@ class CartController extends Controller
 
         $genisses =DB::select("SELECT * from bovins where bovins.idBovin = $request->idG");
 
+        $content =  Cart::getContent();
+        foreach($content as $produit){
+            $prod = $produit->id;
+
+            if($prod == $request->idG){
+            
+                return redirect(route('cart_index'))
+                ->with('error','Le Génisse a été déjà ajouté dans le panier !');
+            
+            }
+        }
+        
         Cart::add(array(
             'id' => $genisses[0]->idBovin, 
             'name' => $genisses[0]->description,
@@ -123,6 +144,18 @@ class CartController extends Controller
 
         $veaux =DB::select("SELECT * from bovins where bovins.idBovin = $request->idVea");
 
+        $content =  Cart::getContent();
+        foreach($content as $produit){
+            $prod = $produit->id;
+
+            if($prod == $request->idVea){
+            
+                return redirect(route('cart_index'))
+                ->with('error','Le Veau a été déjà ajouté dans le panier !');
+            
+            }
+        }
+        
         Cart::add(array(
             'id' => $veaux[0]->idBovin, 
             'name' => $veaux[0]->description,
@@ -138,6 +171,18 @@ class CartController extends Controller
 
         $velles =DB::select("SELECT * from bovins where bovins.idBovin = $request->idVel");
         
+        $content =  Cart::getContent();
+        foreach($content as $produit){
+            $prod = $produit->id;
+
+            if($prod == $request->idVel){
+            
+                return redirect(route('cart_index'))
+                ->with('error','Le Velle a été déjà ajouté dans le panier !');
+            
+            }
+        }
+        
         Cart::add(array(
             'id' => $velles[0]->idBovin, 
             'name' => $velles[0]->description,
@@ -151,15 +196,36 @@ class CartController extends Controller
 
     public function addBouteille(Request $request){
 
+        $bouteille = DB::select("SELECT * from bouteilles where idBouteille = $request->idB");
+        $bout_dispo = $bouteille[0]->nombreDispo;
+        
+        $request->validate([
+            'quantite' => 'required|numeric|min:1|max:'.$bout_dispo.''
+        ]);
+
         $bouteilles = DB::select("SELECT * from bouteilles where bouteilles.idBouteille = $request->idB");
 
         $lastOne = DB::table('bovins')->latest('idBovin')->first();
+
+        $content =  Cart::getContent();
+        foreach($content as $produit){
+            $prod = $produit->id;
+            $bouteille = DB::select("SELECT * from bouteilles where idBouteille = ($prod - $lastOne->idBovin)");
+
+            if(($produit->quantity + $request->quantite) <= $bouteille[0]->nombreDispo){
+                
+            }else{
+                return redirect()->route('cart_index')
+                ->with('error','Le nombre de bouteilles ('. ($produit->quantity + $request->quantite) .') dans le panier est supérieur à celle dans le stock.
+                Stock Actuel = '.$bouteille[0]->nombreDispo.' bouteille(s)');
+            }
+        }
 
         Cart::add(array(
             'id' => $lastOne->idBovin + $bouteilles[0]->idBouteille, 
             'name' => $bouteilles[0]->description,
             'price' => $bouteilles[0]->prix,
-            'quantity' => $request->qty,
+            'quantity' => $request->quantite,
             'attributes' => array('photo'=>$bouteilles[0]->photo) 
         ));
 
@@ -170,15 +236,29 @@ class CartController extends Controller
     public function index(){
 
         $content =  Cart::getContent();
+        $lastOne = DB::table('bovins')->latest('idBovin')->first();
+        $lastBovin = $lastOne->idBovin;
 
         $total_prix_panier = Cart::getTotal();
-        return view('cart.index',compact('content', 'total_prix_panier'));
+        return view('cart.index',compact('content', 'total_prix_panier', 'lastBovin'));
     }
 
     //Code Client
     public function addVacheClient(Request $request){
 
         $vaches =DB::select("SELECT * from bovins where bovins.idBovin = $request->idV");
+
+        $content =  Cart::getContent();
+        foreach($content as $produit){
+            $prod = $produit->id;
+
+            if($prod == $request->idV){
+            
+                return redirect(route('cart_index_client'))
+                ->with('error','La Vache a été déjà ajouté dans le panier !');
+            
+            }
+        }
 
         Cart::add(array(
             'id' => $vaches[0]->idBovin, 
@@ -195,6 +275,18 @@ class CartController extends Controller
 
         $taureaux =DB::select("SELECT * from bovins where bovins.idBovin = $request->idT");
 
+        $content =  Cart::getContent();
+        foreach($content as $produit){
+            $prod = $produit->id;
+
+            if($prod == $request->idT){
+            
+                return redirect(route('cart_index_client'))
+                ->with('error','Le Taureau a été déjà ajouté dans le panier !');
+            
+            }
+        }
+
         Cart::add(array(
             'id' => $taureaux[0]->idBovin, 
             'name' => $taureaux[0]->description,
@@ -209,7 +301,19 @@ class CartController extends Controller
     public function addGenisseClient(Request $request){
 
         $genisses =DB::select("SELECT * from bovins where bovins.idBovin = $request->idG");
+        
+        $content =  Cart::getContent();
+        foreach($content as $produit){
+            $prod = $produit->id;
 
+            if($prod == $request->idG){
+            
+                return redirect(route('cart_index_client'))
+                ->with('error','Le Génisse a été déjà ajouté dans le panier !');
+            
+            }
+        }
+        
         Cart::add(array(
             'id' => $genisses[0]->idBovin, 
             'name' => $genisses[0]->description,
@@ -225,6 +329,18 @@ class CartController extends Controller
 
         $veaux =DB::select("SELECT * from bovins where bovins.idBovin = $request->idVea");
 
+        $content =  Cart::getContent();
+        foreach($content as $produit){
+            $prod = $produit->id;
+
+            if($prod == $request->idVea){
+            
+                return redirect(route('cart_index_client'))
+                ->with('error','Le Veau a été déjà ajouté dans le panier !');
+            
+            }
+        }
+
         Cart::add(array(
             'id' => $veaux[0]->idBovin, 
             'name' => $veaux[0]->description,
@@ -239,6 +355,18 @@ class CartController extends Controller
     public function addVelleClient(Request $request){
 
         $velles =DB::select("SELECT * from bovins where bovins.idBovin = $request->idVel");
+       
+        $content =  Cart::getContent();
+        foreach($content as $produit){
+            $prod = $produit->id;
+
+            if($prod == $request->idVel){
+            
+                return redirect(route('cart_index_client'))
+                ->with('error','Le Velle a été déjà ajouté dans le panier !');
+            
+            }
+        }
         
         Cart::add(array(
             'id' => $velles[0]->idBovin, 
@@ -255,20 +383,35 @@ class CartController extends Controller
 
         $bouteille = DB::select("SELECT * from bouteilles where idBouteille = $request->idB");
         $bout_dispo = $bouteille[0]->nombreDispo;
-        
+
         $request->validate([
-            'qty' => 'required|numeric|min:1|max:'.$bout_dispo.''
+            'quantite' => 'required|numeric|min:1|max:'.$bout_dispo.''
         ]);
 
         $bouteilles = DB::select("SELECT * from bouteilles where bouteilles.idBouteille = $request->idB");
 
         $lastOne = DB::table('bovins')->latest('idBovin')->first();
+        
+        
+        $content =  Cart::getContent();
+        foreach($content as $produit){
+            $prod = $produit->id;
+            $bouteille = DB::select("SELECT * from bouteilles where idBouteille = ($prod - $lastOne->idBovin)");
+            // dd($request->idB);
+            if(($produit->quantity + $request->quantite) <= $bouteille[0]->nombreDispo){
+                
+            }else{
+                return redirect()->route('cart_index_client')
+                ->with('error','Le nombre de bouteilles ('. ($produit->quantity + $request->quantite) .') dans le panier est supérieur à celle dans le stock.
+                Stock Actuel = '.$bouteille[0]->nombreDispo.' bouteille(s)');
+            }
+        }
 
         Cart::add(array(
             'id' => $lastOne->idBovin + $bouteilles[0]->idBouteille,
             'name' => $bouteilles[0]->description,
             'price' => $bouteilles[0]->prix,
-            'quantity' => $request->qty,
+            'quantity' => $request->quantite,
             'attributes' => array('photo'=>$bouteilles[0]->photo) 
         ));
 
@@ -278,9 +421,11 @@ class CartController extends Controller
     public function indexClient(){
 
         $content =  Cart::getContent();
-        
+        $lastOne = DB::table('bovins')->latest('idBovin')->first();
+        $lastBovin = $lastOne->idBovin;
+
         $total_prix_panier = Cart::getTotal();
-        return view('cart.clients.index',compact('content', 'total_prix_panier'));
+        return view('cart.clients.index',compact('content', 'total_prix_panier', 'lastBovin'));
     }
 
     public function indexCommande(Request $request){
@@ -350,10 +495,10 @@ class CartController extends Controller
         if(count($content) > 0){
             $total_prix_panier = $request->montant;
             $moyen_pay = $request->moyenDePaiement;
-            $frais = $request->frais;
+            // $frais = $request->frais;
             Cart::clear();
 
-            return view('shop.clients.commande_confirm',compact('content', 'total_prix_panier', 'moyen_pay', 'frais'));
+            return view('shop.clients.commande_confirm',compact('content', 'total_prix_panier', 'moyen_pay'));
         }
         else{
             return view('shop.clients.commande_vide');

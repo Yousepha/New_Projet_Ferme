@@ -29,23 +29,24 @@
     <table class="table table-bordered table-striped bg-dark" style="color:white; border:none">
         <tr class="text-center">
         <th width="10%">Photo</th>
+            <th>Prénom & nom</th>{{----}}
             <th>Nombre Bouteilles</th>
             <th>Prix Unitaire</th>
             <th>Prix Total</th>
             <th>Date</th>
-            {{--<th>Date test</th>--}}
             <th width="250px">Action</th>
         </tr>
         @foreach ($data_lait as $laits)
         <tbody style="color:black; font:blod; background:#ffff">
             <tr class="text-center">
                 <td><img src="{{ URL::to('/') }}/images/{{ $laits->photo }}" class="rounded-circle" width="60" height="50" /></td>
+                <td>{{ $laits->prenom }} {{ $laits->nom }}</td>
                 <td>{{ $laits->nbrBouteilleVendu }}</td>
                 <td>{{ $laits->prix }} Fcfa</td>
-                <td>{{ $laits->prix * $laits->nbrBouteilleVendu }}</td>
-                {{--<td>{{ Carbon\Carbon::parse($laits->created_at)->format("Y-m-d") }}</td>--}}
+                <td>{{ $laits->prix * $laits->nbrBouteilleVendu }} Fcfa</td>
+                <td>{{ Carbon\Carbon::parse($laits->created_at)->format("Y-m-d") }}</td>
                 
-                <td>{{ date('F d, Y', strtotime($laits->created_at) )}}</td>
+                {{--<td>{{ date('F d, Y', strtotime($laits->created_at) )}}</td>--}}
                 
                 <td width="25%">
                    <a class="btn btn-info" href="{{ route('commandes_lait.show',$laits->idCom) }}"><span class="fa fa-eye">voir </span></a>
@@ -56,7 +57,7 @@
         <tfoot>
             <tr class="text-center" style="color:black; font:blod; background:#ffff">
                 
-                <td colspan="4"></td>
+                <td colspan="5"></td>
                               
                 <td>Montant Total: {{ $montantTotale }} Fcfa</td>
                 <td>Total: {{ $nb_com }} Commande(s)</td>

@@ -26,9 +26,9 @@
                     <form action="{{ route('cart_add_B_client', ['idB'=>$bouteilles[0]->idBouteille]) }}" method="POST" id="panier_add">
                     @csrf
 
-                    <label for="qty">Quantité</label>
-                    <input class="form-control" name="qty" oninput="this.value = Math.abs(this.value)" id="qty" type="number">
-                    <span style="color:red">@error('qty') {{$message}} @enderror</span>
+                    <label for="quantite">Quantité</label>
+                    <input class="form-control" name="quantite" oninput="this.value = Math.abs(this.value)" id="qty" value="{{ old('quantite') }}" type="number">
+                    <span style="color:red">@error('quantite') {{$message}} @enderror</span>
                     </form>
                     <button type="submit" form="panier_add" class="btn btn-cart my-2 btn-block btn-warning"><i class="fa fa-lg fa-shopping-cart"></i> Ajouter au Panier</button>
 

@@ -20,6 +20,7 @@ class DiagnosticFermierController extends Controller
         $data = DB::table('diagnostics')
         ->join('bovins', 'bovins.idBovin', '=', 'diagnostics.bovin_id')
         ->join('maladies', 'maladies.idMaladie','=','diagnostics.maladie_id')
+        ->where('etatDeSante','Malade')
         ->select('*')
         ->paginate(5);
         
@@ -33,10 +34,10 @@ class DiagnosticFermierController extends Controller
      */
     public function create()
     {
-        $bovins = Bovin::all();
+        // afficher seulement les bovins sain
+        $bovins = Bovin::all()->where('etatDeSante','Sain');
 
         $maladies = Maladie::all();
-        // afficher seulement les bovins sain
         
         return view('diagnosticfermiers.create',compact('bovins', 'maladies'));
     }

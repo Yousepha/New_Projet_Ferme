@@ -15,7 +15,7 @@ class AdresseLivraisonController extends Controller
 
         if(count($content) > 0){
             $total_prix_panier = Cart::getTotal();
-            return view('shop.clients.adresse_livraison',compact('content', 'total_prix_panier'));
+            return view('shop.clients.paiement',compact('content', 'total_prix_panier'));
         }
         else{
             return view('shop.clients.commande_vide');

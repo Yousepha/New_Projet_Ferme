@@ -26,9 +26,7 @@
                     <form action="{{ route('cart_add_Vea_client', ['idVea'=>$veaux[0]->idBovin]) }}" method="POST" id="panier_add">
                     @csrf
 
-                    <label for="qty">Quantité</label>
-                    <input class="form-control" oninput="this.value = Math.abs(this.value)" name="qty" id="qty" type="number">{{--value="1"--}}
-                    <span style="color:red">@error('qty') {{$message}} @enderror</span>
+                    <input class="form-control" oninput="this.value = Math.abs(this.value)" name="qty" id="qty" value="1" type="hidden">{{--value="1"--}}
                     </form>
                     <button type="submit" form="panier_add" class="btn btn-cart my-2 btn-block btn-warning"><i class="fa fa-lg fa-shopping-cart"></i> Ajouter au Panier</button>
 

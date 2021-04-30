@@ -26,9 +26,7 @@
                     <form action="{{ route('cart_add_G_client', ['idG'=>$genisses[0]->idBovin]) }}" method="POST" id="panier_add">
                     @csrf
 
-                    <label for="qty">Quantité</label>
-                    <input class="form-control" name="qty" id="qty" oninput="this.value = Math.abs(this.value)" type="number">
-                    <span style="color:red">@error('qty') {{$message}} @enderror</span>
+                        <input class="form-control" name="qty" id="qty" oninput="this.value = Math.abs(this.value)" value="1" type="hidden">
                     </form>
                     <button type="submit" form="panier_add" class="btn btn-cart my-2 btn-block btn-warning"><i class="fa fa-lg fa-shopping-cart"></i> Ajouter au Panier</button>
 

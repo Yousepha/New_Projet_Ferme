@@ -18,8 +18,7 @@
 
 
             <h2>Paiement</h2>
-            <h4 class="mt-5">Total Frais: {{$frais}} Fcfa</h4>
-            <h4 class="mt-3">Total à régler: {{$total_prix_panier}} Fcfa</h4>
+            <h4 class="mt-3">Total à régler: {{ $total_prix_panier }} Fcfa</h4>
 
         </div>
         <form action="{{ route('ma_commande') }}" method="post" id="paiement">
@@ -33,8 +32,7 @@
                     <option value="Free money">Free money</option>
                 
                 </select>
-                <input type="hidden" name="montant" value="{{$total_prix_panier}}">
-                <input type="hidden" name="frais" value="{{$frais}}">
+                <input type="hidden" name="montant" value="{{ $total_prix_panier }}">
             </div>
         </form>
 

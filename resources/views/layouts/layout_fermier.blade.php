@@ -28,7 +28,7 @@
                     <!-- <li><i class="fa fa-filter"></i><a style="text-decoration:none" href="{{ route('bouteilles.index') }}">Les bouteilles de lait</a></li> -->
                     <li><i class="fa fa-cogs"></i><a style="text-decoration:none" href="{{ route('pesages.index') }}">Pesage</a></li>
                     <li><i class="fa fa-medkit"></i><a style="text-decoration:none" href="{{ route('diagnosticfermiers.index') }}">Sante</a></li>
-                    <li><i class="fa fa-user"></i><a style="text-decoration:none" href="{{ route('profile') }}">Mon compte</a></li>
+                    <li><i class="fa fa-user"></i><a style="text-decoration:none" href="{{ route('profile.fermier') }}">Mon compte</a></li>
                     <li><i class="fa fa-cutlery"></i><a style="text-decoration:none" href="{{ route('alimentationjour.index') }}">Alimentation du jour</a></li>
                     <li><a style="text-decoration:none" href="{{ route('logout') }}"  onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>
@@ -58,7 +58,7 @@
                     </div>
                     <h1>{{ config('app.name', 'Laravel') }}</h1>
                     
-                    <img src="{{ asset('images/fermier.jpg') }}" alt="">
+                    <img class="rounded-circle" style="width:70px; height:50px" src="{{ URL::to('/') }}/images/{{ auth()->user()->photo }}" alt="photo-profile">
                 </header>
                 <div class="content-data">
                     @yield('content')

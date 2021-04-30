@@ -56,7 +56,7 @@ Route::get('/', [App\Http\Controllers\Shop\MainController::class, 'index'])->nam
 
 Route::get('/shop/clients', [App\Http\Controllers\Shop\MainController::class, 'indexClient'])->name('accueil_client');
 
-Route::get('/shop/clients/address', [App\Http\Controllers\AdresseLivraisonController::class, 'index'])->name('adresse_client');
+Route::get('/shop/clients/paiement', [App\Http\Controllers\AdresseLivraisonController::class, 'index'])->name('adresse_client');
 Route::post('/paiement', [App\Http\Controllers\AdresseLivraisonController::class, 'store'])->name('adresse.store');
 
 /* Route pour l'historique du client*/
@@ -115,6 +115,16 @@ Route::get('/all_genisses', [App\Http\Controllers\VoirToutController::class, 'in
 Route::get('/all_veaux', [App\Http\Controllers\VoirToutController::class, 'indexVeau'])->name('voirTout.veau');
 Route::get('/all_velles', [App\Http\Controllers\VoirToutController::class, 'indexVelle'])->name('voirTout.velle');
 Route::get('/all_laits', [App\Http\Controllers\VoirToutController::class, 'indexLait'])->name('voirTout.lait');
+
+/**Profiles des utilisateurs */
+Route::get('/profile_admin', [App\Http\Controllers\ProfilController::class, 'profileAdmin'])->name('profile.admin');
+Route::get('/profile_fermier', [App\Http\Controllers\ProfilController::class, 'profileFermier'])->name('profile.fermier');
+Route::get('/profile_user', [App\Http\Controllers\ProfilController::class, 'profileUser'])->name('profile.user');
+/**Update des Profiles */
+Route::put('/update_admin/{id}', [App\Http\Controllers\ProfilController::class, 'updateProfileAdmin'])->name('update.profile.admin');
+Route::put('/update_fermier/{id}', [App\Http\Controllers\ProfilController::class, 'updateProfileFermier'])->name('update.profile.fermier');
+Route::put('/update_user/{id}', [App\Http\Controllers\ProfilController::class, 'updateProfileUser'])->name('update.profile.user');
+
 
 /**Vues pour le e-commerce*/
 Route::view('produits','e-commerce.produit_en_ligne')->name('produits');

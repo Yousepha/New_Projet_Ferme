@@ -85,7 +85,7 @@ class BouteilleController extends Controller
         
         /* code relatif au stock */
         $stock = DB::select("SELECT * from stock_laits where idStock = 1");
-        /**Je Vérifie si la quantité dispo dans le stock est supérieur a la quantié dans les bouteilles*/
+        /**Je Vérifie si la quantité dispo dans le stock de lait est supérieur a la quantité dans les bouteilles*/
         if($stock[0]->quantiteDispo >= $stock_dispo ){
             
             $input_stock = array(

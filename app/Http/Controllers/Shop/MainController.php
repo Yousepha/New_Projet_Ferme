@@ -45,8 +45,8 @@ class MainController extends Controller
         ->select('*')
         ->get();
 
-        $bouteilles = DB::table('vente_laits')
-        ->join('bouteilles', 'bouteilles.idBouteille', '=', 'vente_laits.bouteille_id')
+        $bouteilles = DB::table('bouteilles')
+        ->where('bouteilles.nombreDispo','>', 0)
         ->select('*')
         ->get();
 
@@ -136,7 +136,7 @@ class MainController extends Controller
         ->get();
 
         $bouteilles = DB::table('bouteilles')
-        ->where('prix', '!=', 'NULL')
+        ->where('bouteilles.nombreDispo','>', 0)
         ->select('*')
         ->limit(3)
         ->get();

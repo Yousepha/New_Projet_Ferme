@@ -153,7 +153,7 @@ class EmployeeController extends Controller
         $photo = $request->file('photo');
         if($photo != '')  // here is the if part when you dont want to update the image required
         {
-            // unlink(public_path('images').'/'.$image_name);
+            unlink(public_path('images').'/'.$image_name);
 
             $request->validate([
                 'nom'    =>  'required|string',
@@ -190,7 +190,7 @@ class EmployeeController extends Controller
             'telephone'        =>      $request->telephone,
             'adresse'        =>       $request->adresse,
             'login'        =>       $request->login,
-            'password'        =>      $request->password,
+            'password'        =>      bcrypt($request->password),
             // 'profile'        =>       "fermier",
             'email'        =>       $request->email,
             // 'est_fermier' => 1,

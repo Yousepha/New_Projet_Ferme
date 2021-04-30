@@ -65,7 +65,7 @@ class HomeController extends Controller
         ->get();
 
         $bouteilles = DB::table('bouteilles')
-        ->where('prix', '!=', 'NULL')
+        ->where('bouteilles.nombreDispo','>', 0)
         ->select('*')
         ->limit(3)
         ->get();

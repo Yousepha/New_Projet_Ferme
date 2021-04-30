@@ -29,7 +29,7 @@
     <table class="table table-bordered table-striped bg-dark" style="color:white; border:none">
         <tr class="text-center">
         <th width="10%">Photo Bovin</th>
-            <th>Prenom & nom</th>
+            <th>Prénom & nom</th>
             <th>Telephone</th>
             <th>Prix Total</th>
             <th>Date</th>

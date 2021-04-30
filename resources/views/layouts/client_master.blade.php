@@ -217,7 +217,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="{{route('compte')}}">
+				<a href="{{route('profile.user')}}">
 					<span class="icon"><i class="fa fa-user fa-2x"></i></span>
 					<span class="text">Profile</span>
 				</a>

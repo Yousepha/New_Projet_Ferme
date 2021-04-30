@@ -38,7 +38,6 @@
                                 <del class="barre"> {{$prod->prix + 10000}}  Fcfa</del>
                                 <h4> {{$prod->prix}} Fcfa</h4>
                                 <a href="{{route('voir_produit_taureau_client', ['idTaureau'=>$prod->idBovin])}}" class="btn btn-md btn-outline-secondary"><i class="fa fa-eye"></i></a>
-                                <a href="{{route('voir_produit_taureau_client', ['idTaureau'=>$prod->idBovin])}}" class="btn btn-md btn-outline-secondary"><i class="fa fa-lg fa-shopping-cart"></i></a>
                             </div>
                         </div>
                     </div>

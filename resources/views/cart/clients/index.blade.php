@@ -2,6 +2,13 @@
 @section('content') 
 <main role="main">
 
+    @if($message = Session::get('success'))
+    <div class="alert alert-success">
+        <button class="close" data-dismiss="alert" type="button">x</button>
+        <p align="center"><strong>{{$message}}</strong></p>
+    </div>
+    @endif
+
     @if($message = Session::get('error'))
     <div class="alert alert-danger">
         <button class="close" data-dismiss="alert" type="button">x</button>
@@ -16,8 +23,8 @@
                 <thead>
                     <tr>
                         <th>Produit</th>
-                        <th>Qte</th>
-                        <th>P.U</th>
+                        <th>Quantité</th>
+                        <th>P.U (Prix Unitaire)</th>
                         <th>Total TTC</th>
                         <th>Opération</th>
                     </tr>
@@ -29,13 +36,17 @@
                 <tr>
                     <td>
                         <img width="110" class="rounded-circle img-thumbnail" src="{{ asset('images/'.$produit->attributes['photo']) }}" alt="">
-                        {{ $produit->name }}
+                        {{-- $produit->name --}}
                     </td>
                     <td>
                         <form  action="{{ url('/cart/update')}}/{{ $produit->id }}" method="post">
-                        <input style="display: inline-block" oninput="this.value = Math.abs(this.value)" name="qty" id="qte" class="form-control col-sm-4" type="number" value="{{ $produit->quantity }}">{{--disabled--}}
                         @csrf
+                        @if($produit->id <= $lastBovin)
+                            <input style="display: inline-block" oninput="this.value = Math.abs(this.value)" name="qty" id="qte" class="form-control col-sm-4" type="number" value="{{ $produit->quantity }}" disabled>{{--disabled--}}
+                        @else
+                            <input style="display: inline-block" oninput="this.value = Math.abs(this.value)" name="qty" id="qte" class="form-control col-sm-4" type="number" value="{{ $produit->quantity }}">{{--disabled--}}
                             <button type="submit" class="btn py-1 pl-3 pr-3 btn-circle btn-outline-success fa fa-refresh"> </button>
+                        @endif
                         </form>
                     </td>
                     <td>

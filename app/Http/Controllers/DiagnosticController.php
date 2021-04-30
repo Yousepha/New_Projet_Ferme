@@ -34,10 +34,10 @@ class DiagnosticController extends Controller
      */
     public function create()
     {
+        // afficher seulement les bovins sain
         $bovins = Bovin::all()->where('etatDeSante','Sain');
 
         $maladies = Maladie::all();
-        // afficher seulement les bovins sain
         return view('diagnostics.create',compact('bovins', 'maladies'));
     }
 

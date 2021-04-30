@@ -26,12 +26,6 @@
         <p align="center"><strong>{{$message}}</strong></p>
     </div>
     @endif
-    @if($message = Session::get('selected'))
-    <div class="alert alert-danger">
-        <button class="close" data-dismiss="alert" type="button">x</button>
-        <p align="center"><strong>{{$message}}</strong></p>
-    </div>
-    @endif
    
 <form action="{{ route('alimentationjour.store') }}" method="POST">
     @csrf
@@ -43,7 +37,7 @@
                     <select name="nomAlimentation" class="form-control" required>
                         @foreach($achat_aliment as $aliment)
                         <option value="{{ $aliment->nomAliment }}">
-                            {{ $aliment->nomAliment }}
+                            {{ $aliment->nomAliment }} {{ $aliment->quantite }} kg en stock
                         </option>
                         @endforeach
                     </select>

@@ -16,12 +16,6 @@ class AlimentationDuJourController extends Controller
      */
     public function index()
     {
-        // $data = AlimentationDuJour::latest()->paginate(3);
-        // $qte_ach = DB::select("SELECT * from achat_aliments, alimentation_du_jours where achat_aliments.idAchatAliment = alimentation_du_jours.nomAlimentation");
-        // $qte_al = DB::select("SELECT * from alimentation_du_jours, achat_aliments where alimentation_du_jours.nomAlimentation = achat_aliments.idAchatAliment");
-        // $qte_totale = $qte_ach[0]->quantite + $qte_al[0]->quantite;
-
-        // dd($qte_totale);
         $data = DB::table('achat_aliments')
         ->join('alimentation_du_jours', 'alimentation_du_jours.nomAlimentation', '=', 'achat_aliments.nomaliment')
         ->select('*')
@@ -60,6 +54,7 @@ class AlimentationDuJourController extends Controller
             'quantite' => 'required',
             // 'date' => 'required|date',
         ]);
+        $date_actu = \Carbon\Carbon::now()->format('y.m.d');
             
         $nom_aliment = DB::select("SELECT * from achat_aliments where achat_aliments.nomAliment = '$request->nomAlimentation'");
 // dd($request->nomAlimentation);
@@ -78,7 +73,7 @@ class AlimentationDuJourController extends Controller
             'fermier_id' => $fermier_id[0]->id,
             'nomAlimentation' => $request->nomAlimentation,
             'quantite' => $request->quantite,
-            // 'date' => $request->date,
+            'date' => $date_actu,
         );
         
 

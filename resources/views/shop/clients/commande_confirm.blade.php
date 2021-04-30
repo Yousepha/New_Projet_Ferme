@@ -294,7 +294,7 @@
                                                                 <span class="header-sm">Adresse de Livraison</span><br />
                                                                 Prenom & Nom: <strong>{{ Auth::user()->full_name }}</strong> <br />
                                                                 Telephone: <strong>{{ Auth::user()->telephone }}</strong> <br />
-                                                                Frais de livraison: <strong>{{ $frais }} Fcfa</strong><br />
+                                                                Frais de livraison: <strong>{{ $total_prix_panier }} Fcfa</strong><br />
                                                                 Adresse: <strong>{{ Auth::user()->adresse }}</strong> <br />
                                                                 Payé via <strong>{{ $moyen_pay }}</strong><br />
                                                             </td>
@@ -341,7 +341,7 @@
                                                     <img width="110" src="{{ asset('images/'.$produit->attributes['photo']) }}" alt="item1">
                                                 </td>
                                                 <td class="product">
-                                                    <span style="color: #4d4d4d; font-weight:bold;">{{ $produit->name }}</span>
+                                                    <span style="color: #4d4d4d; font-weight:bold;">{{-- $produit->name --}}</span>
                                                 </td>
                                             </tr>
                                         </table>

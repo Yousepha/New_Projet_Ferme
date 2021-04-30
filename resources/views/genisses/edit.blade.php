@@ -191,27 +191,51 @@
 
                         <!-- Default input -->
                         <div class="form-group col-md-6">
-                            <label for="prix">Prix</label>
-                            <input mdbInput type="text" oninput="this.value = Math.abs(this.value)" class="form-control" name="prix" id="prix" value="{{ $data->prix }}">
-                            <span style="color:red">@error('prix') {{$message}} @enderror</span>
-                        
+                            <!-- <div class="row"> -->
+                                <label for="" class="col-md-6"><strong>Choisir le geniteur</strong></label>
+                                <div class="">
+                                    <select name="geniteur" class="form-control" required>
+                                        @foreach($geniteurs as $geniteur)
+                                        <option value="{{ $geniteur->nom }}"
+
+                                            @if($geniteur->nom == $data->nom)
+                                            selected
+                                            @endif
+                                        
+                                        >
+                                            {{ $geniteur->nom }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="clearfix"></div>
+                            <!-- </div> -->
                         </div>
+                        <!--  -->
 
                         <!-- Default input -->
                         <div class="form-group col-md-6">
-                            <label for="geniteur">Géniteur</label>
-                            <input mdbInput type="text" class="form-control" name="geniteur" id="phone" value="{{ $data->geniteur }}">
-                            <span style="color:red">@error('geniteur') {{$message}} @enderror</span>
-                        
-                        </div>
+                            <!-- <div class="row"> -->
+                                <label for="" class="col-md-6"><strong>Choisir la genitrice</strong></label>
+                                <div class="">
+                                    <select name="genitrice" class="form-control" required>
+                                        @foreach($genitrices as $genitrice)
+                                        <option value="{{ $genitrice->nom }} "
 
-                        <!-- Default input -->
-                        <div class="form-group col-md-6">
-                            <label for="genitrice">Génitrice</label>
-                            <input mdbInput type="text" class="form-control" name="genitrice" id="phone" value="{{ $data->genitrice }}">
-                            <span style="color:red">@error('genitrice') {{$message}} @enderror</span>
-                        
+                                            @if($genitrice->nom == $data->nom)
+                                            selected
+                                            @endif
+                                        
+                                        >
+                                            {{ $genitrice->nom }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="clearfix"></div>
+                            <!-- </div> -->
                         </div>
+                        <!--  -->
 
                         <div class="row">
                             <div class="form-group col-md-4">
