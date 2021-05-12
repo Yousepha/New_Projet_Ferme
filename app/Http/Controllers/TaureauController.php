@@ -52,23 +52,21 @@ class TaureauController extends Controller
      */
     public function store(Request $request)
     {
+        $date_actu = \Carbon\Carbon::now()->format('y.m.d');
+
         $codeBovin = Helper::IDGenerator(new Taureau,'idBovin', 'codeBovin', 2, 'TAU');
         $q = new Taureau;
         $q->codeBovin = $codeBovin;
 
-        // $errorMessage = [
-        //     'required' => 'Le champ :attribute est obligatoire'
-        // ];
-
         $request->validate([
             'nom'    =>  'required',
             'etat'     =>  'required',
-            'prix'     =>  'nullable',
-            'situation'     =>  'nullable',
-            'dateNaissance'     =>  'required|date',
+            // 'prix'     =>  'nullable',
+            // 'situation'     =>  'nullable',
+            'dateNaissance'     =>  'nullable|date|before:'.$date_actu.'',
             'etatDeSante'     =>  'required',
-            'geniteur'     =>  'nullable|string',
-            'genitrice'     =>  'nullable|string',
+            // 'geniteur'     =>  'nullable|string',
+            // 'genitrice'     =>  'nullable|string',
             'photo'         =>  'required|image|max:2048'
         ]);
 
@@ -83,11 +81,11 @@ class TaureauController extends Controller
             'etat'        =>   $request->etat,
             'dateNaissance'        =>      $request->dateNaissance,
             'etatDeSante'        =>       $request->etatDeSante,
-            'geniteur'        =>       $request->geniteur,
-            'genitrice'        =>       $request->genitrice,
+            // 'geniteur'        =>       $request->geniteur,
+            // 'genitrice'        =>       $request->genitrice,
             'race_id'        =>       $request->race_id,
-            'prix'        =>       $request->prix,
-            'situation'        =>       $request->situation,
+            // 'prix'        =>       $request->prix,
+            // 'situation'        =>       $request->situation,
             'photo'            =>   $new_name,
         );
         
@@ -153,6 +151,8 @@ class TaureauController extends Controller
      */
     public function update(Request $request, $idBovin)
     {
+        $date_actu = \Carbon\Carbon::now()->format('y.m.d');
+
         $image_name = $request->hidden_image;
         $photo = $request->file('photo');
         if($photo != '')  // here is the if part when you dont want to update the image required
@@ -162,12 +162,12 @@ class TaureauController extends Controller
             $request->validate([
                 'nom'    =>  'required',
                 'etat'     =>  'required',
-                'dateNaissance'     =>  'required|date',
+                'dateNaissance'     =>  'nullable|date|before:'.$date_actu.'',
                 'etatDeSante'     =>  'required',
-                'prix'     =>  'nullable',
-                'situation'     =>  'nullable',
-                'geniteur'     =>  'nullable|string',
-                'genitrice'     =>  'nullable|string',
+                // 'prix'     =>  'nullable',
+                // 'situation'     =>  'nullable',
+                // 'geniteur'     =>  'nullable|string',
+                // 'genitrice'     =>  'nullable|string',
                 'photo'         =>  'image|max:2048'
             ]);
 
@@ -179,12 +179,12 @@ class TaureauController extends Controller
             $request->validate([
                 'nom'    =>  'required',
                 'etat'     =>  'required',
-                'dateNaissance'     =>  'required|date',
+                'dateNaissance'     =>  'nullable|date|before:'.$date_actu.'',
                 'etatDeSante'     =>  'required',
-                'prix'     =>  'nullable',
-                'situation'     =>  'nullable',
-                'geniteur'     =>  'nullable|string',
-                'genitrice'     =>  'nullable|string',
+                // 'prix'     =>  'nullable',
+                // 'situation'     =>  'nullable',
+                // 'geniteur'     =>  'nullable|string',
+                // 'genitrice'     =>  'nullable|string',
             ]);
         }
 
@@ -193,11 +193,11 @@ class TaureauController extends Controller
             'etat'        =>   $request->etat,
             'dateNaissance'        =>      $request->dateNaissance,
             'etatDeSante'        =>       $request->etatDeSante,
-            'geniteur'        =>       $request->geniteur,
-            'genitrice'        =>       $request->genitrice,
+            // 'geniteur'        =>       $request->geniteur,
+            // 'genitrice'        =>       $request->genitrice,
             'race_id'        =>       $request->race_id,
-            'prix'        =>       $request->prix,
-            'situation'        =>       $request->situation,
+            // 'prix'        =>       $request->prix,
+            // 'situation'        =>       $request->situation,
             'photo'            =>   $image_name
         );
 

@@ -65,8 +65,8 @@
             <th >Etat</th>
             <th >Date de Naissance</th>
             <th >Etat De Sante</th>
-            <th >geniteur</th>
-            <th >genitrice</th>
+            <!-- <th >geniteur</th> -->
+            <!-- <th >genitrice</th> -->
             <th >Action</th>
         </tr>
         @if(count($data) > 0)
@@ -80,8 +80,8 @@
                 <td>{{ $taureaux->etat }}</td>
                 <td>{{ $taureaux->dateNaissance }}</td>
                 <td>{{ $taureaux->etatDeSante }}</td>
-                <td>{{ $taureaux->geniteur }}</td>
-                <td>{{ $taureaux->genitrice }}</td>
+                <!-- <td>{{ $taureaux->geniteur }}</td>
+                <td>{{ $taureaux->genitrice }}</td> -->
                 <td width="25%">
                 <!-- here is the button action side where you can edit . view and delete the taureaux record -->
                 <form action="{{ route('taureaux.destroy', $taureaux->idBovin) }}" method="post">

@@ -31,11 +31,11 @@
                                 <h3><span>nomRace : </span>  <i>{{ $races[0]->nomRace }}</i> </h3>
                                 <h3>Etat     : <i>{{ $data->etat }}</i>  </h3>
                                 <h3>situation     : <i>{{ $data->situation }}</i>  </h3>
-                                <h3>Prix     : <i>{{ $data->prix }} Fcfa</i>  </h3>
+                                <!-- <h3>Prix     : <i>{{ $data->prix }} Fcfa</i>  </h3> -->
                                 <h3>Date de Naissance      : <i>{{ $data->dateNaissance }}</i></h3>
                                 <h3>Etat De Santé      : <i>{{ $data->etatDeSante }}</i></h3>
-                                <h3>Geniteur      : <i>{{ $data->geniteur }}</i></h3>
-                                <h3>Genitrice      : <i>{{ $data->genitrice }}</i></h3>
+                                <!-- <h3>Geniteur      : <i>{{ $data->geniteur }}</i></h3>
+                                <h3>Genitrice      : <i>{{ $data->genitrice }}</i></h3> -->
                             </div>
                             <a href="{{ route('taureaux.index') }}" class="btn bg-dark" style="color:white">Retour</a>
 

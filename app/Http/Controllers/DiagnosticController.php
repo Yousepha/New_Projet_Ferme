@@ -75,8 +75,8 @@ class DiagnosticController extends Controller
                         ->where('maladie_id',$request->idMaladie)
                         ->where('bovins.idBovin',$request->idBovin)
                         ->where('maladies.idMaladie',$request->idMaladie)
-                        ->where('dateMaladie','>=', $request->dateMaladie)
-                        ->where('dateGuerison', NULL)
+                        // ->where('dateMaladie','>=', $request->dateMaladie)
+                        // ->where('dateGuerison', NULL)
                         // ->orWhere('dateGuerison', '>', $request->dateMaladie)
                         ->get();
 
@@ -85,7 +85,7 @@ class DiagnosticController extends Controller
         if(count($bovin_maladie) > 0){
 
             return redirect()->route('diagnostics.create')
-            ->with('error','Le Bovin '.$bovin_maladie[0]->nom.' n\'est pas encore guéri de la maladie: '.$bovin_maladie[0]->nomMaladie. ', ou la date de maladie saisie est identique ou antérieur à l\'ancienne ');
+            ->with('error','Le Bovin '.$bovin_maladie[0]->nom.' n\'est pas encore guéri de la maladie: '.$bovin_maladie[0]->nomMaladie);
         }else{
             $input_data = array(
                 'bovin_id' => $request->idBovin,

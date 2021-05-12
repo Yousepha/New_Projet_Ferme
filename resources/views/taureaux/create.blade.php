@@ -53,7 +53,7 @@
                         </div>
 
                         <!-- Default input -->
-                        <div class="form-group col-md-6">
+                        {{--<div class="form-group col-md-6">
                             <label for="etatSante" class="col-md-6"> Choisir la situation</label>
                             
                             <select  name="situation" id="etatSante" class="form-control" required>
@@ -61,7 +61,7 @@
                                 <option>en vente</option>
                                 
                             </select>
-                        </div>
+                        </div>--}}
 
                         <!-- Default input -->
                         <div class="form-group col-md-6">
@@ -103,7 +103,7 @@
                         <!--  -->
                         
                         <!-- Default input -->
-                        <div class="form-group col-md-6">
+                        {{--<div class="form-group col-md-6">
                             <label for="prix" class="col-md-6">Le Prix</label>
                             <input mdbInput type="number" oninput="this.value = Math.abs(this.value)" id="prix" class="form-control" name="prix" placeholder="Prix" value="{{ old('prix') }}">
                             <span style="color:red">@error('prix') {{$message}} @enderror</span>
@@ -124,7 +124,7 @@
                             <input mdbInput type="text" id="genitrice" class="form-control" name="genitrice" id="phone" placeholder="Genitrice" value="{{ old('genitrice') }}">
                             <span style="color:red">@error('genitrice') {{$message}} @enderror</span>
                         
-                        </div>
+                        </div>--}}
 
                         
                         <div class="form-group col-md-3">

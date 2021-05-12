@@ -104,7 +104,7 @@
                         </div>
 
                         <!-- Default input -->
-                        <div class="form-group col-md-6">
+                        {{--<div class="form-group col-md-6">
                             <label for="genitrice">Situation</label>
                             <div class="">
                                 <select name="situation" class="form-control" required>
@@ -126,7 +126,7 @@
                                 </select>
                             </div>
 
-                        </div>
+                        </div>--}}
 
                         <!--  -->
                         <div class="form-group col-md-6">
@@ -151,7 +151,7 @@
                         <!--  -->
 
                         <!-- Default input -->
-                        <div class="form-group col-md-6">
+                        {{--<div class="form-group col-md-6">
                             <label for="prix">Prix</label>
                             <input mdbInput type="text" oninput="this.value = Math.abs(this.value)" class="form-control" name="prix" id="prix" value="{{ $data->prix }}">
                             <span style="color:red">@error('prix') {{$message}} @enderror</span>
@@ -172,7 +172,7 @@
                             <input mdbInput type="text" class="form-control" name="genitrice" id="phone" value="{{ $data->genitrice }}">
                             <span style="color:red">@error('genitrice') {{$message}} @enderror</span>
                         
-                        </div>
+                        </div>--}}
 
                         <div class="row">
                             <div class="form-group col-md-4">
