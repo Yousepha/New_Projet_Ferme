@@ -6,7 +6,7 @@
 			<i class="fa fa-bars"></i>
 		</div>
 		<ul>
-			<li><a href="{{ route('product_lait.index') }}"><i class="fa fa-bell"></i></a></li>
+			<li><a href="{{ route('production_lait_aliment') }}"><i class="fa fa-bell"></i></a></li>
 			<li><a href="{{ route('profile.admin') }}"><i class="fa fa-user"></i></a></li>
 			<li><a href="{{ route('logout') }}"  onclick="event.preventDefault();
 				document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i></a>

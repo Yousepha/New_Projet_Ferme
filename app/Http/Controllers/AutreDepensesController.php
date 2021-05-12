@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AutresDepenses;
 use App\Models\Admin;
+use App\Models\Type;
 use Illuminate\Support\Facades\DB;
 
 class AutreDepensesController extends Controller
@@ -27,7 +28,8 @@ class AutreDepensesController extends Controller
      */
     public function create()
     {
-        return view('autresdepenses.create');
+        $types = Type::all();
+        return view('autresdepenses.create',compact('types'));
     }
 
     /**
@@ -38,17 +40,19 @@ class AutreDepensesController extends Controller
      */
     public function store(Request $request)
     {
-        $admin_id = DB::select("SELECT id from users where est_admin = 1");
-        // dd($admin_id[0]->id);
+        $date_actu = \Carbon\Carbon::now()->format('y.m.d');
+        
+        $admin_id = auth()->user()->id;
+
         $request->validate([
-            'dateDepenses' => 'required|date',
+            'dateDepenses' => 'required|date|before:'.$date_actu.'',
             'type' => 'required',
             'libelle' => 'required',
             'montant' => 'required|Integer',
         ]);
   
         $input_data = array(
-            'admin_id' => $admin_id[0]->id,
+            'admin_id' => $admin_id,
             'dateDepenses' => $request->dateDepenses,
             'type' => $request->type,
             'libelle' => $request->libelle,
@@ -69,6 +73,8 @@ class AutreDepensesController extends Controller
      */
     public function show($idDepenses)
     {
+        // $types = Type::all();
+        
         $data = AutresDepenses::findOrFail($idDepenses);
         return view('autresdepenses.show',compact('data'));
     }
@@ -81,8 +87,10 @@ class AutreDepensesController extends Controller
      */
     public function edit($idDepenses)
     {
+        $types = Type::all();
+
         $data = AutresDepenses::findOrFail($idDepenses);
-        return view('autresdepenses.edit',compact('data'));
+        return view('autresdepenses.edit',compact('data', 'types'));
     }
 
     /**
@@ -96,14 +104,14 @@ class AutreDepensesController extends Controller
     {
         $request->validate([
             'dateDepenses' => 'required|date',
-            'type' => 'required',
+            // 'type' => 'required',
             'libelle' => 'required',
             'montant' => 'required|Integer',
         ]);
         
         $input_data = array(
             'dateDepenses' => $request->dateDepenses,
-            'type' => $request->type,
+            // 'type' => $request->type,
             'libelle' => $request->libelle,
             'montant' => $request->montant,
         );

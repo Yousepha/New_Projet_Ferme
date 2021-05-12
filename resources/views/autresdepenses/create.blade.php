@@ -42,14 +42,33 @@
            
             </div>
         </div>
-        <div class="col-md-12">
+        {{--<div class="col-md-12">
             <div class="form-group">
                 <strong>Type:</strong>
                 <input type="text" name="type" class="form-control" placeholder="Type" value="{{ old('dateDepenses') }}">
                 <span style="color:red">@error('type') {{$message}} @enderror</span>
             
             </div>
+        </div>--}}
+
+        <!-- Default input -->
+        <div class="form-group col-md-12">
+            <!-- <div class="row"> -->
+                <label for="type" class=""><strong>Choisir le type</strong></label>
+                <div class="">
+                    <select name="type" class="form-control" required>
+                        @foreach($types as $type)
+                        <option value="{{ $type->nomType }} ">
+                            {{ $type->nomType }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="clearfix"></div>
+            <!-- </div> -->
         </div>
+        <!--  -->
+
         <div class="col-md-12">
             <div class="form-group">
                 <strong>Montant:</strong>

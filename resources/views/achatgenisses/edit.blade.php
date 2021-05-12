@@ -53,7 +53,7 @@
                         </div>--}}
 
                         <!--  -->
-                        <div class="form-group col-md-6">
+                        {{--<div class="form-group col-md-6">
                             <label for="race">Phase</label>
                             <div class="">
                                 <select name="phase" class="form-control" required>
@@ -75,7 +75,7 @@
                                 </select>
                             </div>
                             <div class="clearfix"></div>
-                        </div>
+                        </div>--}}
                         <!--  -->
 
                         <!-- Default input -->

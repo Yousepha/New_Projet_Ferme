@@ -7,6 +7,7 @@ use App\Http\Controllers\BovinsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AutreDepensesController;
+use App\Http\Controllers\TypeController;
 use App\Http\Controllers\VachesController;
 use App\Http\Controllers\GenisseController;
 use App\Http\Controllers\AlimentationDuJourController;
@@ -168,6 +169,9 @@ Route::resource('employee', EmployeeController::class);
 // route pour les clients
 Route::resource('clients', ClientController::class);
 
+// route pour les types de dépenses
+Route::resource('types', TypeController::class);
+
 // route pour les autres dépenses
 Route::resource('autresdepenses', AutreDepensesController::class);
 Route::get('/depenses_search', [App\Http\Controllers\AutreDepensesController::class, 'search'])->name('search_depenses');
@@ -262,7 +266,9 @@ Route::get('/production_lait_search', [App\Http\Controllers\InfosController::cla
 
 Route::get('/production_aliment', [App\Http\Controllers\InfosController::class, 'indexAlimentation'])->name('product_aliment.index');
 Route::get('/voir_production_aliment/{id}', [App\Http\Controllers\InfosController::class, 'alimentShow'])->name('product_aliment.show');
-
+Route::get('/production_aliment_search', [App\Http\Controllers\InfosController::class, 'search_aliment'])->name('search_production_aliment');
+// Vue pour les deux production lait et aliment
+Route::view('index_production','production.gestion_de_production')->name('production_lait_aliment');
 
 
 // Route::view('/achatBovin', 'dashboard_admin/AchatsEtDepenses/achatBovin')->name('achatBovin');

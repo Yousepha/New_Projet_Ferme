@@ -40,13 +40,6 @@
                         
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="dateIA" class="col-md-6">Date IA</label>
-                            <input mdbInput type="date" id="dateIA" class="form-control" name="dateIA" id="last_name" placeholder="Date Insimination artificiel" value="{{ old('dateIA') }}">
-                            <span style="color:red">@error('dateIA') {{$message}} @enderror</span>
-                        
-                        </div>
-
                         <!--  -->
                         {{--<div class="form-group col-md-6">
                             <!-- <div class="row"> -->
@@ -83,6 +76,13 @@
                         
                         </div>
 
+                        <div class="form-group col-md-6">
+                            <label for="dateIA" class="col-md-6">Date IA</label>
+                            <input mdbInput type="date" id="dateIA" class="form-control" name="dateIA" id="last_name" placeholder="Date Insimination artificiel" value="{{ old('dateIA') }}">
+                            <span style="color:red">@error('dateIA') {{$message}} @enderror</span>
+                        
+                        </div>
+                        
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                         {{-- <input mdbInput type="text" class="form-control" name="etatDeSante" id="phone" placeholder="Etat De Sante">--}}                           

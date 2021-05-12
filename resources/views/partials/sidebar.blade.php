@@ -30,6 +30,7 @@
                     <li><a href="{{ route('achatbovins') }}">Achat Bovin</a></li>
                     <li><a href="{{ route('achataliments.index') }}">Achat Aliment</a></li>
                     <li><a href="{{ route('autresdepenses.index') }}">Autre Depenses</a></li>
+                    <li><a href="{{ route('types.index') }}">Autre Types de Depenses</a></li>
                 </ul>
             </li>
             <li> <a href="#" data-toggle="collapse" data-target="#tables" class="collapsed active" ><i class="fa fa-medkit"></i> <span class="nav-label">Santé</span><span class="fa fa-chevron-left pull-right"></span></a>

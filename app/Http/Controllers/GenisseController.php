@@ -69,6 +69,10 @@ class GenisseController extends Controller
         $dateNaiss = $request->input('dateNaissance');
         $dateIA = $request->input('dateIA');
 
+        if($dateNaiss == NULL){
+            $dateNaiss = "0000-00-00";
+        }
+
         if($dateIA != NULL){
             $phase = "gestant";
         }else{
@@ -210,6 +214,10 @@ class GenisseController extends Controller
         $dateNaiss = $request->input('dateNaissance');
         $dateIA = $request->input('dateIA');
 
+        if($dateNaiss == NULL){
+            $dateNaiss = "0000-00-00";
+        }
+        
         if($dateIA != NULL){
             $phase = "gestant";
         }else{

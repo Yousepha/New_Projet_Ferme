@@ -57,23 +57,37 @@ class AchatGenisseController extends Controller
      */
     public function store(Request $request)
     {
+        $date_actu = \Carbon\Carbon::now()->format('y.m.d');
+        $dateNaiss = $request->input('dateNaissance');
+        $dateIA = $request->input('dateIA');
+
+        if($dateNaiss == NULL){
+            $dateNaiss = "0000-00-00";
+        }
+
+        if($dateIA != NULL){
+            $phase = "gestant";
+        }else{
+            $phase = "non gestant";
+        }
+
         $codeBovin = Helper::IDGenerator(new Genisse,'idBovin', 'codeBovin', 2, 'GEN');
         $q = new Genisse;
         $q->codeBovin = $codeBovin;
 
-        $admin_id = DB::select("SELECT id from users where est_admin = 1");
+        $admin_id = auth()->user()->id;
 
         $request->validate([
             'nom'    =>  'required',
             'etat'     =>  'required',
-            'dateNaissance'     =>  'nullable|date',
+            'dateNaissance'     =>  'nullable|date|before:'.$date_actu.'',
             'etatDeSante'     =>  'required',
             'geniteur'     =>  'nullable',
             'genitrice'     =>  'nullable',
             'photo'         =>  'required|image|max:2048',
-            'dateAchatBovin' =>  'required',
+            'dateAchatBovin'     =>  'required|date|before:'.$date_actu.'|after:'.$dateNaiss.'',
             'montantBovin' =>  'required',
-            'dateIA' =>  'required',
+            'dateIA' => 'nullable|date|before:'.$date_actu.'|after:'.$dateNaiss.'',
         ]);
 
         
@@ -101,10 +115,10 @@ class AchatGenisseController extends Controller
                 'idBovin' => $bovin->idBovin,
                 'codeBovin' => $q->codeBovin,
                 'dateIA' => $request->dateIA,
-                'phase' => $request->phase,
+                'phase' => $phase,
             ]);
             $achat_bovin = $this->achat_bovin->create([
-                'admin_id' => $admin_id[0]->id,
+                'admin_id' => $admin_id,
                 'bovin_id' => $bovin->idBovin,
                 'montantBovin' => $request->montantBovin,
                 'dateAchatBovin' => $request->dateAchatBovin,
@@ -168,6 +182,20 @@ class AchatGenisseController extends Controller
      */
     public function update(Request $request, $idBovin)
     {
+        $date_actu = \Carbon\Carbon::now()->format('y.m.d');
+        $dateNaiss = $request->input('dateNaissance');
+        $dateIA = $request->input('dateIA');
+
+        if($dateNaiss == NULL){
+            $dateNaiss = "0000-00-00";
+        }
+
+        if($dateIA != NULL){
+            $phase = "gestant";
+        }else{
+            $phase = "non gestant";
+        }
+        
         $image_name = $request->hidden_image;
         $photo = $request->file('photo');
         if($photo != '')  // here is the if part when you dont want to update the image required
@@ -177,14 +205,14 @@ class AchatGenisseController extends Controller
             $request->validate([
                 'nom'    =>  'required',
                 'etat'     =>  'required',
-                'dateNaissance'     =>  'nullable|date',
+                'dateNaissance'     =>  'nullable|date|before:'.$date_actu.'',
                 'etatDeSante'     =>  'required',
                 'geniteur'     =>  'nullable',
                 'genitrice'     =>  'nullable',
                 'photo'         =>  'image|max:2048',
-                'dateAchatBovin' =>  'required',
+                'dateAchatBovin'     =>  'required|date|before:'.$date_actu.'|after:'.$dateNaiss.'',
                 'montantBovin' =>  'required',
-                'dateIA' =>  'required',
+                'dateIA' => 'nullable|date|before:'.$date_actu.'|after:'.$dateNaiss.'',
             ]);
 
             $image_name = rand() . '.' . $photo->getClientOriginalExtension();
@@ -195,13 +223,13 @@ class AchatGenisseController extends Controller
             $request->validate([
                 'nom'    =>  'required',
                 'etat'     =>  'required',
-                'dateNaissance'     =>  'nullable|date',
+                'dateNaissance'     =>  'nullable|date|before:'.$date_actu.'',
                 'etatDeSante'     =>  'required',
                 'geniteur'     =>  'nullable',
                 'genitrice'     =>  'nullable',
-                'dateAchatBovin' =>  'required',
+                'dateAchatBovin'     =>  'required|date|before:'.$date_actu.'|after:'.$dateNaiss.'',
                 'montantBovin' =>  'required',
-                'dateIA' =>  'required',
+                'dateIA' => 'nullable|date|before:'.$date_actu.'|after:'.$dateNaiss.'',
             ]);
         }
 
@@ -220,7 +248,7 @@ class AchatGenisseController extends Controller
         
         $genisse = array(
             'dateIA' => $request->dateIA,
-            'phase' => $request->phase,
+            'phase' => $phase,
         );
 
         Genisse::whereIdbovin($idBovin)->update($genisse);

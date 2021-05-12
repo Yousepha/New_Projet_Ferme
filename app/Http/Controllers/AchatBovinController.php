@@ -17,11 +17,14 @@ class AchatBovinController extends Controller
      */
     public function index()
     {        
+        $admin_id = auth()->user()->id;
+        
         $data = DB::table('achat_bovins')
         ->join('bovins', 'bovins.idBovin', '=', 'achat_bovins.bovin_id')
         ->join('admins', 'admins.user_id', '=', 'achat_bovins.admin_id')
         ->join('races', 'races.idRace', '=', 'bovins.race_id')
         ->where('bovins.etat', '=', 'Vivant')
+        ->where('admins.user_id', $admin_id)
         ->select('*')
         ->paginate(5);
         return view('achatbovins.index', compact('data'));

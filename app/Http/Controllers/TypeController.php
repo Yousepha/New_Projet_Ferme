@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Race;
+use App\Models\Type;
 
-class RaceController extends Controller
+class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class RaceController extends Controller
      */
     public function index()
     {
-        $data = Race::latest()->paginate(5);
-        return view('races.index',compact('data'))->with('i',(request()->input('page',1)-1)*5);
+        $data = Type::latest()->paginate(5);
+        return view('types.index',compact('data'))->with('i',(request()->input('page',1)-1)*5);
     }
 
     /**
@@ -25,7 +25,7 @@ class RaceController extends Controller
      */
     public function create()
     {
-        return view('races.create');
+        return view('types.create');
     }
 
     /**
@@ -37,17 +37,17 @@ class RaceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nomRace' => 'required|unique:races',
+            'nomType' => 'required|unique:types',
         ]);
 
         $input_data = array(
-            'nomRace' => $request->nomRace
+            'nomType' => $request->nomType
         );
 
-        Race::create($input_data);
+        Type::create($input_data);
    
-        return redirect()->route('races.index')
-                        ->with('success','La race a été créée avec succès!.');
+        return redirect()->route('types.index')
+                        ->with('success','Le Type de dépenses a été créé avec succès!.');
     }
 
     /**
@@ -56,10 +56,10 @@ class RaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($idRace)
+    public function show($idType)
     {
-        $data = Race::findOrFail($idRace);
-        return view('races.show',compact('data'));
+        $data = Type::findOrFail($idType);
+        return view('types.show',compact('data'));
     }
 
     /**
@@ -68,10 +68,10 @@ class RaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($idRace)
+    public function edit($idType)
     {
-        $data = Race::findOrFail($idRace);
-        return view('races.edit',compact('data'));
+        $data = Type::findOrFail($idType);
+        return view('types.edit',compact('data'));
     }
 
     /**
@@ -81,20 +81,20 @@ class RaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $idRace)
+    public function update(Request $request, $idType)
     {
         $request->validate([
-            'nomRace' => 'required|unique:races',
+            'nomType' => 'required|unique:types',
         ]);
 
         $input_data = array(
-            'nomRace' => $request->nomRace
+            'nomType' => $request->nomType
         );
   
-        Race::whereIdrace($idRace)->update($input_data);
+        Type::whereIdtype($idType)->update($input_data);
   
-        return redirect()->route('races.index')
-                        ->with('success','Mise à jour de la race réussie !');
+        return redirect()->route('types.index')
+                        ->with('success','Mise à jour du Type de dépense réussie !');
     }
 
     /**
@@ -103,12 +103,12 @@ class RaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($idRace)
+    public function destroy($idType)
     {
-        $data = Race::findOrFail($idRace);
+        $data = Type::findOrFail($idType);
         $data->delete();
   
-        return redirect()->route('races.index')
-                        ->with('error','La race est supprimée avec succès !');
+        return redirect()->route('types.index')
+                        ->with('error','Le Type de dépenses est supprimé avec succès !');
     }
 }

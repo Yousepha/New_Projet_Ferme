@@ -48,23 +48,17 @@ class InfosController extends Controller
         ->join('fermiers', 'fermiers.user_id', '=', 'alimentation_du_jours.fermier_id')
         ->join('users', 'users.id', '=', 'fermiers.user_id')
         ->select('*')
-        ->get();
+        ->paginate(5);
 
-        dd($data);
+        // dd($data);
         return view('production_aliment.index',compact('data'));
     }
 
-    public function alimentShow($idAliment)
-    {
-        $arr['data'] = TraiteDuJour::findOrFail($idAliment);
-        
-        $arr['vaches'] = DB::select("SELECT * from production_laits, traite_du_jours, vaches, bovins
-        where production_laits.idProductionLait = traite_du_jours.productionLait_id
-        and vaches.idBovin = production_laits.bovin_id
-        and vaches.idBovin = bovins.idBovin
-        and traite_du_jours.idAliment = $idAliment");
+    public function alimentShow($idAlimentation)
+    {        
+        $data = AlimentationDuJour::findOrFail($idAlimentation);
 
-        return view('production_lait.show')->with($arr);
+        return view('production_aliment.show',compact('data'));
     }
 
     public function search(Request $request){
@@ -94,6 +88,27 @@ class InfosController extends Controller
         $stock = DB::table('stock_laits')->get();
 
         return view('production_lait.index', compact('data', 'stock', 'stockTotale'));
+    }
+
+    public function search_aliment(Request $request){
+        
+        $request->validate([
+            'fromDate'=>'required',
+            'toDate'=>'required'
+        ]);
+
+        $fromDate = $request->input('fromDate');
+        $toDate = $request->input('toDate');
+
+        $data = DB::table('alimentation_du_jours')
+                    ->join('fermiers', 'fermiers.user_id', '=', 'alimentation_du_jours.fermier_id')
+                    ->join('users', 'users.id', '=', 'fermiers.user_id')
+                    ->where('date','>=', $fromDate)
+                    ->where('date','<=', $toDate)
+                    ->paginate(5);
+                // dd($data);
+
+        return view('production_aliment.index', compact('data'));
     }
 
 }

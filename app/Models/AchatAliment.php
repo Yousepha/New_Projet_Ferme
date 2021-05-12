@@ -13,6 +13,7 @@ class AchatAliment extends Model
         'admin_id',
         'nomAliment',
         'quantite',
+        'quantite_consommee',
         'montant',
         'prixUnitaire',
         'dateAchatAliment'

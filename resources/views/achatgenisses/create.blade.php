@@ -48,7 +48,7 @@
                         </div>
 
                         <!--  -->
-                        <div class="form-group col-md-6">
+                        {{--<div class="form-group col-md-6">
                             <!-- <div class="row"> -->
                                 <label for="" class="col-md-6">Phase</label>
                                 <div class="">
@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             <!-- </div> -->
-                        </div>
+                        </div>--}}
                         <!--  -->
 
                         <!-- Default input -->
@@ -70,7 +70,7 @@
                             
                             <select  name="etat" class="form-control" required>
                                 <option>Vivant</option>
-                                <option>Mort</option>
+                                <!-- <option>Mort</option> -->
                                 
                             </select>
                         </div>
@@ -78,7 +78,7 @@
                         <!-- Default input -->
                         <div class="form-group col-md-6">
                             <label for="dateNaiss" class="col-md-6">Date de Naissance</label>
-                            <input mdbInput type="date" id="dateNaiss" class="form-control" name="dateNaissance" id="email" placeholder="Date Naissance" value="{{ old('prenom') }}">
+                            <input mdbInput type="date" id="dateNaiss" class="form-control" name="dateNaissance" id="email" placeholder="Date Naissance" value="{{ old('dateNaissance') }}">
                             <span style="color:red">@error('dateNaissance') {{$message}} @enderror</span>
                         
                         </div>{{----}}

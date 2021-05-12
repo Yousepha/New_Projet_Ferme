@@ -56,22 +56,25 @@ class AchatVeauController extends Controller
      */
     public function store(Request $request)
     {
+        $date_actu = \Carbon\Carbon::now()->format('y.m.d');
+        $dateNaiss = $request->input('dateNaissance');
+
+        if($dateNaiss == NULL){
+            $dateNaiss = "0000-00-00";
+        }
+        
         $codeBovin = Helper::IDGenerator(new Veau,'idBovin', 'codeBovin', 2, 'VEA');
         $q = new Veau;
         $q->codeBovin = $codeBovin;
 
-        $admin_id = DB::select("SELECT id from users where est_admin = 1");
-        
-        // $errorMessage = [
-        //     'required' => 'Le champ :attribute est obligatoire'
-        // ];
+        $admin_id = auth()->user()->id;
 
         $request->validate([
             'nom'    =>  'required',
             'etat'     =>  'required',
-            'dateNaissance'     =>  'nullable|date',
+            'dateNaissance'     =>  'nullable|date|before:'.$date_actu.'',
             'etatDeSante'     =>  'required',
-            'dateAchatBovin'     =>  'required',
+            'dateAchatBovin'     =>  'required|date|before:'.$date_actu.'|after:'.$dateNaiss.'',
             'montantBovin'     =>  'required',
             'geniteur'     =>  'nullable',
             'genitrice'     =>  'nullable',
@@ -104,7 +107,7 @@ class AchatVeauController extends Controller
                 'codeBovin' => $q->codeBovin,
             ]);
             $achat_bovin = $this->achat_bovin->create([
-                'admin_id' => $admin_id[0]->id,
+                'admin_id' => $admin_id,
                 'bovin_id' => $bovin->idBovin,
                 'montantBovin' => $request->montantBovin,
                 'dateAchatBovin' => $request->dateAchatBovin,
@@ -167,6 +170,13 @@ class AchatVeauController extends Controller
      */
     public function update(Request $request, $idBovin)
     {
+        $date_actu = \Carbon\Carbon::now()->format('y.m.d');
+        $dateNaiss = $request->input('dateNaissance');
+
+        if($dateNaiss == NULL){
+            $dateNaiss = "0000-00-00";
+        }
+
         $image_name = $request->hidden_image;
         $photo = $request->file('photo');
         if($photo != '')  // here is the if part when you dont want to update the image required
@@ -176,9 +186,9 @@ class AchatVeauController extends Controller
             $request->validate([
                 'nom'    =>  'required',
                 'etat'     =>  'required',
-                'dateNaissance'     =>  'nullable|date',
+                'dateNaissance'     =>  'nullable|date|before:'.$date_actu.'',
                 'etatDeSante'     =>  'required',
-                'dateAchatBovin'     =>  'required',
+                'dateAchatBovin'     =>  'required|date|before:'.$date_actu.'|after:'.$dateNaiss.'',
                 'montantBovin'     =>  'required',
                 'geniteur'     =>  'nullable',
                 'genitrice'     =>  'nullable',
@@ -193,9 +203,9 @@ class AchatVeauController extends Controller
             $request->validate([
                 'nom'    =>  'required',
                 'etat'     =>  'required',
-                'dateNaissance'     =>  'nullable|date',
+                'dateNaissance'     =>  'nullable|date|before:'.$date_actu.'',
                 'etatDeSante'     =>  'required',
-                'dateAchatBovin'     =>  'required',
+                'dateAchatBovin'     =>  'required|date|before:'.$date_actu.'|after:'.$dateNaiss.'',
                 'montantBovin'     =>  'required',
                 'geniteur'     =>  'nullable',
                 'genitrice'     =>  'nullable',

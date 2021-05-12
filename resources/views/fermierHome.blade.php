@@ -110,7 +110,7 @@
           <div class="inner color-white">
             <h3 class="flip-box-header">Alimentation des Bovins</h3>
             <p>Consultez le Stock de l'Alimentation</p>
-            <a href="{{ route('stocks.index') }}"><button class="flip-box-button">Accèder</button></a>
+            <!-- <a href="{{ route('stocks.index') }}"><button class="flip-box-button">Accèder</button></a> -->
           </div>
       </div>
     </div>
@@ -129,7 +129,7 @@
           <div class="inner color-white">
             <h3 class="flip-box-header">Pesage en fonction de l'alimentation</h3>
             <p>Effet de l’alimentation des animaux sur la qualité de la viande et du lait</p>
-            <button class="flip-box-button">Accèder</button>
+            <!-- <button class="flip-box-button">Accèder</button> -->
           </div>
       </div>
     </div>
@@ -148,7 +148,7 @@
           <div class="inner color-white">
             <h3 class="flip-box-header">Production de lait par vache</h3>
             <p>pour le confort de l'animal, il faut pratiquer la traite 2 fois par jour, matin et soir.</p>
-            <button class="flip-box-button">Accèder</button>
+            <!-- <button class="flip-box-button">Accèder</button> -->
           </div>
       </div>
     </div>

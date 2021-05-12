@@ -85,7 +85,7 @@ class MaladieController extends Controller
     public function update(Request $request, $idMaladie)
     {
         $request->validate([
-            'nomMaladie' => 'required',
+            'nomMaladie' => 'required|unique:maladies',
         ]);
 
         $input_data = array(

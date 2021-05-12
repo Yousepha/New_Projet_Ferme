@@ -47,7 +47,7 @@
                             
                             <select  name="etat" class="form-control" required>
                                 <option>Vivant</option>
-                                <option>Mort</option>
+                                <!-- <option>Mort</option> -->
                                 
                             </select>
                         </div>
