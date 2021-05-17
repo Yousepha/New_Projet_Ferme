@@ -291,10 +291,10 @@
                                                     <table cellspacing="0" cellpadding="0" width="100%" style="border-collapse:separate !important;">
                                                         <tr>
                                                             <td class="mini-block">
-                                                                <span class="header-sm">Adresse de Livraison</span><br />
+                                                                <span class="header-sm">Votre Facture</span><br />
                                                                 Prenom & Nom: <strong>{{ Auth::user()->full_name }}</strong> <br />
                                                                 Telephone: <strong>{{ Auth::user()->telephone }}</strong> <br />
-                                                                Frais de livraison: <strong>{{ $total_prix_panier }} Fcfa</strong><br />
+                                                                Montant de la commande: <strong>{{ $total_prix_panier }} Fcfa</strong><br />
                                                                 Adresse: <strong>{{ Auth::user()->adresse }}</strong> <br />
                                                                 Payé via <strong>{{ $moyen_pay }}</strong><br />
                                                             </td>

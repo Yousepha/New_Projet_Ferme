@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="">
-                <h2 class="alert alert-dark text-center" style="color:red; text:bold">Enregistrer les bouteilles de laits ici !</h2>
+                <h2 class="alert alert-dark text-center" style="color:red; text:bold">Enregistrer les ventes de bouteilles de laits ici !</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success fa fa-plus-circle" href="{{ route('bouteilles.create') }}"> Ajouter un bouteille</a>

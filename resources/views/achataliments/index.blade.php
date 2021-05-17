@@ -32,7 +32,7 @@
             <th>Date Achat Aliment</th>
             <th>Nom Aliment</th>
             <th>Quantité</th>
-            <th>Quantité Consommée</th>
+            <!-- <th>Quantité Consommée</th> -->
             <th>Montant</th>
             <th width="250px">Action</th>
         </tr>
@@ -43,7 +43,7 @@
             <td>{{ $achataliments->dateAchatAliment }}</td>
             <td>{{ $achataliments->nomAliment }}</td>
             <td>{{ $achataliments->quantite }} (kg)</td>
-            <td>{{ $achataliments->quantite_consommee }} (kg)</td>
+            <!-- <td>{{ $achataliments->quantite_consommee }} (kg)</td> -->
             <td>{{ $achataliments->montant }} Fcfa</td>
             <td width="25%">
                 <form action="{{ route('achataliments.destroy',$achataliments->idAchatAliment) }}" method="POST">

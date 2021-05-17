@@ -68,7 +68,7 @@ class DiagnosticFermierController extends Controller
                         ->where('maladie_id',$request->idMaladie)
                         ->where('bovins.idBovin',$request->idBovin)
                         ->where('maladies.idMaladie',$request->idMaladie)
-                        // ->where('dateMaladie','>=', $request->dateMaladie)
+                        ->where('dateMaladie', $request->dateMaladie)
                         // ->where('dateGuerison', NULL)
                         ->get();
 
@@ -162,12 +162,30 @@ class DiagnosticFermierController extends Controller
             'dateGuerison' => 'nullable|date|before:'.$date_actu.'|after:'.$dateMaladie.'',
         ]);
 
-        $input_data = array(
-            'bovin_id' => $request->idBovin,
-            'maladie_id' => $request->idMaladie,
-            'dateMaladie' => $request->dateMaladie,
-            'dateGuerison' => $request->dateGuerison,
-        );
+        
+        $bovin_maladie = DB::table('diagnostics')
+                        ->join('bovins', 'bovins.idBovin', '=', 'diagnostics.bovin_id')
+                        ->join('maladies', 'maladies.idMaladie','=','diagnostics.maladie_id')
+                        ->where('etatDeSante','Malade')
+                        ->where('bovin_id',$request->idBovin)
+                        ->where('maladie_id',$request->idMaladie)
+                        ->where('bovins.idBovin',$request->idBovin)
+                        ->where('maladies.idMaladie',$request->idMaladie)
+                        ->where('dateMaladie', $request->dateMaladie)
+                        ->get();
+
+        if(count($bovin_maladie) > 0){
+
+            return redirect()->route('diagnosticfermiers.edit', $idDiagnostic)
+            ->with('error','Le Bovin '.$bovin_maladie[0]->nom.' n\'est pas encore guéri de la maladie: '.$bovin_maladie[0]->nomMaladie);
+        }else{
+            $input_data = array(
+                'bovin_id' => $request->idBovin,
+                'maladie_id' => $request->idMaladie,
+                'dateMaladie' => $request->dateMaladie,
+                'dateGuerison' => $request->dateGuerison,
+            );
+        }
   
         Diagnostic::whereiddiagnostic($idDiagnostic)->update($input_data);
 

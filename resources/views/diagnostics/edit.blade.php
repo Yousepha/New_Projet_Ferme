@@ -20,16 +20,12 @@
         </div>
     </div>
    
-    {{--@if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Avertissement!</strong>Veuillez vérifier votre code d'entrée<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif--}}
+    @if($message = Session::get('error'))
+    <div class="alert alert-danger">
+        <button class="close" data-dismiss="alert" type="button">x</button>
+        <p align="center"><strong>{{$message}}</strong></p>
+    </div>
+    @endif 
   
     <form action="{{ route('diagnostics.update',$data->idDiagnostic) }}" method="POST">
         @csrf

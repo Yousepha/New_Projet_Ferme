@@ -44,14 +44,14 @@
                
                 </div>
             </div>
-            {{--<div class="col-md-12">
+            <div class="col-md-12">
                 <div class="form-group">
                     <strong>Type:</strong>
                     <input type="text" name="type" value="{{ $data->type }}" class="form-control" placeholder="Type">
                     <span style="color:red">@error('type') {{$message}} @enderror</span>
                 
                 </div>
-            </div>--}}
+            </div>{{-- --}}
 
             {{--<!-- Default input -->
             <div class="form-group col-md-12">

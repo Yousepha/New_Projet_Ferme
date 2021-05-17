@@ -31,12 +31,12 @@
                 {{ $data->quantite }}(kg)
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        {{--<div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Quantité Consommée:</strong>
                 {{ $data->quantite_consommee }}(kg)
             </div>
-        </div>
+        </div>--}}
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Montant:</strong>

@@ -86,7 +86,7 @@
                         <div class="card-body">
                             <p class="card-text">Bouteille <br>{{$prod->description}}</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <strike class="barre"> {{$prod->prix + 1000}}  Fcfa</strike>
+                                <strike class="barre"> {{$prod->prix + 500}}  Fcfa</strike>
                                 <h4> {{$prod->prix}} Fcfa</h4>
                                 <!-- <h4> {{$prod->nombreDispo}} en stock</h4> -->
                                 <a href="{{route('voir_produit_lait_client', ['idLait'=>$prod->idBouteille])}}" class="btn btn-md btn-outline-secondary"><i class="fa fa-eye"></i></a>

@@ -7,7 +7,7 @@ use App\Http\Controllers\BovinsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AutreDepensesController;
-use App\Http\Controllers\TypeController;
+// use App\Http\Controllers\TypeController;
 use App\Http\Controllers\VachesController;
 use App\Http\Controllers\GenisseController;
 use App\Http\Controllers\AlimentationDuJourController;
@@ -170,7 +170,7 @@ Route::resource('employee', EmployeeController::class);
 Route::resource('clients', ClientController::class);
 
 // route pour les types de dépenses
-Route::resource('types', TypeController::class);
+// Route::resource('types', TypeController::class);
 
 // route pour les autres dépenses
 Route::resource('autresdepenses', AutreDepensesController::class);

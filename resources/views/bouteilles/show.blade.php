@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="">
-                <h2 class="alert alert-dark text-center" style="color:red; text:bold"> Infos sur la vente de lait de {{ $bouteilles->capacite }} Litre(s)</h2>
+                <h2 class="alert alert-dark text-center" style="color:red; text:bold"> Infos sur la vente de la bouteille de lait de {{ $bouteilles->capacite }} Litre(s)</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary fa fa-reply-all" href="{{ route('bouteilles.index') }}"> Retour</a>

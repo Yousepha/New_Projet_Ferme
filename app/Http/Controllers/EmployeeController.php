@@ -56,12 +56,12 @@ class EmployeeController extends Controller
         $request->validate([
             'nom'    =>  'required|string',
             'prenom'     =>  'required|string',
-            'telephone'     =>  'required|string|min:7|max:7',
+            'telephone'     =>  'required|string|min:7|max:7|unique:users',
             'adresse'     =>  'required|string',
-            'login'     =>  'required|string',
+            'login'     =>  'required|string|unique:users',
             'password'     =>  'required|string|min:8',
             'profile'     =>  'nullable',
-            'email'     =>  'nullable',
+            'email'     =>  'nullable|unique:users',
             'photo'         =>  'image|max:2048',
             
         ]);

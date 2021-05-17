@@ -190,7 +190,7 @@ class ProfilController extends Controller
         $photo = $request->file('photo');
         if($photo != '')  // here is the if part when you dont want to update the image required
         {
-            unlink(public_path('images').'/'.$image_name);
+            // unlink(public_path('images').'/'.$image_name);
 
             $request->validate([
                 'nom'    =>  'required|string',

@@ -189,7 +189,7 @@
                                 Lait frais
                             </h3>
                             <span>
-                                <strike> {{$prod->prix + 1000}}  Fcfa</strike>
+                                <strike> {{$prod->prix + 500}}  Fcfa</strike>
                                 <h4> {{$prod->prix}} Fcfa</h4>
                                 <h4> {{$prod->nombreDispo}} en stock</h4>
                                 <h6> {{$prod->description}} </h6>{{-- --}}

@@ -28,8 +28,8 @@ class AutreDepensesController extends Controller
      */
     public function create()
     {
-        $types = Type::all();
-        return view('autresdepenses.create',compact('types'));
+        // $types = Type::all();
+        return view('autresdepenses.create');
     }
 
     /**
@@ -87,10 +87,10 @@ class AutreDepensesController extends Controller
      */
     public function edit($idDepenses)
     {
-        $types = Type::all();
+        // $types = Type::all();
 
         $data = AutresDepenses::findOrFail($idDepenses);
-        return view('autresdepenses.edit',compact('data', 'types'));
+        return view('autresdepenses.edit',compact('data'));
     }
 
     /**
@@ -104,14 +104,14 @@ class AutreDepensesController extends Controller
     {
         $request->validate([
             'dateDepenses' => 'required|date',
-            // 'type' => 'required',
+            'type' => 'required',
             'libelle' => 'required',
             'montant' => 'required|Integer',
         ]);
         
         $input_data = array(
             'dateDepenses' => $request->dateDepenses,
-            // 'type' => $request->type,
+            'type' => $request->type,
             'libelle' => $request->libelle,
             'montant' => $request->montant,
         );

@@ -140,7 +140,7 @@
                 <div class="col-5 col-xs-12 align-items-center">
                     <div class="about-slogan right-to-left play-on-scroll">
                         <h3>
-                            <span class="primary-color">Nous</span> vendons <span class="primary-color">des vaches et des produits laitière</span>
+                            <span class="primary-color">Nous</span> vendons <span class="primary-color">des vaches et des produits laitières</span>
                             à des prix <span class="primary-color"> incroyables</span>
                         </h3>
                         <p>
@@ -252,7 +252,7 @@
     </section>
     <!-- END TESTIMONIAL SECTION -->
     <!-- FOOTER SECTION -->
-    <section class="footer bg-img" style="background-image: url(assets/ban1.jpg);">
+    <section class="footer bg-img" style="background-image: url(assets/ban1a.jpg);">
         <div class="container">
             <div class="row">
                 <div class="col-6 col-xs-12">

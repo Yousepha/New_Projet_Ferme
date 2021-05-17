@@ -65,7 +65,7 @@ class AlimentationDuJourController extends Controller
         if($request->quantite <= $nom_aliment[0]->quantite){
             $input_qte_aliment = array(
                 'quantite' => $nom_aliment[0]->quantite - $request->quantite,
-                'quantite_consommee' => $nom_aliment[0]->quantite_consommee + $request->quantite,
+                // 'quantite_consommee' => $nom_aliment[0]->quantite_consommee + $request->quantite,
             );
         }
         else{
@@ -131,7 +131,7 @@ class AlimentationDuJourController extends Controller
         $nom_aliment_jour = DB::select("SELECT * from alimentation_du_jours, achat_aliments where alimentation_du_jours.idAlimentation = $idAlimentation
         and alimentation_du_jours.nomAlimentation = achat_aliments.nomAliment");
         $qte_avant = $nom_aliment_jour[0]->quantite + $nom_aliment[0]->quantite;
-        $qte_avant_cons = $nom_aliment[0]->quantite_consommee - $nom_aliment_jour[0]->quantite;
+        // $qte_avant_cons = $nom_aliment[0]->quantite_consommee - $nom_aliment_jour[0]->quantite;
 
         $request->validate([
             'nomAlimentation' => 'required',
@@ -141,7 +141,7 @@ class AlimentationDuJourController extends Controller
         if($request->quantite <= $qte_avant){
             $input_qte_aliment = array(
                 'quantite' => $qte_avant - $request->quantite,
-                'quantite_consommee' => $qte_avant_cons + $request->quantite,
+                // 'quantite_consommee' => $qte_avant_cons + $request->quantite,
             );
         }
         else{
@@ -178,11 +178,11 @@ class AlimentationDuJourController extends Controller
         $nom_aliment_jour = DB::select("SELECT * from alimentation_du_jours, achat_aliments where alimentation_du_jours.idAlimentation = $idAlimentation
         and alimentation_du_jours.nomAlimentation = achat_aliments.nomAliment");
         $qte_avant = $nom_aliment_jour[0]->quantite + $nom_aliment[0]->quantite;
-        $qte_avant_cons = $nom_aliment[0]->quantite_consommee - $nom_aliment[0]->quantite;
+        // $qte_avant_cons = $nom_aliment[0]->quantite_consommee - $nom_aliment[0]->quantite;
         // dd($nom_aliment[0]->quantite);
         $input_qte_aliment = array(
             'quantite' => $qte_avant,
-            'quantite_consommee' => $qte_avant_cons,
+            // 'quantite_consommee' => $qte_avant_cons,
         );
 
         AchatAliment::wherenomaliment($nom_aliment_jour[0]->nomAlimentation)->update($input_qte_aliment);

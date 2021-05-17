@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="">
-                <h2 class="alert alert-dark text-center" style="color:red; text:bold">Modifier la capacite de la bouteille</h2>
+                <h2 class="alert alert-dark text-center" style="color:red; text:bold">Modifier la Vente de la bouteille</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary fa fa-reply-all" href="{{ route('bouteilles.index') }}"> Retour</a>
