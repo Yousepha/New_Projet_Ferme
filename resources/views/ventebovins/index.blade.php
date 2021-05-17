@@ -8,7 +8,7 @@
                 <h2 class="alert alert-dark text-center" style="color:red; text:bold">Enregistrer les Ventes de Bovins en ligne Ici !</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success fa fa-plus-circle" href="{{ route('ventebovins.create') }}"> Ajouter un produit</a>
+                <a class="btn btn-success fa fa-plus-circle" href="{{ route('ventebovins.create') }}"> Ajouter un bovin</a>
             </div>
             <div class="pull-left">
                 <a class="btn btn-primary fa fa-reply-all" href="{{ route('produits') }}"> Retour</a>

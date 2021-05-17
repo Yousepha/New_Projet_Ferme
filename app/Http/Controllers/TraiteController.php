@@ -78,6 +78,22 @@ class TraiteController extends Controller
         /**Recupération de la date actuelle !*/
         $date_actu = \Carbon\Carbon::now()->format('y.m.d');
      
+        $traite_vache = DB::table('traite_du_jours')
+                        ->join('production_laits', 'production_laits.idProductionLait', '=', 'traite_du_jours.productionLait_id')
+                        ->join('vaches', 'vaches.idBovin','=','production_laits.bovin_id')
+                        ->join('bovins', 'bovins.idBovin', '=', 'vaches.idBovin')                    
+                        ->where('dateTraite', $date_actu)
+                        ->where('bovins.idBovin', $request->idBovin)
+                        ->get();
+        // dd(count($traite_vache));
+        if(count($traite_vache) > 0){
+
+            return redirect()->route('traites.create')
+            ->with('error','La vache '.$traite_vache[0]->nom.' a été déjà traitée ');
+        }else{
+
+        }
+
         $input_data = array(
             'fermier_id' => $fermier_id,
             'traiteMatin' => $request->traiteMatin,
@@ -142,6 +158,7 @@ class TraiteController extends Controller
         
         $arr['vaches'] = DB::select("SELECT * from production_laits, traite_du_jours, vaches, bovins
         where production_laits.idProductionLait = traite_du_jours.productionLait_id
+        and vaches.idBovin = production_laits.bovin_id
         and vaches.idBovin = bovins.idBovin
         and traite_du_jours.idTraiteDuJour = $idTraiteDuJour");
 
