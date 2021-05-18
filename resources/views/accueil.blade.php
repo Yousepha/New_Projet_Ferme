@@ -260,15 +260,13 @@
                     {{ config('app.name', 'Laravel') }}
                     </h1>
                     <br>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, quas harum? Atque eius
-                        quaerat fuga sint molestiae illo corrupti vitae voluptatibus. Dicta rerum est delectus
-                        perspiciatis nemo nihil autem! Doloremque?</p>
+                    <p>Découvrez la qualité de notre offre de bovins, toutes races : veaux et reproducteurs pour le troupeau allaitant, veaux et femelles repro. pour le troupeau laitier et bovins maigres pour l’atelier d’engraissement</p>
                     <br>
                     <p>Email: admin@mail.com</p>
                     <p>Phone: +221 77 454 67 89</p>
                     <!-- <p>Website: freshfood.com</p> -->
                 </div>
-                <div class="col-2 col-xs-12">
+                {{--<div class="col-2 col-xs-12">
                     <h1>
                         A propos
                     </h1>
@@ -294,7 +292,7 @@
                         </a>
                     </p>
                 </div>
-                
+                --}}
                 <!-- <div class="col-4 col-xs-12">
                     <h1>
                         Subscribe & media

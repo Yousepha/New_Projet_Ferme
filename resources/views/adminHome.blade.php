@@ -102,7 +102,7 @@
                             <thead>
                                 <tr class="text-dark">
                                     <th>#</th>
-                                    <th>Name</th>
+                                    <th>Prénom & Nom</th>
                                     <th>Salaire</th>
                                     <th>Photo</th>
                                     <th>Contact</th>
@@ -150,7 +150,7 @@
                                     <td>{{ $bovin->nom }}</td>
                                     <td>{{ $bovin->codeBovin }}</td>
                                     <td><img src="{{ URL::to('/') }}/images/{{ $bovin->photo }}" class="rounded-circle" width="60" height="50" /></td>
-                                    @if($bovin->etatDeSante == "Sain")
+                                    @if($bovin->etatDeSante != "Malade")
                                         <td><span class="badge badge-success w-75 py-2">{{ $bovin->etatDeSante }}</span></td>
                                     @else
                                         <td><span class="badge badge-danger w-75 py-2">{{ $bovin->etatDeSante }}</span></td>

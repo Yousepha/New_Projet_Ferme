@@ -56,6 +56,20 @@ class PesageController extends Controller
             'poids' => $request->poids,
         );
 
+        $pesage = DB::table('pesages')
+                ->join('bovins', 'bovins.idBovin', '=', 'pesages.bovin_id')
+                ->where('datePesee', $date_actu)
+                ->where('bovins.idBovin', $request->idBovin)
+                ->get();
+
+        if(count($pesage) > 0){
+
+            return redirect()->route('pesages.create')
+            ->with('error','La Bovin '.$pesage[0]->nom.' a été déjà pesée ');
+        }else{
+
+        }
+
         Pesage::create($input_data);
         
         return redirect()->route('pesages.index')
@@ -117,7 +131,7 @@ class PesageController extends Controller
             'datePesee' => $date_actu,
             'poids' => $request->poids,
         );
-  
+
         Pesage::whereidpesage($idPesage)->update($input_data);
   
         return redirect()->route('pesages.index')
